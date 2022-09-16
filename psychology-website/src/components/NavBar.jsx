@@ -1,17 +1,30 @@
 import React from "react";
+import "./NavBar.css";
 
 function NavBar() {
   return (
     <nav>
-      <h3 className="nav--name">Psychologist Gizem Cakin</h3>
+      <a href="##" className="nav--name">
+        Psychologist Gizem Cakin
+      </a>
       <div className="nav--primary">
-        <p className="primary--buttons">
-          <a href="##">About me</a>
-          <a href="##">What I offer</a>
-          <a href="##">Blog</a>
-          <a href="##">Contacts</a>
-          <button className="book-appointment">Book an appointment</button>
+        <p className="nav--anchors">
+          <a href="##" className="nav--anchor">
+            About me
+          </a>
+          <a href="##" className="nav--anchor">
+            What I offer
+          </a>
+          <a href="##" className="nav--anchor">
+            Blog
+          </a>
+          <a href="##" className="nav--anchor">
+            Contacts
+          </a>
         </p>
+        <button className="nav--book-appointment-btn">
+          Book an appointment
+        </button>
       </div>
     </nav>
   );
