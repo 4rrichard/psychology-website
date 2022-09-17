@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-scroll";
 import "./NavBar.css";
 
 function NavBar() {
@@ -8,20 +9,47 @@ function NavBar() {
         Psychologist Gizem Cakin
       </a>
       <div className="nav--primary">
-        <p className="nav--anchors">
-          <a href="##" className="nav--anchor">
+        <div className="nav--anchors">
+          <Link
+            activeClass="active"
+            to="about-me"
+            spy={true}
+            smooth={true}
+            className="nav--anchor"
+          >
             About me
-          </a>
-          <a href="##" className="nav--anchor">
-            What I offer
-          </a>
-          <a href="##" className="nav--anchor">
+          </Link>
+
+          <Link
+            activeClass="active"
+            to="offers"
+            spy={true}
+            smooth={true}
+            className="nav--anchor"
+          >
+            What I Offer
+          </Link>
+
+          <Link
+            activeClass="active"
+            to="blog"
+            spy={true}
+            smooth={true}
+            className="nav--anchor"
+          >
             Blog
-          </a>
-          <a href="##" className="nav--anchor">
+          </Link>
+
+          <Link
+            activeClass="active"
+            to="contacts"
+            spy={true}
+            smooth={true}
+            className="nav--anchor"
+          >
             Contacts
-          </a>
-        </p>
+          </Link>
+        </div>
         <button className="nav--book-appointment-btn">
           Book an appointment
         </button>

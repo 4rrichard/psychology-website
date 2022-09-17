@@ -1,0 +1,52 @@
+.blog {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.blog .blog--title,
+.blog .blog--subtitle {
+  text-align: center;
+}
+.blog .blog--title {
+  margin-bottom: 20px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+}
+.blog .blog--subtitle {
+  width: 75vw;
+  margin: 0 auto 80px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+}
+.blog .blog--articles {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+.blog .blog--articles .blog--article {
+  width: auto;
+  border: 2px solid #bf9773;
+  border-radius: 30px;
+  overflow: hidden;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.blog .blog--articles .blog--article .blog--image {
+  max-width: 100%;
+}
+.blog .blog--articles .blog--article .blog-article--title {
+  padding-top: 20px;
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+}
+.blog .blog--articles .blog--article .blog-article--pharagraph {
+  padding: 10px 30px 30px 30px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+}
+.blog .blog--articles .blog--article:hover {
+  scale: 1.05;
+}/*# sourceMappingURL=Blog.css.map */

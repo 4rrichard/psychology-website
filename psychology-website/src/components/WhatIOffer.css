@@ -1,0 +1,38 @@
+.offers {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.offers .offers--title,
+.offers .offers--subtitle {
+  text-align: center;
+}
+.offers .offers--title {
+  margin-bottom: 20px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+}
+.offers .offers--subtitle {
+  width: 75vw;
+  margin: 0 auto 80px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+}
+.offers .offers--main-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+.offers .offers--main-container .offers--offer {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Quicksand", sans-serif;
+}
+.offers .offers--main-container .offers--offer .offers--icon {
+  width: 80px;
+  margin-bottom: 15px;
+}/*# sourceMappingURL=WhatIOffer.css.map */

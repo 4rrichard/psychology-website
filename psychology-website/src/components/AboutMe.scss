@@ -1,0 +1,38 @@
+.about-me {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .about-me--title {
+    text-align: center;
+    margin-bottom: 60px;
+
+    font-family: "Oswald", sans-serif;
+    font-weight: 400;
+    font-size: 50px;
+  }
+  .about-me--main-container {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    font-family: "Quicksand", sans-serif;
+    .about-me--image,
+    .about-me--pharagraph {
+      width: 500px;
+      height: 600px;
+    }
+    .about-me--image {
+      object-fit: cover;
+      object-position: 5% 0;
+
+      border-radius: 30px;
+    }
+    .about-me--pharagraph {
+      padding: 30px;
+
+      border: 2px solid #bf9773;
+      border-radius: 30px;
+    }
+  }
+}
