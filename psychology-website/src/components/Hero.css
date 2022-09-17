@@ -26,9 +26,18 @@
 }
 .hero .hero--aboutme-btn,
 .hero .hero--book-appointment-btn {
-  height: 45px;
+  height: 50px;
   padding: 13px;
   background-color: #bf9773;
   border-radius: 6px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
   color: white;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.hero .hero--aboutme-btn:hover,
+.hero .hero--book-appointment-btn:hover {
+  background-color: #dbb898;
 }/*# sourceMappingURL=Hero.css.map */

@@ -20,14 +20,21 @@ nav {
   .nav--primary {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 13px;
+
+    font-size: 18px;
     .nav--anchors {
       .nav--anchor {
         margin-right: 30px;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-in-out;
+      }
+      .nav--anchor:hover {
+        color: rgb(63, 63, 63);
       }
     }
     .nav--book-appointment-btn {
-      height: 45px;
+      height: 50px;
 
       padding: 13px;
 
@@ -35,7 +42,7 @@ nav {
       border-radius: 6px;
 
       font-weight: 600;
-      font-size: 16px;
+      font-size: 18px;
       color: white;
 
       transition-duration: 0.2s;
