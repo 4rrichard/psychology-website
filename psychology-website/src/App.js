@@ -5,6 +5,7 @@ import ContactMe from "./components/ContactMe";
 import FAQ from "./components/FAQ";
 import Hero from "./components/Hero";
 import NavBar from "./components/NavBar";
+import Subscribe from "./components/Subscribe";
 import WhatIOffer from "./components/WhatIOffer";
 import "./reset.css";
 
@@ -19,6 +20,7 @@ function App() {
         <Blog />
         <FAQ />
         <ContactMe />
+        <Subscribe />
       </div>
     </>
   );

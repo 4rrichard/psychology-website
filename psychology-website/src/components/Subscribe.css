@@ -1,0 +1,50 @@
+.subscribe {
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.subscribe .subscribe--title {
+  margin-bottom: 20px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+  text-align: center;
+}
+.subscribe .subscribe--subtitle {
+  font-family: "Quicksand", sans-serif;
+  margin-bottom: 30px;
+}
+.subscribe .subscribe--form {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+}
+.subscribe .subscribe--form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dbb898;
+  border-radius: 7px;
+}
+.subscribe .subscribe--form input[type=text] {
+  background-color: #f7f2eb;
+  font-family: "Quicksand", sans-serif;
+}
+.subscribe .subscribe--form .subscribe--first-name {
+  width: auto;
+}
+.subscribe .subscribe--form .subscribe--btn {
+  height: 50px;
+  padding: 13px;
+  background-color: #bf9773;
+  border-radius: 6px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.subscribe .subscribe--form .subscribe--btn:hover {
+  background-color: #dbb898;
+}/*# sourceMappingURL=Subscribe.css.map */
