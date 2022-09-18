@@ -1,0 +1,37 @@
+.footer {
+  padding: 30px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-family: "Quicksand", sans-serif;
+
+  background-color: #f7f2eb;
+  .footer--reach-me {
+    display: flex;
+    gap: 50px;
+    .footer-reach-me--text {
+      margin-right: -20px;
+
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .footer--social {
+      width: 40px;
+      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      cursor: pointer;
+      .footer--social-icon {
+        filter: invert(86%) sepia(10%) saturate(2300%) hue-rotate(331deg)
+          brightness(72%) contrast(97%);
+      }
+    }
+    .footer--social:hover .footer--social-icon {
+      scale: 1.1;
+    }
+  }
+}
