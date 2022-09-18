@@ -1,0 +1,74 @@
+import React from "react";
+import "./ContactMe.css";
+
+function ContactMe() {
+  return (
+    <section className="contacts">
+      <h1 className="contacts--title">Contact me</h1>
+      <div className="contacts-container">
+        <div className="contacts--info">
+          <p className="contacts--subtitle">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit.
+          </p>
+          <div className="contacts--adress">
+            <h3 className="contacts--adress-subtitle">Adress</h3>
+            <p className="contacts--adress-pharagraph">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+            </p>
+          </div>
+          <div className="contacts--hours">
+            <h3 className="contacts--hours-subtitle">Hours</h3>
+            <p className="contacts--hours-pharagraph">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+            </p>
+          </div>
+          <div className="contacts--contact">
+            <h3 className="contacts--contact-subtitle">Contacts</h3>
+            <p className="contacts--contact-pharagraph">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+            </p>
+          </div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10780.902942915289!2d19.0577637!3d47.5049949!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1e1303babc750580!2zQ29kZWNvb2wgQnVkYXBlc3QgLSBQcm9ncmFtb3rDsyBLw6lwesOpcywgSW5mb3JtYXRpa3VzIEvDqXB6w6lz!5e0!3m2!1shu!2shu!4v1663503961778!5m2!1shu!2shu"
+            width="600"
+            height="450"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="google-maps"
+            className="google-maps"
+          ></iframe>
+        </div>
+        <form className="contacts--send-email">
+          <input
+            type="text"
+            placeholder="Enter your full name"
+            className="send-email--full-name "
+          />
+          <input
+            type="text"
+            placeholder="Enter your email adress"
+            className="send-email--email-adress "
+          />
+          <input
+            type="text"
+            placeholder="Enter your phone number"
+            className="send-email--phone-number "
+          />
+          <textarea
+            name="message"
+            placeholder="Write your message"
+            className="send-email--message"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <button className="send-email--btn">Send</button>
+        </form>
+      </div>
+    </section>
+  );
+}
+
+export default ContactMe;

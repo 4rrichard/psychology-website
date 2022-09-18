@@ -1,6 +1,7 @@
 import "./App.css";
 import AboutMe from "./components/AboutMe";
 import Blog from "./components/Blog";
+import ContactMe from "./components/ContactMe";
 import FAQ from "./components/FAQ";
 import Hero from "./components/Hero";
 import NavBar from "./components/NavBar";
@@ -17,6 +18,7 @@ function App() {
         <WhatIOffer />
         <Blog />
         <FAQ />
+        <ContactMe />
       </div>
     </>
   );

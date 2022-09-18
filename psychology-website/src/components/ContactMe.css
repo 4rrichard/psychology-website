@@ -1,0 +1,93 @@
+.contacts {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contacts .contacts--title {
+  margin-bottom: 20px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+  text-align: center;
+}
+.contacts .contacts-container {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+.contacts .contacts-container .contacts--info {
+  width: auto;
+  max-width: 50%;
+}
+.contacts .contacts-container .contacts--info .contacts--subtitle {
+  padding-bottom: 15px;
+  font-family: "Quicksand", sans-serif;
+}
+.contacts .contacts-container .contacts--info .contacts--adress,
+.contacts .contacts-container .contacts--info .contacts--hours,
+.contacts .contacts-container .contacts--info .contacts--contact {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+.contacts .contacts-container .contacts--info .contacts--adress-subtitle,
+.contacts .contacts-container .contacts--info .contacts--hours-subtitle,
+.contacts .contacts-container .contacts--info .contacts--contact-subtitle {
+  font-family: "Oswald", sans-serif;
+}
+.contacts .contacts-container .contacts--info .contacts--adress-pharagraph,
+.contacts .contacts-container .contacts--info .contacts--hours-pharagraph,
+.contacts .contacts-container .contacts--info .contacts--contact-pharagraph {
+  font-family: "Quicksand", sans-serif;
+}
+.contacts .contacts-container .contacts--info .contacts--adress-pharagraph {
+  padding-left: 14px;
+}
+.contacts .contacts-container .contacts--info .contacts--hours-pharagraph {
+  padding-left: 20px;
+}
+.contacts .contacts-container .contacts--info .google-maps {
+  min-width: 100%;
+  max-height: 350px;
+  width: auto;
+  margin-top: 50px;
+}
+.contacts .contacts--send-email {
+  min-width: 400px;
+  width: auto;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  border: 1px solid #dbb898;
+  border-radius: 7px;
+}
+.contacts .contacts--send-email input,
+.contacts .contacts--send-email textarea {
+  padding: 10px;
+  border: 1px solid #dbb898;
+  border-radius: 7px;
+}
+.contacts .contacts--send-email input[type=text],
+.contacts .contacts--send-email textarea {
+  background-color: #f7f2eb;
+  font-family: "Quicksand", sans-serif;
+}
+.contacts .contacts--send-email .send-email--btn {
+  height: 50px;
+  padding: 13px;
+  background-color: #bf9773;
+  border-radius: 6px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.contacts .contacts--send-email .send-email--btn:hover {
+  background-color: #dbb898;
+}/*# sourceMappingURL=ContactMe.css.map */
