@@ -32,7 +32,7 @@ function ScrollToTop() {
   return (
     <>
       {isVisible && (
-        <>
+        <div className="to-top">
           <FontAwesomeIcon
             icon={faSquareCaretUp}
             size="4x"
@@ -40,7 +40,7 @@ function ScrollToTop() {
             className="to-top-btn"
           />
           <h2 className="to-top-text">To Top</h2>
-        </>
+        </div>
       )}
     </>
   );

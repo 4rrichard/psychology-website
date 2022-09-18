@@ -1,3 +1,7 @@
+.to-top:hover .to-top-btn {
+  scale: 1.2;
+}
+
 .to-top-btn,
 .to-top-text {
   position: fixed;
@@ -12,10 +16,6 @@
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   filter: invert(86%) sepia(10%) saturate(2300%) hue-rotate(331deg) brightness(72%) contrast(97%);
-}
-
-.to-top-btn:hover {
-  scale: 1.2;
 }
 
 .to-top-text {
