@@ -12,7 +12,7 @@ function ContactMe() {
             eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit.
           </p>
           <div className="contacts--adress">
-            <h3 className="contacts--adress-subtitle">Adress</h3>
+            <h3 className="contacts--adress-subtitle">Address</h3>
             <p className="contacts--adress-pharagraph">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
             </p>

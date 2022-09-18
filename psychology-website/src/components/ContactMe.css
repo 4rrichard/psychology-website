@@ -36,6 +36,7 @@
 .contacts .contacts-container .contacts--info .contacts--hours-subtitle,
 .contacts .contacts-container .contacts--info .contacts--contact-subtitle {
   font-family: "Oswald", sans-serif;
+  font-weight: 400;
 }
 .contacts .contacts-container .contacts--info .contacts--adress-pharagraph,
 .contacts .contacts-container .contacts--info .contacts--hours-pharagraph,
