@@ -24,6 +24,8 @@
 }
 .footer .footer--reach-me .footer--social .footer--social-icon {
   filter: invert(86%) sepia(10%) saturate(2300%) hue-rotate(331deg) brightness(72%) contrast(97%);
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
 }
 .footer .footer--reach-me .footer--social:hover .footer--social-icon {
   scale: 1.1;
