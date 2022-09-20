@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./App.css";
 import AboutMe from "./components/AboutMe";
@@ -16,9 +16,15 @@ import "./reset.css";
 function App() {
   const location = useLocation();
   const path = location.pathname;
-  const [display, setDisplay] = useState(
-    path !== "/appointment" ? true : false
-  );
+  const [display, setDisplay] = useState(true);
+
+  useEffect(() => {
+    if (path !== "/appointment") {
+      setDisplay(true);
+    } else {
+      setDisplay(false);
+    }
+  }, [path]);
 
   return (
     <>
