@@ -1,60 +1,67 @@
 import React from "react";
-import { Link } from "react-scroll";
+import { Link as Scroll } from "react-scroll";
+import { Link, Route, Routes } from "react-router-dom";
 import "./NavBar.css";
+import Appointment from "./Appointment";
 
 function NavBar() {
   return (
-    <nav>
-      <a href="##" className="nav--name">
-        Psychologist Gizem Cakin
-      </a>
-      <div className="nav--primary">
-        <div className="nav--anchors">
-          <Link
-            activeClass="active"
-            to="about-me"
-            spy={true}
-            smooth={true}
-            className="nav--anchor"
-          >
-            About me
-          </Link>
+    <>
+      <nav>
+        <Link to="/" className="nav--name">
+          Psychologist Gizem Cakin
+        </Link>
+        <div className="nav--primary">
+          <div className="nav--anchors">
+            <Scroll
+              activeClass="active"
+              to="about-me"
+              spy={true}
+              smooth={true}
+              className="nav--anchor"
+            >
+              About me
+            </Scroll>
 
-          <Link
-            activeClass="active"
-            to="offers"
-            spy={true}
-            smooth={true}
-            className="nav--anchor"
-          >
-            What I Offer
-          </Link>
+            <Scroll
+              activeClass="active"
+              to="offers"
+              spy={true}
+              smooth={true}
+              className="nav--anchor"
+            >
+              What I Offer
+            </Scroll>
 
-          <Link
-            activeClass="active"
-            to="blog"
-            spy={true}
-            smooth={true}
-            className="nav--anchor"
-          >
-            Blog
-          </Link>
+            <Scroll
+              activeClass="active"
+              to="blog"
+              spy={true}
+              smooth={true}
+              className="nav--anchor"
+            >
+              Blog
+            </Scroll>
 
-          <Link
-            activeClass="active"
-            to="contacts"
-            spy={true}
-            smooth={true}
-            className="nav--anchor"
-          >
-            Contacts
+            <Scroll
+              activeClass="active"
+              to="contacts"
+              spy={true}
+              smooth={true}
+              className="nav--anchor"
+            >
+              Contacts
+            </Scroll>
+          </div>
+          <Link to="/appointment" className="nav--book-appointment-btn">
+            Book an appointment
           </Link>
         </div>
-        <button className="nav--book-appointment-btn">
-          Book an appointment
-        </button>
-      </div>
-    </nav>
+      </nav>
+      <Routes>
+        <Route path="/appointment" element={<Appointment />} />
+      </Routes>
+    </>
   );
 }
 

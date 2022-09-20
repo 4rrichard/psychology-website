@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-scroll";
 import "./Hero.css";
 
 function Hero() {
@@ -9,7 +10,15 @@ function Hero() {
         readable content of a page when looking at its layout.
       </h4>
       <h1 className="hero--title">Mental Health Therapy in Budapest</h1>
-      <button className="hero--aboutme-btn">About me</button>
+      <Link
+        activeClass="active"
+        to="about-me"
+        spy={true}
+        smooth={true}
+        className="hero--aboutme-btn"
+      >
+        About me
+      </Link>
       <button className="hero--book-appointment-btn">
         Book an appointment
       </button>

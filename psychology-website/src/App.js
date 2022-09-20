@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./App.css";
 import AboutMe from "./components/AboutMe";
 import Blog from "./components/Blog";
@@ -12,18 +14,29 @@ import WhatIOffer from "./components/WhatIOffer";
 import "./reset.css";
 
 function App() {
+  const location = useLocation();
+  const path = location.pathname;
+  const [display, setDisplay] = useState(
+    path !== "/appointment" ? true : false
+  );
+
   return (
     <>
       <NavBar />
-      <Hero />
-      <div className="body-container">
-        <AboutMe />
-        <WhatIOffer />
-        <Blog />
-        <FAQ />
-        <ContactMe />
-        <Subscribe />
-      </div>
+      {display && (
+        <>
+          <Hero />
+          <div className="body-container">
+            <AboutMe />
+            <WhatIOffer />
+            <Blog />
+            <FAQ />
+            <ContactMe />
+            <Subscribe />
+          </div>
+        </>
+      )}
+
       <Footer />
       <ScrollToTop />
     </>
