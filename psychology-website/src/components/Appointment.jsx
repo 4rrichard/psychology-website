@@ -3,16 +3,13 @@ import { DateTime, Info, Interval } from "luxon";
 import "./Appointment.css";
 
 function Appointment() {
-  const day = DateTime.local(2022, 9, 20, { locale: "en" }).day;
-
-  const weekdays = Info.weekdays("long", { locale: "en" });
-
-  const weekday = DateTime.local(2022, 9, 20, { locale: "en" }).weekdayLong;
+  // const day = DateTime.local(2022, 9, 20, { locale: "en" }).day;
+  // const weekday = DateTime.local(2022, 9, 20, { locale: "en" }).weekdayLong;
+  // const year = DateTime.local(2022, 9, 20, { locale: "en" }).year;
   const month = DateTime.local(2022, 9, 20, { locale: "en" }).monthLong;
-  const year = DateTime.local(2022, 9, 20, { locale: "en" }).year;
 
-  const start = DateTime.local(2022, 9, 18, { locale: "en" });
-  const end = DateTime.local(2022, 9, 25, { locale: "en" });
+  const start = DateTime.local(2022, 9, 19, { locale: "en" });
+  const end = DateTime.local(2022, 9, 26, { locale: "en" });
 
   const interval = Interval.fromDateTimes(start, end);
 
@@ -25,6 +22,9 @@ function Appointment() {
   }
 
   const dateArray = Array.from(days(interval));
+
+  const weekdays = Info.weekdays("long", { locale: "en" });
+
   const daysOfSept = dateArray.map((dates) => dates.c).map((date) => date.day);
 
   const septArray = [];
@@ -32,22 +32,30 @@ function Appointment() {
     septArray.push(month);
   }
 
+  const wholeWeekArray = [];
+  septArray.map((sept, index) => {
+    return wholeWeekArray.push({
+      month: sept,
+      days: daysOfSept[index],
+      weekdays: weekdays[index],
+    });
+  });
+
+  console.log(wholeWeekArray);
+
   return (
     <>
-      <h1 className="appointment-title">Appointment Booking</h1>
+      <h1 className="appointment--title">Appointment Booking</h1>
       <div className="appointment">
-        <div className="appointment--fulldate">
-          {septArray.map((sept) => (
-            <h2 className="appointment-month">{sept}</h2>
-          ))}
+        {wholeWeekArray.map((wholeMonth) => (
+          <div className="appointment--fulldate">
+            <h2 className="appointment--month">{wholeMonth.month}</h2>
 
-          {daysOfSept.map((days) => (
-            <h1 className="appointment-date">{days}</h1>
-          ))}
-          {weekdays.map((weekday) => (
-            <h2 className="appointment-day">{weekday}</h2>
-          ))}
-        </div>
+            <h1 className="appointment--date">{wholeMonth.days}</h1>
+
+            <h2 className="appointment--day">{wholeMonth.weekdays}</h2>
+          </div>
+        ))}
       </div>
     </>
   );

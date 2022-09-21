@@ -1,9 +1,33 @@
-.appointment-title {
+.appointment--title {
+  margin-bottom: 20px;
   font-family: "Oswald", sans-serif;
   font-weight: 400;
   font-size: 50px;
+  text-align: center;
 }
 
+.appointment {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
 .appointment .appointment--fulldate {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.appointment .appointment--fulldate .appointment--month {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+}
+.appointment .appointment--fulldate .appointment--date {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+}
+.appointment .appointment--fulldate .appointment--day {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
 }/*# sourceMappingURL=Appointment.css.map */
