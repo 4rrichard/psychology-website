@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { DateTime, Info, Interval } from "luxon";
+import { Link, Route, Routes } from "react-router-dom";
 import "./Appointment.css";
+import RegContact from "./RegContact";
 
 function Appointment() {
   // const day = DateTime.local(2022, 9, 20, { locale: "en" }).day;
   // const weekday = DateTime.local(2022, 9, 20, { locale: "en" }).weekdayLong;
   // const year = DateTime.local(2022, 9, 20, { locale: "en" }).year;
+
+  const now = DateTime.now().toFormat("dd");
+  const nowHour = DateTime.now().c.hour;
+  const dateLimit = DateTime.now().plus({ days: 1 }).toFormat("dd");
+
   const month = DateTime.local(2022, 9, 20, { locale: "en" }).monthLong;
 
   const start = DateTime.local(2022, 9, 19, { locale: "en" });
@@ -32,6 +39,11 @@ function Appointment() {
     septArray.push(month);
   }
 
+  const hoursArr = [];
+  for (let i = 10; i < 19; i++) {
+    hoursArr.push(`${i}:${"00"}`);
+  }
+
   const wholeWeekArray = [];
   septArray.map((sept, index) => {
     return wholeWeekArray.push({
@@ -41,12 +53,11 @@ function Appointment() {
     });
   });
 
-  console.log(wholeWeekArray);
-
+  // && nowHour >= hours.slice(0, 2)
   return (
-    <>
+    <section className="appointment">
       <h1 className="appointment--title">Appointment Booking</h1>
-      <div className="appointment">
+      <div className="appointment--container">
         {wholeWeekArray.map((wholeMonth) => (
           <div className="appointment--fulldate">
             <h2 className="appointment--month">{wholeMonth.month}</h2>
@@ -54,10 +65,22 @@ function Appointment() {
             <h1 className="appointment--date">{wholeMonth.days}</h1>
 
             <h2 className="appointment--day">{wholeMonth.weekdays}</h2>
+            {hoursArr.map((hours) => (
+              <Link
+                to="/contact"
+                className="appointment--hours"
+                disabled={now >= wholeMonth.days}
+              >
+                {hours}
+              </Link>
+            ))}
           </div>
         ))}
       </div>
-    </>
+      <Routes>
+        <Route path="/contact" element={<RegContact />} />
+      </Routes>
+    </section>
   );
 }
 

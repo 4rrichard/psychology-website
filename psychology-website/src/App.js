@@ -19,7 +19,7 @@ function App() {
   const [display, setDisplay] = useState(true);
 
   useEffect(() => {
-    if (path !== "/appointment") {
+    if (path !== "/appointment" && path !== "/contact") {
       setDisplay(true);
     } else {
       setDisplay(false);
