@@ -46,9 +46,16 @@
   border-radius: 7px;
 }
 .regContact .contacts--send-email input[type=text],
+.regContact .contacts--send-email input[type=email],
+.regContact .contacts--send-email input[type=number],
 .regContact .contacts--send-email textarea {
   background-color: #f7f2eb;
   font-family: "Quicksand", sans-serif;
+}
+.regContact .contacts--send-email input::-webkit-outer-spin-button,
+.regContact .contacts--send-email input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .regContact .contacts--send-email .send-email--btn {
   height: 50px;

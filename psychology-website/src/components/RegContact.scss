@@ -57,9 +57,16 @@
       border-radius: 7px;
     }
     input[type="text"],
+    input[type="email"],
+    input[type="number"],
     textarea {
       background-color: #f7f2eb;
       font-family: "Quicksand", sans-serif;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
     .send-email--btn {
       height: 50px;
