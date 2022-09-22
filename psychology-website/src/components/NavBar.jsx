@@ -1,8 +1,7 @@
 import React from "react";
 import { Link as Scroll } from "react-scroll";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./NavBar.css";
-import Appointment from "./Appointment";
 
 function NavBar() {
   return (
@@ -58,9 +57,6 @@ function NavBar() {
           </Link>
         </div>
       </nav>
-      <Routes>
-        <Route path="/appointment" element={<Appointment />} />
-      </Routes>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import AboutMe from "./components/AboutMe";
 import Blog from "./components/Blog";
@@ -11,7 +12,9 @@ import NavBar from "./components/NavBar";
 import ScrollToTop from "./components/ScrollToTop";
 import Subscribe from "./components/Subscribe";
 import WhatIOffer from "./components/WhatIOffer";
+
 import "./reset.css";
+import Appointment from "./components/Appointment";
 
 function App() {
   const location = useLocation();
@@ -19,7 +22,7 @@ function App() {
   const [display, setDisplay] = useState(true);
 
   useEffect(() => {
-    if (path !== "/appointment" && path !== "/contact") {
+    if (path !== "/appointment") {
       setDisplay(true);
     } else {
       setDisplay(false);
@@ -42,7 +45,10 @@ function App() {
           </div>
         </>
       )}
-
+      <Routes>
+        <Route path="/" />
+        <Route path="/appointment" element={<Appointment />} />
+      </Routes>
       <Footer />
       <ScrollToTop />
     </>

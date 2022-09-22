@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-scroll";
+import { Link as Scroll } from "react-scroll";
+import { Link } from "react-router-dom";
 import "./Hero.css";
 
 function Hero() {
@@ -10,7 +11,7 @@ function Hero() {
         readable content of a page when looking at its layout.
       </h4>
       <h1 className="hero--title">Mental Health Therapy in Budapest</h1>
-      <Link
+      <Scroll
         activeClass="active"
         to="about-me"
         spy={true}
@@ -18,10 +19,10 @@ function Hero() {
         className="hero--aboutme-btn"
       >
         About me
-      </Link>
-      <button className="hero--book-appointment-btn">
+      </Scroll>
+      <Link to="/appointment" className="hero--book-appointment-btn">
         Book an appointment
-      </button>
+      </Link>
     </section>
   );
 }

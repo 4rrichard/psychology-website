@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DateTime, Info, Interval } from "luxon";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Appointment.css";
 import RegContact from "./RegContact";
 
@@ -8,6 +8,15 @@ function Appointment() {
   // const day = DateTime.local(2022, 9, 20, { locale: "en" }).day;
   // const weekday = DateTime.local(2022, 9, 20, { locale: "en" }).weekdayLong;
   // const year = DateTime.local(2022, 9, 20, { locale: "en" }).year;
+  const [display, setDisplay] = useState(true);
+
+  const handleClick = () => {
+    setDisplay(false);
+  };
+
+  const clickBack = () => {
+    setDisplay(true);
+  };
 
   const now = DateTime.now().toFormat("dd");
   const nowHour = DateTime.now().c.hour;
@@ -55,32 +64,36 @@ function Appointment() {
 
   // && nowHour >= hours.slice(0, 2)
   return (
-    <section className="appointment">
-      <h1 className="appointment--title">Appointment Booking</h1>
-      <div className="appointment--container">
-        {wholeWeekArray.map((wholeMonth) => (
-          <div className="appointment--fulldate">
-            <h2 className="appointment--month">{wholeMonth.month}</h2>
+    <>
+      {display ? (
+        <section className="appointment">
+          <h1 className="appointment--title">Appointment Booking</h1>
+          <div className="appointment--container">
+            {wholeWeekArray.map((wholeMonth, index) => (
+              <div className="appointment--fulldate" key={index}>
+                <h2 className="appointment--month">{wholeMonth.month}</h2>
 
-            <h1 className="appointment--date">{wholeMonth.days}</h1>
+                <h1 className="appointment--date">{wholeMonth.days}</h1>
 
-            <h2 className="appointment--day">{wholeMonth.weekdays}</h2>
-            {hoursArr.map((hours) => (
-              <Link
-                to="/contact"
-                className="appointment--hours"
-                disabled={now >= wholeMonth.days}
-              >
-                {hours}
-              </Link>
+                <h2 className="appointment--day">{wholeMonth.weekdays}</h2>
+                {hoursArr.map((hours) => (
+                  <Link
+                    className="appointment--hours"
+                    onClick={handleClick}
+                    disabled={now >= wholeMonth.days}
+                    key={hours}
+                  >
+                    {hours}
+                  </Link>
+                ))}
+              </div>
             ))}
           </div>
-        ))}
-      </div>
-      <Routes>
-        <Route path="/contact" element={<RegContact />} />
-      </Routes>
-    </section>
+        </section>
+      ) : (
+        <RegContact clickBack={clickBack} />
+      )}
+    </>
   );
 }
 
