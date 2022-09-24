@@ -13,6 +13,36 @@
 
     text-align: center;
   }
+  .appointment--change-week {
+    width: 100%;
+
+    margin-bottom: 30px;
+
+    display: flex;
+    justify-content: center;
+    gap: 23px;
+    .appointment--current-week-date {
+      font-size: 22px;
+    }
+    .prev-week-btn,
+    .next-week-btn {
+      min-width: 70px;
+
+      padding: 10px;
+
+      color: white;
+      font-family: "Quicksand", sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      background-color: #bf9773;
+      border-radius: 5px;
+
+      text-align: center;
+
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in-out;
+    }
+  }
   .appointment--container {
     display: flex;
     justify-content: center;

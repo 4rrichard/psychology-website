@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import BookedMessage from "./BookedMessage";
 import "./RegContact.css";
+import axios from "axios";
 
 function RegContact({ clickBack }) {
   const [displayConfirm, setDisplayConfirm] = useState(true);
@@ -12,15 +13,23 @@ function RegContact({ clickBack }) {
     message: "",
   });
 
-  useEffect(() => {
-    localStorage.setItem("form", JSON.stringify(formData));
-  }, [formData]);
+  // useEffect(() => {
+  //   localStorage.setItem("form", JSON.stringify(formData));
+  // }, [formData]);
 
   const handleForm = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => {
       return { ...prevFormData, [name]: value };
     });
+    axios
+      .post(
+        "https://sheet.best/api/sheets/4abe4cb6-50cc-46ab-89d5-734474480d61",
+        formData
+      )
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   const bookedBtnHandle = () => {
@@ -28,7 +37,7 @@ function RegContact({ clickBack }) {
   };
 
   const bookedFormDataHandle = (e) => {
-    console.log(formData);
+    console.log(e);
   };
 
   return (
