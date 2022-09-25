@@ -19,12 +19,16 @@ function Appointment() {
   // console.log(dateArray[0].setLocale("en").weekdayLong);
 
   // const weekdays = Info.weekdays("long", { locale: "en" });
+  // const nowFullDateStart = DateTime.now().toFormat("MMMM dd, yyyy");
+  // const nowFullDateEnd = DateTime.now()
+  //   .plus({ days: 6 })
+  //   .toFormat("MMMM dd, yyyy");
 
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
   const [displayPrevWeek, setDisplayPrevWeek] = useState(false);
   const [incrementStart, setIncrementStart] = useState(0);
-  const [incrementEnd, setIncrementEnd] = useState(9);
+  const [incrementEnd, setIncrementEnd] = useState(6);
 
   const handleClick = () => {
     setDisplay(false);
@@ -43,26 +47,19 @@ function Appointment() {
     setDisplayPrevWeek(true);
   };
 
-  const nowFullDateStart = DateTime.now().toFormat("MMMM dd, yyyy");
-  const nowFullDateEnd = DateTime.now()
-    .plus({ days: 6 })
-    .toFormat("MMMM dd, yyyy");
-
   const nowHour = DateTime.now().c.hour;
   const nowDate = DateTime.now().toFormat("dd");
   const nowMonth = DateTime.now().setLocale("en").monthLong;
 
   const startOfWeek = DateTime.now({ locale: "en" });
-  const endOfWeek = DateTime.now().plus({ days: 7 });
+  const endOfWeek = DateTime.now().plus({ days: 6 });
 
   const startOfNextWeek = DateTime.now().plus({ days: incrementStart });
   const endOfNextWeek = DateTime.now().plus({ days: incrementEnd });
   const nextMonth = DateTime.now().setLocale("en").plus({ month: 1 }).monthLong;
-  const startOfMonth = DateTime.now().setLocale("en").startOf("month");
 
-  console.log(startOfMonth);
-
-  // console.log(DateTime.now().setLocale("en").plus({ days: 50 }).monthLong);
+  const fullDateStart = startOfNextWeek.toFormat("MMMM dd, yyyy");
+  const fullDateEnd = endOfNextWeek.toFormat("MMMM dd, yyyy");
 
   const interval = Interval.fromDateTimes(startOfWeek, endOfWeek);
 
@@ -86,12 +83,20 @@ function Appointment() {
 
   const dateArrayNextWeek = Array.from(days(intervalNextWeek));
 
+  // console.log(dateArrayNextWeek);
+
+  // console.log(dateArrayNextWeek[0].setLocale("en").monthLong);
+
   const daysOfSeptNextWeek = dateArrayNextWeek
     .map((dates) => dates.c)
     .map((date) => date.day);
 
   const weekdaysOfSept = dateArray.map(
     (dates) => dates.setLocale("en").weekdayLong
+  );
+
+  const nextMonths = dateArrayNextWeek.map(
+    (month) => month.setLocale("en").monthLong
   );
 
   const monthArray = [];
@@ -121,7 +126,7 @@ function Appointment() {
 
   const wholeWeekArrayNextWeek = [];
 
-  nextMonthArray.map((month, index) => {
+  nextMonths.map((month, index) => {
     return wholeWeekArrayNextWeek.push({
       month: month,
       days: daysOfSeptNextWeek[index],
@@ -137,7 +142,7 @@ function Appointment() {
           <h1 className="appointment--title">Appointment Booking</h1>
           <div className="appointment--change-week">
             <button className="prev-week-btn">Previous Week</button>
-            <h1 className="appointment--current-week-date">{`${nowFullDateStart} - ${nowFullDateEnd}`}</h1>
+            <h1 className="appointment--current-week-date">{`${fullDateStart} - ${fullDateEnd}`}</h1>
             <button onClick={handleNextClick} className="next-week-btn">
               Next Week
             </button>
