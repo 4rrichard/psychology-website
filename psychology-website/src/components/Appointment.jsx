@@ -3,6 +3,7 @@ import { DateTime, Interval } from "luxon";
 import { Link } from "react-router-dom";
 import "./Appointment.css";
 import RegContact from "./RegContact";
+import { useEffect } from "react";
 
 function Appointment() {
   // const day = DateTime.local(2022, 9, 20, { locale: "en" }).day;
@@ -26,12 +27,36 @@ function Appointment() {
 
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
-  const [displayPrevWeek, setDisplayPrevWeek] = useState(false);
+
   const [incrementStart, setIncrementStart] = useState(0);
   const [incrementEnd, setIncrementEnd] = useState(6);
 
-  const handleClick = () => {
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const [dateDisabled, setDateDisabled] = useState(false);
+
+  const [sendFullDate, setSendFullDate] = useState("");
+
+  const handleClick = (e) => {
+    const selectHour = e.target.innerText;
+    const selectMonth =
+      e.target.parentNode.firstElementChild.nextElementSibling.innerText;
+    const selectDate =
+      e.target.parentNode.firstElementChild.nextElementSibling
+        .nextElementSibling.innerText;
+    const selectYear = e.target.parentNode.firstElementChild.innerText;
+
+    // console.log(
+    //   e.target.parentNode.parentNode.parentNode.firstElementChild
+    //     .nextElementSibling.firstElementChild.nextElementSibling.innerText
+    // );
     setDisplay(false);
+    setSendFullDate({
+      hour: selectHour,
+      date: selectDate,
+      month: selectMonth,
+      year: selectYear,
+    });
   };
 
   const clickBack = () => {
@@ -44,11 +69,24 @@ function Appointment() {
     setDisplayNextWeek(true);
   };
   const handlePrevClick = () => {
-    setDisplayPrevWeek(true);
+    setIncrementStart((prevState) => prevState - 7);
+    setIncrementEnd((prevState) => prevState - 7);
+    setDisplayNextWeek(true);
   };
 
-  const nowHour = DateTime.now().c.hour;
+  const now = DateTime.now();
   const nowDate = DateTime.now().toFormat("dd");
+
+  // const nowHour = DateTime.now().c.hour;
+  // const yesterday = DateTime.now().plus({ day: -1 });
+  const tomorrowHour = DateTime.now().plus({ day: 1 }).c.hour;
+  const tomorrowDate = DateTime.now().plus({ day: 1 }).c.day;
+  const nowHourFormatted = DateTime.now()
+    .plus({ hour: 1 })
+    .toLocaleString(DateTime.TIME_SIMPLE);
+  // console.log(nowHourFormatted);
+
+  // console.log(tomorrowHour, tomorrowDate);
   const nowMonth = DateTime.now().setLocale("en").monthLong;
 
   const startOfWeek = DateTime.now({ locale: "en" });
@@ -79,13 +117,46 @@ function Appointment() {
 
   const dateArray = Array.from(days(interval));
 
+  //--- Disable previous button ---
+  useEffect(() => {
+    const arrayFirst = [];
+    arrayFirst.push(
+      "" +
+        String(startOfNextWeek.c.year) +
+        String(startOfNextWeek.c.month).padStart(2, "0") +
+        String(startOfNextWeek.c.day).padStart(2, "0")
+    );
+    const arraySecond = [];
+    arraySecond.push(
+      "" +
+        String(startOfWeek.c.year) +
+        String(startOfWeek.c.month).padStart(2, "0") +
+        String(startOfWeek.c.day).padStart(2, "0")
+    );
+
+    if (parseInt(arrayFirst[0]) > parseInt(arraySecond[0])) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [
+    startOfNextWeek.c.year,
+    startOfNextWeek.c.month,
+    startOfNextWeek.c.day,
+    startOfWeek.c.year,
+    startOfWeek.c.day,
+    startOfWeek.c.month,
+  ]);
+
+  useEffect(() => {});
+
   const daysOfSept = dateArray.map((dates) => dates.c).map((date) => date.day);
 
   const dateArrayNextWeek = Array.from(days(intervalNextWeek));
 
-  // console.log(dateArrayNextWeek);
-
-  // console.log(dateArrayNextWeek[0].setLocale("en").monthLong);
+  const yearNext = dateArrayNextWeek
+    .map((year) => year.c)
+    .map((year) => year.year);
 
   const daysOfSeptNextWeek = dateArrayNextWeek
     .map((dates) => dates.c)
@@ -109,14 +180,14 @@ function Appointment() {
     hoursArr.push(`${i}:${"00"}`);
   }
 
-  const wholeWeekArray = [];
-  monthArray.map((month, index) => {
-    return wholeWeekArray.push({
-      month: month,
-      days: daysOfSept[index],
-      weekdays: weekdaysOfSept[index],
-    });
-  });
+  // const wholeWeekArray = [];
+  // monthArray.map((month, index) => {
+  //   return wholeWeekArray.push({
+  //     month: month,
+  //     days: daysOfSept[index],
+  //     weekdays: weekdaysOfSept[index],
+  //   });
+  // });
 
   const nextMonthArray = [];
 
@@ -128,12 +199,14 @@ function Appointment() {
 
   nextMonths.map((month, index) => {
     return wholeWeekArrayNextWeek.push({
+      year: yearNext[index],
       month: month,
       days: daysOfSeptNextWeek[index],
       weekdays: weekdaysOfSept[index],
     });
   });
 
+  //Get text of button : event.target.innerText
   // && nowHour >= hours.slice(0, 2)
   return (
     <>
@@ -141,7 +214,13 @@ function Appointment() {
         <section className="appointment">
           <h1 className="appointment--title">Appointment Booking</h1>
           <div className="appointment--change-week">
-            <button className="prev-week-btn">Previous Week</button>
+            <button
+              onClick={handlePrevClick}
+              disabled={isDisabled}
+              className="prev-week-btn"
+            >
+              Previous Week
+            </button>
             <h1 className="appointment--current-week-date">{`${fullDateStart} - ${fullDateEnd}`}</h1>
             <button onClick={handleNextClick} className="next-week-btn">
               Next Week
@@ -149,18 +228,23 @@ function Appointment() {
           </div>
           <div className="appointment--container">
             {!displayNextWeek &&
-              wholeWeekArray.map((wholeMonth, index) => (
+              wholeWeekArrayNextWeek.map((wholeMonth, index) => (
                 <div className="appointment--fulldate" key={index}>
+                  <p className="year-no-display">{wholeMonth.year}</p>
                   <h2 className="appointment--month">{wholeMonth.month}</h2>
 
                   <h1 className="appointment--date">{wholeMonth.days}</h1>
 
                   <h2 className="appointment--day">{wholeMonth.weekdays}</h2>
+
                   {hoursArr.map((hours) => (
                     <Link
                       className="appointment--hours"
+                      value={10}
                       onClick={handleClick}
-                      disabled={nowDate >= wholeMonth.days}
+                      disabled={
+                        parseInt(now.c.day) === wholeMonth.days ? true : false
+                      }
                       key={hours}
                     >
                       {hours}
@@ -171,6 +255,7 @@ function Appointment() {
             {displayNextWeek &&
               wholeWeekArrayNextWeek.map((wholeMonth, index) => (
                 <div className="appointment--fulldate" key={index}>
+                  <p className="year-no-display">{wholeMonth.year}</p>
                   <h2 className="appointment--month">{wholeMonth.month}</h2>
 
                   <h1 className="appointment--date">{wholeMonth.days}</h1>
@@ -180,7 +265,7 @@ function Appointment() {
                     <Link
                       className="appointment--hours"
                       onClick={handleClick}
-                      disabled={nowDate >= wholeMonth.days}
+                      disabled={parseInt(now.c.day) === wholeMonth.days}
                       key={hours}
                     >
                       {hours}
@@ -191,7 +276,7 @@ function Appointment() {
           </div>
         </section>
       ) : (
-        <RegContact clickBack={clickBack} />
+        <RegContact clickBack={clickBack} fullDate={sendFullDate} />
       )}
     </>
   );
