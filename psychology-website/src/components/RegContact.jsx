@@ -4,6 +4,14 @@ import BookedMessage from "./BookedMessage";
 import "./RegContact.css";
 import axios from "axios";
 
+const GOOGLE_FORM_ACTION_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSe-m8AyQmotKf10l_T3y-oKveOapK2SMP4ldH2jCBcISBL4Zw/formResponse";
+const GOOGLE_FORM_NAME_ID = "entry.1349438757";
+const GOOGLE_FORM_EMAIL_ID = "entry.907658896";
+const GOOGLE_FORM_PHONE_NUMBER_ID = "entry.909529888";
+const GOOGLE_FORM_MESSAGE_ID = "entry.1030994600";
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+
 function RegContact({ clickBack, fullDate }) {
   const [displayConfirm, setDisplayConfirm] = useState(true);
   const [formData, setFormData] = useState({
@@ -14,20 +22,21 @@ function RegContact({ clickBack, fullDate }) {
     messageError: false,
   });
 
-  const GOOGLE_FORM_ACTION_URL =
-    "https://docs.google.com/forms/d/e/1FAIpQLSe-m8AyQmotKf10l_T3y-oKveOapK2SMP4ldH2jCBcISBL4Zw/viewform";
-  const GOOGLE_FORM_NAME_ID = "entry.1349438757";
-  const GOOGLE_FORM_EMAIL_ID = "entry.907658896";
-  const GOOGLE_FORM_PHONE_NUMBER_ID = "entry.909529888";
-  const GOOGLE_FORM_MESSAGE_ID = "entry.1030994600";
-  const CORS_PROXY = "https://cors-anywhere.herokuapp.com/corsdemo";
-
   const sendMessage = () => {
     const fullForm = new FormData();
-    formData.append(GOOGLE_FORM_MESSAGE_ID, formData.message);
-    formData.append(GOOGLE_FORM_EMAIL_ID, formData.email);
-    formData.append(GOOGLE_FORM_NAME_ID, formData.fullName);
-    formData.append(GOOGLE_FORM_PHONE_NUMBER_ID, formData.phoneNum);
+    fullForm.append(GOOGLE_FORM_NAME_ID, formData.fullName);
+    fullForm.append(GOOGLE_FORM_EMAIL_ID, formData.email);
+    fullForm.append(GOOGLE_FORM_PHONE_NUMBER_ID, formData.phoneNum);
+    fullForm.append(GOOGLE_FORM_MESSAGE_ID, formData.message);
+
+    // fetch(CORS_PROXY + GOOGLE_FORM_ACTION_URL, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(fullForm),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data));
+    console.log(fullForm);
     axios
       .post(CORS_PROXY + GOOGLE_FORM_ACTION_URL, fullForm)
       .then(() => {
@@ -51,19 +60,27 @@ function RegContact({ clickBack, fullDate }) {
   };
 
   const handleChange = (event) => {
-    setFormData({ [event.target.name]: event.target.value });
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const bookedBtnHandle = () => {
+  const bookedBtnHandle = (e) => {
+    e.preventDefault();
     setDisplayConfirm(false);
   };
 
   return (
     <>
-      {displayConfirm ? (
+      {displayConfirm && (
         <section className="regContact">
           <h2 className="regContact--details-title">Booking details</h2>
-          <form onSubmit={handleForm} className="contacts--send-email">
+          <form
+            onSubmit={handleForm}
+            className="contacts--send-email"
+            onInvalid={(e) =>
+              e.target.setCustomValidity("Please fill in the field")
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
+          >
             <div className="details-container">
               <div className="regContact--details">
                 <h3 className="details--title">Date</h3>
@@ -83,30 +100,33 @@ function RegContact({ clickBack, fullDate }) {
 
             <input
               type="text"
-              value={formData.fullName ?? ""}
+              value={formData.fullName}
               onChange={handleChange}
               name="fullName"
               placeholder="Enter your full name"
               className="send-email--full-name "
+              required
             />
             <input
               type="email"
-              value={formData.email ?? ""}
+              value={formData.email}
               onChange={handleChange}
               name="email"
               placeholder="Enter your email adress"
               className="send-email--email-adress "
+              required
             />
             <input
               type="number"
-              value={formData.phoneNum ?? ""}
+              value={formData.phoneNum}
               onChange={handleChange}
               name="phoneNum"
               placeholder="Enter your phone number"
               className="send-email--phone-number "
+              required
             />
             <textarea
-              value={formData.message ?? ""}
+              value={formData.message}
               onChange={handleChange}
               name="message"
               placeholder="Write your message"
@@ -116,7 +136,7 @@ function RegContact({ clickBack, fullDate }) {
             ></textarea>
             <button
               type="submit"
-              onClick={bookedBtnHandle}
+              // onClick={bookedBtnHandle}
               className="send-email--btn"
             >
               Finalize Booking
@@ -126,9 +146,8 @@ function RegContact({ clickBack, fullDate }) {
             Back to Appointments
           </button>
         </section>
-      ) : (
-        <BookedMessage />
       )}
+      {formData && <BookedMessage />}
     </>
   );
 }

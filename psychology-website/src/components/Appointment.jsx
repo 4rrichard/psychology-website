@@ -148,8 +148,6 @@ function Appointment() {
     startOfWeek.c.month,
   ]);
 
-  useEffect(() => {});
-
   const daysOfSept = dateArray.map((dates) => dates.c).map((date) => date.day);
 
   const dateArrayNextWeek = Array.from(days(intervalNextWeek));
