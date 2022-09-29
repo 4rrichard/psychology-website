@@ -5,7 +5,7 @@ import "./RegContact.css";
 import axios from "axios";
 
 const GOOGLE_FORM_ACTION_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSe-m8AyQmotKf10l_T3y-oKveOapK2SMP4ldH2jCBcISBL4Zw/formResponse";
+  "https://docs.google.com/forms/u/0/d/1JB_gb7O4bm7KEB8heNEoeUiicp89SCFtn3Bdb6pNRkU/formResponse";
 const GOOGLE_FORM_NAME_ID = "entry.1349438757";
 const GOOGLE_FORM_EMAIL_ID = "entry.907658896";
 const GOOGLE_FORM_PHONE_NUMBER_ID = "entry.909529888";
@@ -22,12 +22,15 @@ function RegContact({ clickBack, fullDate }) {
     messageError: false,
   });
 
+  const dateMessage = `Booked date: ${fullDate.date} ${fullDate.month} ${fullDate.year} at ${fullDate.hour}`;
+
   const sendMessage = () => {
     const fullForm = new FormData();
     fullForm.append(GOOGLE_FORM_NAME_ID, formData.fullName);
     fullForm.append(GOOGLE_FORM_EMAIL_ID, formData.email);
     fullForm.append(GOOGLE_FORM_PHONE_NUMBER_ID, formData.phoneNum);
     fullForm.append(GOOGLE_FORM_MESSAGE_ID, formData.message);
+    fullForm.append(GOOGLE_FORM_MESSAGE_ID, dateMessage);
 
     // fetch(CORS_PROXY + GOOGLE_FORM_ACTION_URL, {
     //   method: "POST",
@@ -36,7 +39,7 @@ function RegContact({ clickBack, fullDate }) {
     // })
     //   .then((response) => response.json())
     //   .then((data) => console.log(data));
-    console.log(fullForm);
+    console.log(...fullForm);
     axios
       .post(CORS_PROXY + GOOGLE_FORM_ACTION_URL, fullForm)
       .then(() => {
