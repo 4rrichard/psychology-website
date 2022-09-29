@@ -22,15 +22,15 @@ function RegContact({ clickBack, fullDate }) {
     messageError: false,
   });
 
-  const dateMessage = `Booked date: ${fullDate.date} ${fullDate.month} ${fullDate.year} at ${fullDate.hour}`;
+  const dateMessage = `\nBooked date: ${fullDate.date} ${fullDate.month} ${fullDate.year} at ${fullDate.hour}`;
 
   const sendMessage = () => {
+    formData.message += dateMessage;
     const fullForm = new FormData();
     fullForm.append(GOOGLE_FORM_NAME_ID, formData.fullName);
     fullForm.append(GOOGLE_FORM_EMAIL_ID, formData.email);
     fullForm.append(GOOGLE_FORM_PHONE_NUMBER_ID, formData.phoneNum);
     fullForm.append(GOOGLE_FORM_MESSAGE_ID, formData.message);
-    fullForm.append(GOOGLE_FORM_MESSAGE_ID, dateMessage);
 
     // fetch(CORS_PROXY + GOOGLE_FORM_ACTION_URL, {
     //   method: "POST",
