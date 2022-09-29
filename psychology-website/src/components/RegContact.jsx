@@ -12,7 +12,7 @@ const GOOGLE_FORM_PHONE_NUMBER_ID = "entry.909529888";
 const GOOGLE_FORM_MESSAGE_ID = "entry.1030994600";
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
-function RegContact({ clickBack, fullDate }) {
+function RegContact({ clickBack, fullDate, disableDate }) {
   const [displayConfirm, setDisplayConfirm] = useState(true);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -45,13 +45,15 @@ function RegContact({ clickBack, fullDate }) {
     console.log(...fullForm);
     axios
       .post(CORS_PROXY + GOOGLE_FORM_ACTION_URL, fullForm)
-      .then(() => {
+      .then((res) => {
         setFormData({
           fullName: "",
           email: "",
           phoneNum: "",
           message: "",
         });
+
+        setDisplayConfirm(false);
       })
       .catch(() => {
         setFormData({
@@ -69,14 +71,14 @@ function RegContact({ clickBack, fullDate }) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const bookedBtnHandle = (e) => {
-    e.preventDefault();
-    setDisplayConfirm(false);
-  };
+  // const bookedBtnHandle = (e) => {
+  //   e.preventDefault();
+  //   setDisplayConfirm(false);
+  // };
 
   return (
     <>
-      {displayConfirm && (
+      {displayConfirm ? (
         <section className="regContact">
           <h2 className="regContact--details-title">Booking details</h2>
           <form
@@ -152,8 +154,9 @@ function RegContact({ clickBack, fullDate }) {
             Back to Appointments
           </button>
         </section>
+      ) : (
+        <BookedMessage />
       )}
-      {formData && <BookedMessage />}
     </>
   );
 }

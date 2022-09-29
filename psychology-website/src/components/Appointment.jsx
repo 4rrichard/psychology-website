@@ -35,6 +35,8 @@ function Appointment() {
 
   const [dateDisabled, setDateDisabled] = useState(false);
 
+  const [disableDate, setDisableDate] = useState(false);
+
   const [sendFullDate, setSendFullDate] = useState("");
 
   const handleClick = (e) => {
@@ -61,6 +63,10 @@ function Appointment() {
 
   const clickBack = () => {
     setDisplay(true);
+  };
+
+  const dateDisableHandler = () => {
+    setDisableDate(true);
   };
 
   const handleNextClick = () => {
@@ -240,9 +246,7 @@ function Appointment() {
                       className="appointment--hours"
                       value={10}
                       onClick={handleClick}
-                      disabled={
-                        parseInt(now.c.day) === wholeMonth.days ? true : false
-                      }
+                      // disabled={dateDisableHandler}
                       key={hours}
                     >
                       {hours}
@@ -263,7 +267,7 @@ function Appointment() {
                     <Link
                       className="appointment--hours"
                       onClick={handleClick}
-                      disabled={parseInt(now.c.day) === wholeMonth.days}
+                      // disabled={dateDisableHandler}
                       key={hours}
                     >
                       {hours}
@@ -274,7 +278,11 @@ function Appointment() {
           </div>
         </section>
       ) : (
-        <RegContact clickBack={clickBack} fullDate={sendFullDate} />
+        <RegContact
+          clickBack={clickBack}
+          fullDate={sendFullDate}
+          disableDate={disableDate}
+        />
       )}
     </>
   );
