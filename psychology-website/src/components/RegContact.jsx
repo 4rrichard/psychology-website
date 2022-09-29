@@ -22,7 +22,10 @@ function RegContact({ clickBack, fullDate }) {
     messageError: false,
   });
 
-  const dateMessage = `\nBooked date: ${fullDate.date} ${fullDate.month} ${fullDate.year} at ${fullDate.hour}`;
+  const dateMessage = `\nbooked date: ${fullDate.date} ${fullDate.month} ${fullDate.year} at ${fullDate.hour}`;
+
+  // console.log(dateMessage.slice(0, dateMessage.lastIndexOf("\n")));
+  // console.log(dateMessage.slice(dateMessage.lastIndexOf("\n") + 1));
 
   const sendMessage = () => {
     formData.message += dateMessage;
