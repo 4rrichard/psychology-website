@@ -68,6 +68,10 @@
       -webkit-appearance: none;
       margin: 0;
     }
+    input:focus,
+    textarea:focus {
+      border: 1px solid #66492e;
+    }
     .send-email--btn {
       height: 50px;
 

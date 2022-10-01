@@ -57,6 +57,10 @@
   -webkit-appearance: none;
   margin: 0;
 }
+.regContact .contacts--send-email input:focus,
+.regContact .contacts--send-email textarea:focus {
+  border: 1px solid #66492e;
+}
 .regContact .contacts--send-email .send-email--btn {
   height: 50px;
   padding: 13px;

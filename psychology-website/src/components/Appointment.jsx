@@ -33,8 +33,6 @@ function Appointment() {
 
   const [isDisabled, setIsDisabled] = useState(false);
 
-  const [dateDisabled, setDateDisabled] = useState(false);
-
   const [disableDate, setDisableDate] = useState(false);
 
   const [sendFullDate, setSendFullDate] = useState("");
@@ -246,7 +244,7 @@ function Appointment() {
                       className="appointment--hours"
                       value={10}
                       onClick={handleClick}
-                      // disabled={dateDisableHandler}
+                      disabled={disableDate}
                       key={hours}
                     >
                       {hours}
@@ -267,7 +265,7 @@ function Appointment() {
                     <Link
                       className="appointment--hours"
                       onClick={handleClick}
-                      // disabled={dateDisableHandler}
+                      disabled={disableDate}
                       key={hours}
                     >
                       {hours}
@@ -281,7 +279,7 @@ function Appointment() {
         <RegContact
           clickBack={clickBack}
           fullDate={sendFullDate}
-          disableDate={disableDate}
+          disableDate={dateDisableHandler}
         />
       )}
     </>

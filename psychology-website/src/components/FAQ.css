@@ -1,8 +1,7 @@
 .faq {
-  height: 55vh;
+  height: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 .faq .faq--title {
   margin-bottom: 20px;
@@ -11,9 +10,11 @@
   font-size: 50px;
   text-align: center;
 }
-.faq .faq--question-container {
+.faq .faq--question-container,
+.faq .faq--question-container-active {
   width: auto;
   height: 50px;
+  margin-bottom: 20px;
   padding: 10px 30px;
   display: flex;
   align-items: center;
@@ -22,7 +23,35 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.faq .faq--question-container .faq--drop-down {
+.faq .faq--question-container .faq--drop-down,
+.faq .faq--question-container .faq--close,
+.faq .faq--question-container-active .faq--drop-down,
+.faq .faq--question-container-active .faq--close {
   width: auto;
   max-height: 80%;
+}
+.faq .faq--question-container .faq--close,
+.faq .faq--question-container-active .faq--close {
+  transform: rotate(180deg);
+  transition-duration: 0.2s;
+}
+.faq .faq--question-container-active {
+  margin-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.faq .faq--answer-container {
+  max-height: 0;
+}
+.faq .faq--answer-container-active {
+  max-height: 200px;
+  margin-bottom: 20px;
+  background-color: #f7f2eb;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: hidden;
+  transition: max-height 1.5s ease;
+}
+.faq .faq--answer {
+  padding: 20px;
 }/*# sourceMappingURL=FAQ.css.map */

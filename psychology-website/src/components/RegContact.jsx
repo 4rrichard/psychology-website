@@ -21,6 +21,7 @@ function RegContact({ clickBack, fullDate, disableDate }) {
     message: "",
     messageError: false,
   });
+  // const [disabled, setDisabled] = useState(disableDate);
 
   const dateMessage = `\nbooked date: ${fullDate.date} ${fullDate.month} ${fullDate.year} at ${fullDate.hour}`;
 
@@ -45,7 +46,7 @@ function RegContact({ clickBack, fullDate, disableDate }) {
     console.log(...fullForm);
     axios
       .post(CORS_PROXY + GOOGLE_FORM_ACTION_URL, fullForm)
-      .then((res) => {
+      .then(() => {
         setFormData({
           fullName: "",
           email: "",
@@ -54,6 +55,7 @@ function RegContact({ clickBack, fullDate, disableDate }) {
         });
 
         setDisplayConfirm(false);
+        disableDate();
       })
       .catch(() => {
         setFormData({
