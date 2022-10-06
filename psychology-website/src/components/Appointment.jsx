@@ -25,6 +25,9 @@ function Appointment() {
   //   .plus({ days: 6 })
   //   .toFormat("MMMM dd, yyyy");
 
+  //--- localstorage data delete ---
+  // localStorage.clear();
+
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
 
@@ -34,7 +37,9 @@ function Appointment() {
   //rename usestate
   const [isPreviousDisabled, setIsPreviousDisabled] = useState(false);
 
-  const [disableDate, setDisableDate] = useState([]);
+  const [disableDate, setDisableDate] = useState(() =>
+    JSON.parse(localStorage.getItem("bookedTime") ?? "[]")
+  );
 
   const [sendFullDate, setSendFullDate] = useState("");
 
@@ -145,10 +150,10 @@ function Appointment() {
 
   //--- Saving state after refresh  ---
 
-  useEffect(() => {
-    const data = window.localStorage.getItem("bookedTime");
-    setDisableDate(JSON.parse(data));
-  }, []);
+  // useEffect(() => {
+  //   const data = window.localStorage.getItem("bookedTime");
+  //   setDisableDate(JSON.parse(data));
+  // }, []);
 
   useEffect(() => {
     window.localStorage.setItem("bookedTime", JSON.stringify(disableDate));
@@ -212,21 +217,24 @@ function Appointment() {
 
   //Get text of button : event.target.innerText
   // && nowHour >= hours.slice(0, 2)
+  console.log(disableDate);
   function isAppointmentDisabled(hours, wholeMonth) {
-    console.log(disableDate);
-    return disableDate.find((value) => {
-      console.log(value);
-      if (
-        value[0] === wholeMonth.year &&
-        value[1] === wholeMonth.month &&
-        value[2] === wholeMonth.days &&
-        value[3] === hours
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+    console.log(wholeMonth);
+    return (
+      disableDate.find((value) => {
+        console.log(value);
+        if (
+          value[0] === wholeMonth.year &&
+          value[1] === wholeMonth.month &&
+          value[2] === wholeMonth.days &&
+          value[3] === hours
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      }) !== undefined
+    );
   }
   return (
     <>

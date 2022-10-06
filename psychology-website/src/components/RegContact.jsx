@@ -56,11 +56,14 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
         });
 
         setDisplayConfirm(false);
-        setDisableDate([
-          parseInt(fullDate.year),
-          fullDate.month,
-          parseInt(fullDate.date),
-          fullDate.hour,
+        setDisableDate((old) => [
+          ...old,
+          [
+            parseInt(fullDate.year),
+            fullDate.month,
+            parseInt(fullDate.date),
+            fullDate.hour,
+          ],
         ]);
       })
       .catch(() => {
