@@ -219,10 +219,8 @@ function Appointment() {
   // && nowHour >= hours.slice(0, 2)
   console.log(disableDate);
   function isAppointmentDisabled(hours, wholeMonth) {
-    console.log(wholeMonth);
     return (
       disableDate.find((value) => {
-        console.log(value);
         if (
           value[0] === wholeMonth.year &&
           value[1] === wholeMonth.month &&
