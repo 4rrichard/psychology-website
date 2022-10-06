@@ -31,9 +31,10 @@ function Appointment() {
   const [incrementStart, setIncrementStart] = useState(0);
   const [incrementEnd, setIncrementEnd] = useState(6);
 
-  const [isDisabled, setIsDisabled] = useState(false);
+  //rename usestate
+  const [isPreviousDisabled, setIsPreviousDisabled] = useState(false);
 
-  const [disableDate, setDisableDate] = useState(false);
+  const [disableDate, setDisableDate] = useState([]);
 
   const [sendFullDate, setSendFullDate] = useState("");
 
@@ -46,10 +47,6 @@ function Appointment() {
         .nextElementSibling.innerText;
     const selectYear = e.target.parentNode.firstElementChild.innerText;
 
-    // console.log(
-    //   e.target.parentNode.parentNode.parentNode.firstElementChild
-    //     .nextElementSibling.firstElementChild.nextElementSibling.innerText
-    // );
     setDisplay(false);
     setSendFullDate({
       hour: selectHour,
@@ -63,10 +60,6 @@ function Appointment() {
     setDisplay(true);
   };
 
-  const dateDisableHandler = () => {
-    setDisableDate(true);
-  };
-
   const handleNextClick = () => {
     setIncrementStart(incrementStart + 7);
     setIncrementEnd(incrementEnd + 7);
@@ -78,19 +71,17 @@ function Appointment() {
     setDisplayNextWeek(true);
   };
 
-  const now = DateTime.now();
-  const nowDate = DateTime.now().toFormat("dd");
+  // const now = DateTime.now();
+  // const nowDate = DateTime.now().toFormat("dd");
 
   // const nowHour = DateTime.now().c.hour;
   // const yesterday = DateTime.now().plus({ day: -1 });
-  const tomorrowHour = DateTime.now().plus({ day: 1 }).c.hour;
-  const tomorrowDate = DateTime.now().plus({ day: 1 }).c.day;
-  const nowHourFormatted = DateTime.now()
-    .plus({ hour: 1 })
-    .toLocaleString(DateTime.TIME_SIMPLE);
-  // console.log(nowHourFormatted);
+  // const tomorrowHour = DateTime.now().plus({ day: 1 }).c.hour;
+  // const tomorrowDate = DateTime.now().plus({ day: 1 }).c.day;
+  // const nowHourFormatted = DateTime.now()
+  //   .plus({ hour: 1 })
+  //   .toLocaleString(DateTime.TIME_SIMPLE);
 
-  // console.log(tomorrowHour, tomorrowDate);
   const nowMonth = DateTime.now().setLocale("en").monthLong;
 
   const startOfWeek = DateTime.now({ locale: "en" });
@@ -139,9 +130,9 @@ function Appointment() {
     );
 
     if (parseInt(arrayFirst[0]) > parseInt(arraySecond[0])) {
-      setIsDisabled(false);
+      setIsPreviousDisabled(false);
     } else {
-      setIsDisabled(true);
+      setIsPreviousDisabled(true);
     }
   }, [
     startOfNextWeek.c.year,
@@ -151,6 +142,17 @@ function Appointment() {
     startOfWeek.c.day,
     startOfWeek.c.month,
   ]);
+
+  //--- Saving state after refresh  ---
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("bookedTime");
+    setDisableDate(JSON.parse(data));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("bookedTime", JSON.stringify(disableDate));
+  }, [disableDate]);
 
   const daysOfSept = dateArray.map((dates) => dates.c).map((date) => date.day);
 
@@ -210,6 +212,22 @@ function Appointment() {
 
   //Get text of button : event.target.innerText
   // && nowHour >= hours.slice(0, 2)
+  function isAppointmentDisabled(hours, wholeMonth) {
+    console.log(disableDate);
+    return disableDate.find((value) => {
+      console.log(value);
+      if (
+        value[0] === wholeMonth.year &&
+        value[1] === wholeMonth.month &&
+        value[2] === wholeMonth.days &&
+        value[3] === hours
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
   return (
     <>
       {display ? (
@@ -218,7 +236,7 @@ function Appointment() {
           <div className="appointment--change-week">
             <button
               onClick={handlePrevClick}
-              disabled={isDisabled}
+              disabled={isPreviousDisabled}
               className="prev-week-btn"
             >
               Previous Week
@@ -234,17 +252,14 @@ function Appointment() {
                 <div className="appointment--fulldate" key={index}>
                   <p className="year-no-display">{wholeMonth.year}</p>
                   <h2 className="appointment--month">{wholeMonth.month}</h2>
-
                   <h1 className="appointment--date">{wholeMonth.days}</h1>
-
                   <h2 className="appointment--day">{wholeMonth.weekdays}</h2>
-
                   {hoursArr.map((hours) => (
                     <Link
                       className="appointment--hours"
                       value={10}
                       onClick={handleClick}
-                      disabled={disableDate}
+                      disabled={isAppointmentDisabled(hours, wholeMonth)}
                       key={hours}
                     >
                       {hours}
@@ -265,7 +280,7 @@ function Appointment() {
                     <Link
                       className="appointment--hours"
                       onClick={handleClick}
-                      disabled={disableDate}
+                      disabled={isAppointmentDisabled(hours, wholeMonth)}
                       key={hours}
                     >
                       {hours}
@@ -279,7 +294,7 @@ function Appointment() {
         <RegContact
           clickBack={clickBack}
           fullDate={sendFullDate}
-          disableDate={dateDisableHandler}
+          setDisableDate={setDisableDate}
         />
       )}
     </>

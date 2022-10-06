@@ -12,7 +12,7 @@ const GOOGLE_FORM_PHONE_NUMBER_ID = "entry.909529888";
 const GOOGLE_FORM_MESSAGE_ID = "entry.1030994600";
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
-function RegContact({ clickBack, fullDate, disableDate }) {
+function RegContact({ clickBack, fullDate, setDisableDate }) {
   const [displayConfirm, setDisplayConfirm] = useState(true);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -21,6 +21,7 @@ function RegContact({ clickBack, fullDate, disableDate }) {
     message: "",
     messageError: false,
   });
+
   // const [disabled, setDisabled] = useState(disableDate);
 
   const dateMessage = `\nbooked date: ${fullDate.date} ${fullDate.month} ${fullDate.year} at ${fullDate.hour}`;
@@ -55,7 +56,12 @@ function RegContact({ clickBack, fullDate, disableDate }) {
         });
 
         setDisplayConfirm(false);
-        disableDate();
+        setDisableDate([
+          parseInt(fullDate.year),
+          fullDate.month,
+          parseInt(fullDate.date),
+          fullDate.hour,
+        ]);
       })
       .catch(() => {
         setFormData({
