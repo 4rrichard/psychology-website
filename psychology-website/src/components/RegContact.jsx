@@ -10,14 +10,25 @@ import axios from "axios";
 // const GOOGLE_FORM_EMAIL_ID = "entry.907658896";
 // const GOOGLE_FORM_PHONE_NUMBER_ID = "entry.909529888";
 // const GOOGLE_FORM_MESSAGE_ID = "entry.1030994600";
-const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 const {
-  REACT_APP_GOOGLE_FORM_ACTION_URL,
+  REACT_APP_GOOGLE_FORM_KEY,
   REACT_APP_GOOGLE_FORM_NAME_ID,
   REACT_APP_GOOGLE_FORM_EMAIL_ID,
   REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID,
   REACT_APP_GOOGLE_FORM_MESSAGE_ID,
 } = process.env;
+
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+const GOOGLE_FORM_ACTION_URL = `https://docs.google.com/forms/u/0/d/${REACT_APP_GOOGLE_FORM_KEY}/formResponse`;
+
+console.log(
+  GOOGLE_FORM_ACTION_URL,
+  REACT_APP_GOOGLE_FORM_KEY,
+  REACT_APP_GOOGLE_FORM_NAME_ID,
+  REACT_APP_GOOGLE_FORM_EMAIL_ID,
+  REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID,
+  REACT_APP_GOOGLE_FORM_MESSAGE_ID
+);
 
 function RegContact({ clickBack, fullDate, setDisableDate }) {
   const [displayConfirm, setDisplayConfirm] = useState(true);
@@ -53,7 +64,7 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     //   .then((data) => console.log(data));
     console.log(...fullForm);
     axios
-      .post(CORS_PROXY + REACT_APP_GOOGLE_FORM_ACTION_URL, fullForm)
+      .post(CORS_PROXY + GOOGLE_FORM_ACTION_URL, fullForm)
       .then(() => {
         setFormData({
           fullName: "",

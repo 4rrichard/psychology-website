@@ -229,7 +229,6 @@ function Appointment() {
 
   //Get text of button : event.target.innerText
   // && nowHour >= hours.slice(0, 2)
-  console.log(disableDate);
 
   function isAppointmentDisabled(hours, wholeMonth) {
     //now.c.hour + ":00"
