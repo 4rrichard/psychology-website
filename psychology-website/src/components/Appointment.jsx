@@ -76,18 +76,30 @@ function Appointment() {
     setDisplayNextWeek(true);
   };
 
-  // const now = DateTime.now();
   // const nowDate = DateTime.now().toFormat("dd");
 
   // const nowHour = DateTime.now().c.hour;
   // const yesterday = DateTime.now().plus({ day: -1 });
   // const tomorrowHour = DateTime.now().plus({ day: 1 }).c.hour;
-  // const tomorrowDate = DateTime.now().plus({ day: 1 }).c.day;
+  const tomorrow = DateTime.now().plus({ day: 1 });
+  // console.log(tomorrow.c.hour + ":00");
+  // const hourss = DateTime.now().plus({ day: 1 }).plus({ hour: -1 });
+  // console.log(hourss);
+  const hoursArray = [];
+  for (let i = tomorrow.c.hour; i >= 10; i--) {
+    hoursArray.push(`${i}:${"00"}`);
+  }
+  // console.log(hoursArray);
   // const nowHourFormatted = DateTime.now()
   //   .plus({ hour: 1 })
   //   .toLocaleString(DateTime.TIME_SIMPLE);
 
+  const now = DateTime.now();
+
   const nowMonth = DateTime.now().setLocale("en").monthLong;
+  const tomorrowMonth = DateTime.now()
+    .plus({ day: 1 })
+    .setLocale("en").monthLong;
 
   const startOfWeek = DateTime.now({ locale: "en" });
   const endOfWeek = DateTime.now().plus({ days: 6 });
@@ -148,12 +160,12 @@ function Appointment() {
     startOfWeek.c.month,
   ]);
 
-  //--- Saving state after refresh  ---
-
   // useEffect(() => {
   //   const data = window.localStorage.getItem("bookedTime");
   //   setDisableDate(JSON.parse(data));
   // }, []);
+
+  //--- Saving state after refresh  ---
 
   useEffect(() => {
     window.localStorage.setItem("bookedTime", JSON.stringify(disableDate));
@@ -218,7 +230,26 @@ function Appointment() {
   //Get text of button : event.target.innerText
   // && nowHour >= hours.slice(0, 2)
   console.log(disableDate);
+
   function isAppointmentDisabled(hours, wholeMonth) {
+    //now.c.hour + ":00"
+    // console.log(parseInt(hours.slice(0, 2)));
+    // console.log(hoursArray.map((hour) => parseInt(hour.slice(0, 2))));
+    if (
+      wholeMonth.year === tomorrow.c.year &&
+      wholeMonth.month === tomorrowMonth &&
+      wholeMonth.days === tomorrow.c.day &&
+      hours.slice(0, 2) <= hoursArray.map((hour) => parseInt(hour.slice(0, 2)))
+    ) {
+      return true;
+    }
+    if (
+      wholeMonth.year === now.c.year &&
+      wholeMonth.month === nowMonth &&
+      wholeMonth.days === now.c.day
+    ) {
+      return true;
+    }
     return (
       disableDate.find((value) => {
         if (
