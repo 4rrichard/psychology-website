@@ -4,13 +4,20 @@ import BookedMessage from "./BookedMessage";
 import "./RegContact.css";
 import axios from "axios";
 
-const GOOGLE_FORM_ACTION_URL =
-  "https://docs.google.com/forms/u/0/d/1JB_gb7O4bm7KEB8heNEoeUiicp89SCFtn3Bdb6pNRkU/formResponse";
-const GOOGLE_FORM_NAME_ID = "entry.1349438757";
-const GOOGLE_FORM_EMAIL_ID = "entry.907658896";
-const GOOGLE_FORM_PHONE_NUMBER_ID = "entry.909529888";
-const GOOGLE_FORM_MESSAGE_ID = "entry.1030994600";
+// const GOOGLE_FORM_ACTION_URL =
+//   "https://docs.google.com/forms/u/0/d/1JB_gb7O4bm7KEB8heNEoeUiicp89SCFtn3Bdb6pNRkU/formResponse";
+// const GOOGLE_FORM_NAME_ID = "entry.1349438757";
+// const GOOGLE_FORM_EMAIL_ID = "entry.907658896";
+// const GOOGLE_FORM_PHONE_NUMBER_ID = "entry.909529888";
+// const GOOGLE_FORM_MESSAGE_ID = "entry.1030994600";
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+const {
+  REACT_APP_GOOGLE_FORM_ACTION_URL,
+  REACT_APP_GOOGLE_FORM_NAME_ID,
+  REACT_APP_GOOGLE_FORM_EMAIL_ID,
+  REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID,
+  REACT_APP_GOOGLE_FORM_MESSAGE_ID,
+} = process.env;
 
 function RegContact({ clickBack, fullDate, setDisableDate }) {
   const [displayConfirm, setDisplayConfirm] = useState(true);
@@ -32,10 +39,10 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
   const sendMessage = () => {
     formData.message += dateMessage;
     const fullForm = new FormData();
-    fullForm.append(GOOGLE_FORM_NAME_ID, formData.fullName);
-    fullForm.append(GOOGLE_FORM_EMAIL_ID, formData.email);
-    fullForm.append(GOOGLE_FORM_PHONE_NUMBER_ID, formData.phoneNum);
-    fullForm.append(GOOGLE_FORM_MESSAGE_ID, formData.message);
+    fullForm.append(REACT_APP_GOOGLE_FORM_NAME_ID, formData.fullName);
+    fullForm.append(REACT_APP_GOOGLE_FORM_EMAIL_ID, formData.email);
+    fullForm.append(REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID, formData.phoneNum);
+    fullForm.append(REACT_APP_GOOGLE_FORM_MESSAGE_ID, formData.message);
 
     // fetch(CORS_PROXY + GOOGLE_FORM_ACTION_URL, {
     //   method: "POST",
@@ -46,7 +53,7 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     //   .then((data) => console.log(data));
     console.log(...fullForm);
     axios
-      .post(CORS_PROXY + GOOGLE_FORM_ACTION_URL, fullForm)
+      .post(CORS_PROXY + REACT_APP_GOOGLE_FORM_ACTION_URL, fullForm)
       .then(() => {
         setFormData({
           fullName: "",
