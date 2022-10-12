@@ -4,32 +4,6 @@ import BookedMessage from "./BookedMessage";
 import "./RegContact.css";
 import axios from "axios";
 
-// const GOOGLE_FORM_ACTION_URL =
-//   "https://docs.google.com/forms/u/0/d/1JB_gb7O4bm7KEB8heNEoeUiicp89SCFtn3Bdb6pNRkU/formResponse";
-// const GOOGLE_FORM_NAME_ID = "entry.1349438757";
-// const GOOGLE_FORM_EMAIL_ID = "entry.907658896";
-// const GOOGLE_FORM_PHONE_NUMBER_ID = "entry.909529888";
-// const GOOGLE_FORM_MESSAGE_ID = "entry.1030994600";
-const {
-  REACT_APP_GOOGLE_FORM_KEY,
-  REACT_APP_GOOGLE_FORM_NAME_ID,
-  REACT_APP_GOOGLE_FORM_EMAIL_ID,
-  REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID,
-  REACT_APP_GOOGLE_FORM_MESSAGE_ID,
-} = process.env;
-
-const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
-const GOOGLE_FORM_ACTION_URL = `https://docs.google.com/forms/u/0/d/${REACT_APP_GOOGLE_FORM_KEY}/formResponse`;
-
-console.log(
-  GOOGLE_FORM_ACTION_URL,
-  REACT_APP_GOOGLE_FORM_KEY,
-  REACT_APP_GOOGLE_FORM_NAME_ID,
-  REACT_APP_GOOGLE_FORM_EMAIL_ID,
-  REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID,
-  REACT_APP_GOOGLE_FORM_MESSAGE_ID
-);
-
 function RegContact({ clickBack, fullDate, setDisableDate }) {
   const [displayConfirm, setDisplayConfirm] = useState(true);
   const [formData, setFormData] = useState({
@@ -40,8 +14,6 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     messageError: false,
   });
 
-  // const [disabled, setDisabled] = useState(disableDate);
-
   const dateMessage = `\nbooked date: ${fullDate.date} ${fullDate.month} ${fullDate.year} at ${fullDate.hour}`;
 
   // console.log(dateMessage.slice(0, dateMessage.lastIndexOf("\n")));
@@ -50,14 +22,14 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
   const sendMessage = () => {
     formData.message += dateMessage;
     const fullForm = new FormData();
-    fullForm.append(REACT_APP_GOOGLE_FORM_NAME_ID, formData.fullName);
-    fullForm.append(REACT_APP_GOOGLE_FORM_EMAIL_ID, formData.email);
-    fullForm.append(REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID, formData.phoneNum);
-    fullForm.append(REACT_APP_GOOGLE_FORM_MESSAGE_ID, formData.message);
+    fullForm.append("fullName", formData.fullName);
+    fullForm.append("email", formData.email);
+    fullForm.append("phoneNum", formData.phoneNum);
+    fullForm.append("message", formData.message);
 
     console.log(...fullForm);
     axios
-      .post(CORS_PROXY + GOOGLE_FORM_ACTION_URL, fullForm)
+      .post("/api/sendemail", fullForm)
       .then(() => {
         setFormData({
           fullName: "",
@@ -92,11 +64,6 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  // const bookedBtnHandle = (e) => {
-  //   e.preventDefault();
-  //   setDisplayConfirm(false);
-  // };
 
   return (
     <>
