@@ -55,13 +55,6 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     fullForm.append(REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID, formData.phoneNum);
     fullForm.append(REACT_APP_GOOGLE_FORM_MESSAGE_ID, formData.message);
 
-    // fetch(CORS_PROXY + GOOGLE_FORM_ACTION_URL, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(fullForm),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data));
     console.log(...fullForm);
     axios
       .post(CORS_PROXY + GOOGLE_FORM_ACTION_URL, fullForm)
