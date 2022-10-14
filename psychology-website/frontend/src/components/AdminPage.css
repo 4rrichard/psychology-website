@@ -1,0 +1,58 @@
+.admin {
+  height: 100vh;
+  max-width: 40%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin .admin-login {
+  max-height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #bf9773;
+  border-radius: 7px;
+}
+.admin .admin-login label {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+}
+.admin .admin-login .username-label {
+  margin-top: 20px;
+}
+.admin .admin-login .admin-username,
+.admin .admin-login .admin-password {
+  margin: 0 20px;
+  width: 80%;
+  padding: 10px;
+  border: 2px solid #bf9773;
+  border-radius: 7px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+}
+.admin .admin-login .admin-username {
+  margin-bottom: 12px;
+}
+.admin .admin-login .admin-submit {
+  margin-top: 12px;
+  margin-bottom: 20px;
+  max-width: 50%;
+  padding: 10px;
+  color: white;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  background-color: #bf9773;
+  border-radius: 5px;
+  text-align: center;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.admin .admin-login .admin-submit:hover {
+  background-color: #dbb898;
+}/*# sourceMappingURL=AdminPage.css.map */

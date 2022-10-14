@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+
 import AboutMe from "./components/AboutMe";
 import Blog from "./components/Blog";
 import ContactMe from "./components/ContactMe";
@@ -12,14 +12,17 @@ import NavBar from "./components/NavBar";
 import ScrollToTop from "./components/ScrollToTop";
 import Subscribe from "./components/Subscribe";
 import WhatIOffer from "./components/WhatIOffer";
-
-import "./reset.css";
 import Appointment from "./components/Appointment";
+import AdminPage from "./components/AdminPage";
+
+import "./App.css";
+import "./reset.css";
 
 function App() {
   const location = useLocation();
   const path = location.pathname;
   const [display, setDisplay] = useState(true);
+  const [displayPage, setDisplayPage] = useState(true);
 
   useEffect(() => {
     if (path !== "/appointment") {
@@ -27,12 +30,17 @@ function App() {
     } else {
       setDisplay(false);
     }
+    if (path !== "/admin") {
+      setDisplayPage(true);
+    } else {
+      setDisplayPage(false);
+    }
   }, [path]);
 
   return (
     <>
-      <NavBar />
-      {display && (
+      {displayPage && <NavBar />}
+      {display && displayPage && (
         <>
           <Hero />
           <div className="body-container">
@@ -45,12 +53,18 @@ function App() {
           </div>
         </>
       )}
+
       <Routes>
         <Route path="/" />
         <Route path="/appointment" element={<Appointment />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
-      <Footer />
-      <ScrollToTop />
+      {displayPage && (
+        <>
+          <Footer />
+          <ScrollToTop />
+        </>
+      )}
     </>
   );
 }

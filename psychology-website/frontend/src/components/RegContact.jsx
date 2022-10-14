@@ -65,6 +65,8 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  console.log(formData);
+
   return (
     <>
       {displayConfirm ? (
