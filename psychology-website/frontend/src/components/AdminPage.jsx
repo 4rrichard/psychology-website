@@ -44,6 +44,10 @@ function AdminPage() {
             className="admin-username"
             value={loginData.username}
             onChange={handleChange}
+            onInvalid={(e) =>
+              e.target.setCustomValidity("Please fill in the field")
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
           />
         </label>
         <label className="password-label">
@@ -54,6 +58,10 @@ function AdminPage() {
             className="admin-password"
             value={loginData.password}
             onChange={handleChange}
+            onInvalid={(e) =>
+              e.target.setCustomValidity("Please fill in the field")
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
           />
         </label>
         <button className="admin-submit">Login</button>
