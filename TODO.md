@@ -19,3 +19,8 @@ https://developers.google.com/recaptcha/docs/versions
 [] Routing fix:
 ---[] react-router and react-scroll
 ---[] Clicking on any of the navbar buttons leads to the proper section(even when on appointment page)
+https://stackblitz.com/edit/react-fxfv5p?file=src%2FNavigation.js
+https://stackblitz.com/edit/react-grfa36?file=src%2FNavigation.js
+
+[] Website change language onClick
+https://react.i18next.com/

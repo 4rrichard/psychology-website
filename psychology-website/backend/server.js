@@ -8,6 +8,9 @@ const mp = multipart.multipart({});
 const app = express();
 const port = process.env.PORT || 8080;
 
+//middlware beregisztrált, formos üzenetet elérhetővé teszi a formon
+app.use(mp.text());
+
 const {
   REACT_APP_GOOGLE_FORM_KEY,
   REACT_APP_GOOGLE_FORM_NAME_ID,
@@ -16,9 +19,6 @@ const {
   REACT_APP_GOOGLE_FORM_MESSAGE_ID,
 } = process.env;
 const GOOGLE_FORM_ACTION_URL = `https://docs.google.com/forms/u/0/d/${REACT_APP_GOOGLE_FORM_KEY}/formResponse`;
-
-//middlware beregisztrált, formos üzenetet elérhetővé teszi a formon
-app.use(mp.text());
 
 app.post("/api/sendemail", (req, res) => {
   const form = new FormData();

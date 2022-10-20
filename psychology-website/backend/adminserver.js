@@ -1,0 +1,135 @@
+const express = require("express");
+const cors = require("cors");
+const corsOptions = require("./config/corsOptions");
+const verifyJWT = require("./middleware/verifyJWT");
+const bodyParser = require("body-parser");
+const authController = require("./controller/AuthController");
+const refreshTokenController = require("./controller/refreshTokenController");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+require("dotenv").config();
+
+const port = process.env.PORT || 8081;
+const app = express();
+
+app.use(cookieParser());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+
+app.use(bodyParser.json());
+
+app.use(express.urlencoded({ extended: false }));
+
+const {
+  REACT_APP_USERNAME,
+  REACT_APP_PASSWORD,
+  REACT_APP_ACCESS_TOKEN_SECRET,
+  REACT_APP_REFRESH_TOKEN_SECRET,
+} = process.env;
+
+// app.use("/auth", require("./routes/auth"));
+
+// app.use(verifyJWT);
+
+// let refreshTokens = [];
+
+// app.post("/refresh", (req, res) => {
+//   const refreshToken = req.body.token;
+
+//   if (!refreshToken) return res.status(401).json("You are not authenticated!");
+//   if (!refreshTokens.includes(refreshToken)) {
+//     return res.status(403).json("Refresh token is not valid");
+//   }
+
+//   jwt.verify(refreshToken, REACT_APP_REFRESH_TOKEN_SECRET, (err) => {
+//     err && console.log(err);
+//     refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+
+//     const newAccessToken = generateAccessToken();
+//     const newRefreshToken = generateRefreshToken();
+
+//     refreshTokens.push(newRefreshToken);
+
+//     res.status(200).json({
+//       accessToken: newAccessToken,
+//       refreshToken: newRefreshToken,
+//     });
+//   });
+// });
+
+app.get("/refresh", refreshTokenController.handleRefreshToken);
+
+const generateAccessToken = (user) => {
+  return jwt.sign(
+    { admin: REACT_APP_USERNAME },
+    REACT_APP_ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: "30s",
+    }
+  );
+};
+const generateRefreshToken = (user) => {
+  return jwt.sign(
+    { admin: REACT_APP_USERNAME },
+    REACT_APP_REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: "1d",
+    }
+  );
+};
+
+app.post("/auth", (req, res, next) => {
+  console.log(req.headers);
+  if (
+    REACT_APP_USERNAME === req.body.user &&
+    REACT_APP_PASSWORD === req.body.pwd
+  ) {
+    const accessToken = generateAccessToken();
+    const refreshToken = generateRefreshToken();
+
+    res.cookie("jwt", refreshToken, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
+    console.log(res.cookie);
+
+    // refreshTokens.push(refreshToken);
+
+    res.json({
+      user: REACT_APP_USERNAME,
+      accessToken,
+      refreshToken,
+    });
+  } else {
+    res.status(400).json("Username or password incorrect!");
+  }
+});
+
+const verify = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(token, REACT_APP_ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) {
+        return res.status(403).json("Token is not valid!");
+      }
+      req.user = decoded.user;
+      next();
+    });
+  } else {
+    res.status(401).json("You are not authenticated");
+  }
+};
+
+app.post("/logout", verify, (req, res) => {
+  if (REACT_APP_USERNAME) {
+    const refreshToken = req.body.token;
+    // refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+    res.status(200).json("You logged out successfully!");
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server listening on port http://localhost:${port}`);
+});

@@ -17,6 +17,7 @@ import AdminPage from "./components/AdminPage";
 
 import "./App.css";
 import "./reset.css";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   const location = useLocation();
@@ -30,7 +31,7 @@ function App() {
     } else {
       setDisplay(false);
     }
-    if (path !== "/admin") {
+    if (path !== "/admin" && path !== "/login") {
       setDisplayPage(true);
     } else {
       setDisplayPage(false);
@@ -58,6 +59,7 @@ function App() {
         <Route path="/" />
         <Route path="/appointment" element={<Appointment />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/login" element={<Dashboard />} />
       </Routes>
       {displayPage && (
         <>
