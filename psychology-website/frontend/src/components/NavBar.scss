@@ -52,4 +52,20 @@ nav {
       background-color: #dbb898;
     }
   }
+  .logged-in {
+    position: absolute;
+    top: 100px;
+    padding: 10px;
+
+    background-color: #dbb898;
+    border-radius: 20px;
+
+    color: black;
+  }
+  .logged-in:hover {
+    background-color: #eedfc9;
+  }
+  .logged-in:hover:before {
+    content: "Logout ";
+  }
 }

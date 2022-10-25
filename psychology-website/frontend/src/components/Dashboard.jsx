@@ -24,8 +24,8 @@ function Dashboard() {
         setAuth({});
       });
   };
-  const handleData = (event) => {
-    event.preventDefault();
+
+  const getData = () => {
     axios
       .get("http://localhost:8081/protected", {
         headers: { "Content-Type": "application/json" },
@@ -33,7 +33,7 @@ function Dashboard() {
       })
       .then((response) => {
         setAuth(response.data);
-        // navigate("/");
+        navigate("/");
         console.log(response.data);
       });
   };
@@ -41,7 +41,7 @@ function Dashboard() {
   return (
     <div className="login">
       <h1>Welcome {auth.user}!</h1>
-      <button onClick={handleData} className="login--gohome">
+      <button onClick={getData} className="login--gohome">
         Go to the main page!
       </button>
       <button onClick={handleLogout}>Logout</button>

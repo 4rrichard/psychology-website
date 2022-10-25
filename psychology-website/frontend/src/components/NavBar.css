@@ -40,4 +40,18 @@ nav .nav--primary .nav--book-appointment-btn {
 }
 nav .nav--primary .nav--book-appointment-btn:hover {
   background-color: #dbb898;
+}
+nav .logged-in {
+  position: absolute;
+  top: 100px;
+  padding: 10px;
+  background-color: #dbb898;
+  border-radius: 20px;
+  color: black;
+}
+nav .logged-in:hover {
+  background-color: #eedfc9;
+}
+nav .logged-in:hover:before {
+  content: "Logout ";
 }/*# sourceMappingURL=NavBar.css.map */

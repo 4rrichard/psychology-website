@@ -2,15 +2,34 @@ import React from "react";
 import { Link as Scroll } from "react-scroll";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
+import { useContext } from "react";
+import AuthContext from "../context/AuthProvider";
+import axios from "axios";
 
 function NavBar() {
+  const { auth, setAuth } = useContext(AuthContext);
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    axios
+      .get("http://localhost:8081/logout", {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response);
+        setAuth({});
+        alert("You are logged out");
+      });
+  };
+
   return (
     <>
       <nav>
         <Link to="/" className="nav--name">
           Psychologist Gizem Cakin
         </Link>
-        <div></div>
+
         <div className="nav--primary">
           <div className="nav--anchors">
             <Scroll
@@ -27,6 +46,7 @@ function NavBar() {
               activeClass="active"
               to="offers"
               spy={true}
+              hashSpy={true}
               smooth={true}
               className="nav--anchor"
             >
@@ -57,6 +77,11 @@ function NavBar() {
             Book an appointment
           </Link>
         </div>
+        {auth.admin && (
+          <button onClick={handleLogout} className="logged-in">
+            {auth.admin}
+          </button>
+        )}
       </nav>
     </>
   );

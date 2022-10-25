@@ -135,11 +135,6 @@ const verify = (req, res, next) => {
 };
 
 app.get("/logout", verify, (req, res) => {
-  // if (REACT_APP_USERNAME) {
-  //   // const refreshToken = req.body.token;
-  //   // refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
-  //   res.status(200).json("You logged out successfully!");
-  // }
   return res
     .clearCookie("jwt")
     .status(200)
