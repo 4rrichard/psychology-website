@@ -4,10 +4,10 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
 import axios from "axios";
 import "./AdminPage.css";
-import Dashboard from "./Dashboard";
+import jwt_decode from "jwt-decode";
 
 function AdminPage() {
-  const { setAuth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const userRef = useRef();
   const errRef = useRef();
@@ -19,6 +19,43 @@ function AdminPage() {
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
+
+  // const refreshToken = async () => {
+  //   try {
+  //     const res = await axios.post("http://localhost:8081/refresh", {
+  //       token: auth.refreshToken,
+  //     });
+  //     setAuth({
+  //       ...auth,
+  //       accessToken: res.data.accessToken,
+  //       refreshToken: res.data.refreshToken,
+  //     });
+  //     console.log(res);
+  //     return res.data;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // axios.interceptors.request.use(
+  //   async (config) => {
+  //     let currentDate = new Date();
+  //     const decodedToken = jwt_decode(auth.accessToken);
+  //     if (decodedToken.exp * 1000 < currentDate.getTime()) {
+  //       const data = await refreshToken();
+  //       config.headers["authorization"] = "Bearer" + data.accessToken;
+  //     }
+  //     return config;
+  //   },
+  //   (err) => {
+  //     return Promise.reject(err);
+  //   }
+  // );
+
+  // console.log(jwt_decode(auth.accessToken));
+  // const decodedToken = jwt_decode(auth.accessToken);
+  // console.log(decodedToken.admin);
+  // console.log(auth.user);
 
   useEffect(() => {
     userRef.current.focus();
@@ -48,7 +85,7 @@ function AdminPage() {
 
         setUser("");
         setPwd("");
-        setAuth({ user, pwd, accessToken });
+        setAuth({ user, accessToken });
         navigate("/login");
       })
 
