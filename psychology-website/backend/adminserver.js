@@ -1,9 +1,8 @@
 const express = require("express");
+
 const cors = require("cors");
-const corsOptions = require("./config/corsOptions");
-const verifyJWT = require("./middleware/verifyJWT");
+
 const bodyParser = require("body-parser");
-const authController = require("./controller/AuthController");
 const refreshTokenController = require("./controller/refreshTokenController");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
@@ -19,12 +18,12 @@ app.use(bodyParser.json());
 
 app.use(express.urlencoded({ extended: false }));
 
-const {
-  REACT_APP_USERNAME,
-  REACT_APP_PASSWORD,
-  REACT_APP_ACCESS_TOKEN_SECRET,
-  REACT_APP_REFRESH_TOKEN_SECRET,
-} = process.env;
+// const {
+//   REACT_APP_USERNAME,
+//   REACT_APP_PASSWORD,
+//   REACT_APP_ACCESS_TOKEN_SECRET,
+//   REACT_APP_REFRESH_TOKEN_SECRET,
+// } = process.env;
 
 // app.use("/auth", require("./routes/auth"));
 

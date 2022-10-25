@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../api/axios";
 
 const AuthContext = createContext(null);
 
@@ -8,8 +8,13 @@ export const AuthProvider = ({ children }) => {
   //useEffect() meghívni a protected routet, üres töm dependency
   const getData = () => {
     axios
-      .get("http://localhost:8081/protected", {
-        headers: { "Content-Type": "application/json" },
+      .get("/protected", {
+        headers: {
+          "Content-Type": "application/json",
+          // "Access-Control-Allow-Origin": "http://localhost:3000",
+          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          // "Access-Control-Allow-Credentials": true,
+        },
         withCredentials: true,
       })
       .then((response) => {

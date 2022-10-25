@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import AuthContext from "../context/AuthProvider";
-import axios from "axios";
+import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -14,8 +14,13 @@ function Dashboard() {
   const handleLogout = (event) => {
     event.preventDefault();
     axios
-      .get("http://localhost:8081/logout", {
-        headers: { "Content-Type": "application/json" },
+      .get("/logout", {
+        headers: {
+          "Content-Type": "application/json",
+          // "Access-Control-Allow-Origin": "http://localhost:3000",
+          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          // "Access-Control-Allow-Credentials": true,
+        },
         withCredentials: true,
       })
       .then((response) => {
@@ -27,8 +32,13 @@ function Dashboard() {
 
   const getData = () => {
     axios
-      .get("http://localhost:8081/protected", {
-        headers: { "Content-Type": "application/json" },
+      .get("/protected", {
+        headers: {
+          "Content-Type": "application/json",
+          // "Access-Control-Allow-Origin": "http://localhost:3000",
+          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          // "Access-Control-Allow-Credentials": true,
+        },
         withCredentials: true,
       })
       .then((response) => {

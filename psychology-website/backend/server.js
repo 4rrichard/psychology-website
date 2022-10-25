@@ -3,13 +3,27 @@ const multipart = require("express-multipart");
 const FormData = require("form-data");
 require("dotenv").config();
 const axios = require("axios");
+const cors = require("cors");
 
-const mp = multipart.multipart({});
+const bodyParser = require("body-parser");
+const refreshTokenController = require("./controller/refreshTokenController");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+require("dotenv").config();
+const multer = require("multer");
+
+// const mp = multipart.multipart({});
 const app = express();
 const port = process.env.PORT || 8080;
 
 //middlware beregisztrált, formos üzenetet elérhetővé teszi a formon
-app.use(mp.text());
+app.use(cookieParser());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+// app.use(mp.text());
+
+app.use(bodyParser.json());
+
+app.use(express.urlencoded({ extended: false }));
 
 const {
   REACT_APP_GOOGLE_FORM_KEY,
@@ -17,11 +31,17 @@ const {
   REACT_APP_GOOGLE_FORM_EMAIL_ID,
   REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID,
   REACT_APP_GOOGLE_FORM_MESSAGE_ID,
+  REACT_APP_USERNAME,
+  REACT_APP_PASSWORD,
+  REACT_APP_ACCESS_TOKEN_SECRET,
+  REACT_APP_REFRESH_TOKEN_SECRET,
 } = process.env;
+
 const GOOGLE_FORM_ACTION_URL = `https://docs.google.com/forms/u/0/d/${REACT_APP_GOOGLE_FORM_KEY}/formResponse`;
 
-app.post("/api/sendemail", (req, res) => {
+app.post("/api/sendemail", multer().none(), (req, res) => {
   const form = new FormData();
+  console.log(form);
   form.append(REACT_APP_GOOGLE_FORM_NAME_ID, req.body.fullName);
   form.append(REACT_APP_GOOGLE_FORM_EMAIL_ID, req.body.email);
   form.append(REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID, req.body.phoneNum);
@@ -30,7 +50,78 @@ app.post("/api/sendemail", (req, res) => {
   res.send("okay");
 });
 
-app.listen(port, (par) => {
-  console.log(par);
+app.post("/refresh", refreshTokenController.handleRefreshToken);
+
+const generateAccessToken = (user) => {
+  return jwt.sign(
+    { admin: REACT_APP_USERNAME },
+    REACT_APP_ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: "15m",
+    }
+  );
+};
+const generateRefreshToken = (user) => {
+  return jwt.sign(
+    { admin: REACT_APP_USERNAME },
+    REACT_APP_REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: "1d",
+    }
+  );
+};
+
+app.post("/auth", (req, res, next) => {
+  if (
+    REACT_APP_USERNAME === req.body.user &&
+    REACT_APP_PASSWORD === req.body.pwd
+  ) {
+    const accessToken = generateAccessToken();
+    const refreshToken = generateRefreshToken();
+
+    res.cookie("jwt", refreshToken, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+      //secure: true --- https weboldalaknál használatos
+    });
+
+    // refreshTokens.push(refreshToken);
+
+    res.json({
+      user: REACT_APP_USERNAME,
+      accessToken,
+      refreshToken,
+    });
+  } else {
+    res.status(400).json("Username or password incorrect!");
+  }
 });
-console.log("Server started at http://localhost:" + port);
+
+const verify = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (!token) {
+    return res.sendStatus(403);
+  }
+  try {
+    const data = jwt.verify(token, REACT_APP_REFRESH_TOKEN_SECRET);
+    req.user = data.admin;
+    return next();
+  } catch {
+    return res.sendStatus(403);
+  }
+};
+
+app.get("/logout", verify, (req, res) => {
+  return res
+    .clearCookie("jwt")
+    .status(200)
+    .json({ message: "Successfully logged out!" });
+});
+
+app.get("/protected", verify, (req, res) => {
+  return res.json({ admin: req.user });
+});
+
+app.listen(port, () => {
+  console.log(`Server listening on port http://localhost:${port}`);
+});

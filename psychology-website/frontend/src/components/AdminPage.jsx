@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useRef, useEffect, useContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
-import axios from "axios";
+import axios from "../api/axios";
 import "./AdminPage.css";
 import jwt_decode from "jwt-decode";
 
@@ -75,8 +75,13 @@ function AdminPage() {
     event.preventDefault();
 
     axios
-      .post("http://localhost:8081/auth", JSON.stringify({ user, pwd }), {
-        headers: { "Content-Type": "application/json" },
+      .post("/auth", JSON.stringify({ user, pwd }), {
+        headers: {
+          "Content-Type": "application/json",
+          // "Access-Control-Allow-Origin": "http://localhost:3000",
+          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          // "Access-Control-Allow-Credentials": true,
+        },
         withCredentials: true,
       })
       .then((response) => {

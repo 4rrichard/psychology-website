@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import BookedMessage from "./BookedMessage";
 import "./RegContact.css";
-import axios from "axios";
+import axios from "../api/axios";
 
 function RegContact({ clickBack, fullDate, setDisableDate }) {
   const [displayConfirm, setDisplayConfirm] = useState(true);

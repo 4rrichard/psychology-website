@@ -30,7 +30,7 @@ function Appointment() {
   // localStorage.clear();
 
   const { auth } = useContext(AuthContext);
-  const admin = auth.user;
+  const admin = auth.admin;
 
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
@@ -262,6 +262,7 @@ function Appointment() {
     ) {
       return true;
     }
+
     return (
       disableDate.find((value) => {
         if (

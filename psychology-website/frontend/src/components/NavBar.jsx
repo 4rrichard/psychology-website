@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./NavBar.css";
 import { useContext } from "react";
 import AuthContext from "../context/AuthProvider";
-import axios from "axios";
+import axios from "../api/axios";
 
 function NavBar() {
   const { auth, setAuth } = useContext(AuthContext);
@@ -12,7 +12,7 @@ function NavBar() {
   const handleLogout = (event) => {
     event.preventDefault();
     axios
-      .get("http://localhost:8081/logout", {
+      .get("/logout", {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       })
