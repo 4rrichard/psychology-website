@@ -4,12 +4,12 @@ https://blog.logrocket.com/implement-recaptcha-react-application/#implementing-r
 https://developers.google.com/recaptcha/docs/versions
 
 [] Admin page and user roles :
----[] React Context
----[] Backend authentication
----[] When invalid user data - error message
+---[x] React Context
+---[x] Backend authentication
+---[x] When invalid user data - error message
 ---[] Admin can remove booked appointments
 ---[] Admin can add blog posts
----[] Admin can logout when finished
+---[x] Admin can logout when finished
 ---[] Auto logout when leaving page
 
 [] If error with email sending then error message pops up
