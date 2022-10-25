@@ -3,7 +3,8 @@ import { DateTime, Interval } from "luxon";
 import { Link } from "react-router-dom";
 import "./Appointment.css";
 import RegContact from "./RegContact";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import AuthContext from "../context/AuthProvider";
 
 function Appointment() {
   // const day = DateTime.local(2022, 9, 20, { locale: "en" }).day;
@@ -28,6 +29,9 @@ function Appointment() {
   //--- localstorage data delete ---
   // localStorage.clear();
 
+  const { auth } = useContext(AuthContext);
+  const admin = auth.user;
+
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
 
@@ -40,6 +44,8 @@ function Appointment() {
   const [disableDate, setDisableDate] = useState(() =>
     JSON.parse(localStorage.getItem("bookedTime") ?? "[]")
   );
+
+  const [adminDisable, setAdminDisable] = useState(false);
 
   const [sendFullDate, setSendFullDate] = useState("");
 
@@ -59,7 +65,13 @@ function Appointment() {
       month: selectMonth,
       year: selectYear,
     });
+
+    // if (admin) {
+    //   isAppointmentDisabled(setAdminDisable(!adminDisable));
+    // }
   };
+
+  console.log(admin);
 
   const clickBack = () => {
     setDisplay(true);
@@ -171,7 +183,7 @@ function Appointment() {
     window.localStorage.setItem("bookedTime", JSON.stringify(disableDate));
   }, [disableDate]);
 
-  const daysOfSept = dateArray.map((dates) => dates.c).map((date) => date.day);
+  // const daysOfSept = dateArray.map((dates) => dates.c).map((date) => date.day);
 
   const dateArrayNextWeek = Array.from(days(intervalNextWeek));
 
@@ -234,6 +246,7 @@ function Appointment() {
     //now.c.hour + ":00"
     // console.log(parseInt(hours.slice(0, 2)));
     // console.log(hoursArray.map((hour) => parseInt(hour.slice(0, 2))));
+
     if (
       wholeMonth.year === tomorrow.c.year &&
       wholeMonth.month === tomorrowMonth &&
@@ -264,6 +277,7 @@ function Appointment() {
       }) !== undefined
     );
   }
+
   return (
     <>
       {display ? (

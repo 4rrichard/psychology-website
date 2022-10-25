@@ -1,17 +1,50 @@
 import React from "react";
 import { useContext } from "react";
 import AuthContext from "../context/AuthProvider";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Dashboard() {
-  const { auth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
+  const [admin, setAdmin] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    axios
+      .get("http://localhost:8081/logout", {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response);
+        navigate("/admin");
+        setAuth({});
+      });
+  };
+  const handleData = (event) => {
+    event.preventDefault();
+    axios
+      .get("http://localhost:8081/protected", {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      })
+      .then((response) => {
+        setAuth(response.data);
+        // navigate("/");
+        console.log(response.data);
+      });
+  };
 
   return (
     <div className="login">
       <h1>Welcome {auth.user}!</h1>
-      <Link to="/" className="login--gohome">
+      <button onClick={handleData} className="login--gohome">
         Go to the main page!
-      </Link>
+      </button>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }

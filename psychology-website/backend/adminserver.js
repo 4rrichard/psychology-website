@@ -56,14 +56,14 @@ const {
 //   });
 // });
 
-app.get("/refresh", refreshTokenController.handleRefreshToken);
+app.post("/refresh", refreshTokenController.handleRefreshToken);
 
 const generateAccessToken = (user) => {
   return jwt.sign(
     { admin: REACT_APP_USERNAME },
     REACT_APP_ACCESS_TOKEN_SECRET,
     {
-      expiresIn: "30s",
+      expiresIn: "15m",
     }
   );
 };
@@ -78,7 +78,6 @@ const generateRefreshToken = (user) => {
 };
 
 app.post("/auth", (req, res, next) => {
-  console.log(req.headers);
   if (
     REACT_APP_USERNAME === req.body.user &&
     REACT_APP_PASSWORD === req.body.pwd
@@ -89,9 +88,8 @@ app.post("/auth", (req, res, next) => {
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
+      //secure: true --- https weboldalaknál használatos
     });
-
-    console.log(res.cookie);
 
     // refreshTokens.push(refreshToken);
 
@@ -105,29 +103,51 @@ app.post("/auth", (req, res, next) => {
   }
 });
 
-const verify = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  if (authHeader) {
-    const token = authHeader.split(" ")[1];
+// const verify = (req, res, next) => {
+//   const authHeader = req.headers.authorization;
+//   if (authHeader) {
+//     const token = authHeader.split(" ")[1];
 
-    jwt.verify(token, REACT_APP_ACCESS_TOKEN_SECRET, (err, decoded) => {
-      if (err) {
-        return res.status(403).json("Token is not valid!");
-      }
-      req.user = decoded.user;
-      next();
-    });
-  } else {
-    res.status(401).json("You are not authenticated");
+//     jwt.verify(token, REACT_APP_ACCESS_TOKEN_SECRET, (err, decoded) => {
+//       if (err) {
+//         return res.status(403).json("Token is not valid!");
+//       }
+//       req.user = decoded.user;
+//       next();
+//     });
+//   } else {
+//     res.status(401).json("You are not authenticated");
+//   }
+// };
+
+const verify = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (!token) {
+    return res.sendStatus(403);
+  }
+  try {
+    const data = jwt.verify(token, REACT_APP_REFRESH_TOKEN_SECRET);
+    req.user = data.admin;
+    return next();
+  } catch {
+    return res.sendStatus(403);
   }
 };
 
-app.post("/logout", verify, (req, res) => {
-  if (REACT_APP_USERNAME) {
-    const refreshToken = req.body.token;
-    // refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
-    res.status(200).json("You logged out successfully!");
-  }
+app.get("/logout", verify, (req, res) => {
+  // if (REACT_APP_USERNAME) {
+  //   // const refreshToken = req.body.token;
+  //   // refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+  //   res.status(200).json("You logged out successfully!");
+  // }
+  return res
+    .clearCookie("jwt")
+    .status(200)
+    .json({ message: "Successfully logged out!" });
+});
+
+app.get("/protected", verify, (req, res) => {
+  return res.json({ admin: req.user });
 });
 
 app.listen(port, () => {

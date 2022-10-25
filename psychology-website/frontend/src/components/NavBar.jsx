@@ -10,6 +10,7 @@ function NavBar() {
         <Link to="/" className="nav--name">
           Psychologist Gizem Cakin
         </Link>
+        <div></div>
         <div className="nav--primary">
           <div className="nav--anchors">
             <Scroll
