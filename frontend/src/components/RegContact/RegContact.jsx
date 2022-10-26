@@ -16,6 +16,7 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     phoneNum: "",
     message: "",
     messageError: false,
+    captcha: "",
   });
   const [recaptchaValue, setRecaptchaValue] = useState("");
 
@@ -26,24 +27,32 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
 
   const sendMessage = () => {
     formData.message += dateMessage;
+    formData.captcha += recaptchaValue;
     const fullForm = new FormData();
     fullForm.append("fullName", formData.fullName);
     fullForm.append("email", formData.email);
     fullForm.append("phoneNum", formData.phoneNum);
     fullForm.append("message", formData.message);
+    fullForm.append("captcha", formData.captcha);
 
     captchaRef.current.reset();
 
     console.log(...fullForm);
     axios
-      .post("/api/sendemail", { fullForm, recaptchaValue })
-      .then(() => {
+      .post("/api/sendemail", fullForm, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
         setFormData({
           fullName: "",
           email: "",
           phoneNum: "",
           message: "",
         });
+        console.log(response);
 
         setDisplayConfirm(false);
         setDisableDate((old) => [

@@ -29,8 +29,8 @@ function Appointment() {
   //--- localstorage data delete ---
   // localStorage.clear();
 
-  const { auth } = useContext(AuthContext);
-  const admin = auth.admin;
+  // const { auth } = useContext(AuthContext);
+  // const admin = auth.admin;
 
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
@@ -70,8 +70,6 @@ function Appointment() {
     //   isAppointmentDisabled(setAdminDisable(!adminDisable));
     // }
   };
-
-  console.log(admin);
 
   const clickBack = () => {
     setDisplay(true);

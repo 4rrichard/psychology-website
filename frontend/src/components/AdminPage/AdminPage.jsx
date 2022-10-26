@@ -77,9 +77,6 @@ function AdminPage() {
       .post("/auth", JSON.stringify({ user, pwd }), {
         headers: {
           "Content-Type": "application/json",
-          // "Access-Control-Allow-Origin": "http://localhost:3000",
-          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-          // "Access-Control-Allow-Credentials": true,
         },
         withCredentials: true,
       })

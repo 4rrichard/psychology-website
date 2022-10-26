@@ -11,6 +11,7 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const multer = require("multer");
+// const { response } = require("express");
 
 // const mp = multipart.multipart({});
 const app = express();
@@ -20,10 +21,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: [
-      "http://localhost:3000",
-      "https://psychology-website.netlify.app/",
-    ],
+    origin: "http://localhost:3000",
   })
 );
 // app.use(mp.text());
@@ -47,31 +45,39 @@ const {
 
 const GOOGLE_FORM_ACTION_URL = `https://docs.google.com/forms/u/0/d/${REACT_APP_GOOGLE_FORM_KEY}/formResponse`;
 
-app.post("/api/sendemail", multer().none(), async (req, res) => {
+app.post("/api/sendemail", multer().none(), (req, res) => {
   try {
-    const { recaptchaValue, fullName, email, phoneNum, message } = req.body;
-    await axios
+    const { captcha, fullName, email, phoneNum, message } = req.body;
+    const form = new FormData();
+
+    form.append(REACT_APP_GOOGLE_FORM_NAME_ID, fullName);
+    form.append(REACT_APP_GOOGLE_FORM_EMAIL_ID, email);
+    form.append(REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID, phoneNum);
+    form.append(REACT_APP_GOOGLE_FORM_MESSAGE_ID, message);
+
+    axios
       .post(
-        `https://www.google.com/recaptcha/api/siteverify?secret=${REACT_APP_SECRET_KEY}&response=${recaptchaValue}`
+        `https://www.google.com/recaptcha/api/siteverify?secret=${REACT_APP_SECRET_KEY}&response=${captcha}`
       )
       .then(({ data }) => {
         console.log(data);
 
         if (data.success) {
-          const form = new FormData();
-          console.log(form);
-
-          form.append(REACT_APP_GOOGLE_FORM_NAME_ID, fullName);
-          form.append(REACT_APP_GOOGLE_FORM_EMAIL_ID, email);
-          form.append(REACT_APP_GOOGLE_FORM_PHONE_NUMBER_ID, phoneNum);
-          form.append(REACT_APP_GOOGLE_FORM_MESSAGE_ID, message);
           axios.post(GOOGLE_FORM_ACTION_URL, form);
+        } else {
+          return res
+            .status(400)
+            .json({ message: "Recaptcha verification failed" });
         }
+      })
+      .catch((error) => {
+        res.status(400).json({ message: "Invalid Recapatcha" });
       });
   } catch (error) {
     console.log(error);
     res.status(400).json(error);
   }
+  res.send("okay");
 });
 
 app.post("/refresh", refreshTokenController.handleRefreshToken);
