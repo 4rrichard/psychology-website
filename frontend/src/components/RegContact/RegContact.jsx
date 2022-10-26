@@ -37,7 +37,6 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
 
     captchaRef.current.reset();
 
-    console.log(...fullForm);
     axios
       .post("/api/sendemail", fullForm, {
         headers: {
@@ -52,7 +51,6 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
           phoneNum: "",
           message: "",
         });
-        console.log(response);
 
         setDisplayConfirm(false);
         setDisableDate((old) => [
@@ -83,7 +81,6 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
 
   function onChange(value) {
     setRecaptchaValue(value);
-    console.log(value);
   }
 
   return (
