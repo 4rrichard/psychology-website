@@ -16,7 +16,6 @@ const multer = require("multer");
 const app = express();
 const port = process.env.PORT || 8080;
 
-//middlware beregisztrált, formos üzenetet elérhetővé teszi a formon
 app.use(cookieParser());
 app.use(
   cors({
@@ -47,19 +46,6 @@ const {
 } = process.env;
 
 const GOOGLE_FORM_ACTION_URL = `https://docs.google.com/forms/u/0/d/${REACT_APP_GOOGLE_FORM_KEY}/formResponse`;
-
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "../frontend/build/index.html"),
-    function (err) {
-      if (err) {
-        res.status(500).send(err);
-      }
-    }
-  );
-});
 
 app.post("/api/sendemail", multer().none(), async (req, res) => {
   try {
@@ -122,8 +108,6 @@ app.post("/auth", (req, res, next) => {
       maxAge: 24 * 60 * 60 * 1000,
       //secure: true --- https weboldalaknál használatos
     });
-
-    // refreshTokens.push(refreshToken);
 
     res.json({
       user: REACT_APP_USERNAME,
