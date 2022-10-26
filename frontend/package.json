@@ -1,4 +1,5 @@
 {
+  "homepage": "https://psychology-website.vercel.app/",
   "name": "psychology-website",
   "version": "0.1.0",
   "proxy": "http://localhost:8080",
