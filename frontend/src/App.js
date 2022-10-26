@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 
-import AboutMe from "./components/AboutMe";
-import Blog from "./components/Blog";
-import ContactMe from "./components/ContactMe";
-import FAQ from "./components/FAQ";
-import Footer from "./components/Footer";
-import Hero from "./components/Hero";
-import NavBar from "./components/NavBar";
-import ScrollToTop from "./components/ScrollToTop";
-import Subscribe from "./components/Subscribe";
-import WhatIOffer from "./components/WhatIOffer";
-import Appointment from "./components/Appointment";
-import AdminPage from "./components/AdminPage";
+import AboutMe from "./components/AboutMe/AboutMe";
+import Blog from "./components/Blog/Blog";
+import ContactMe from "./components/ContactMe/ContactMe";
+import FAQ from "./components/FAQ/FAQ";
+import Footer from "./components/Footer/Footer";
+import Hero from "./components/Hero/Hero";
+import NavBar from "./components/NavBar/NavBar";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import Subscribe from "./components/Subscribe/Subscribe";
+import WhatIOffer from "./components/WhatIOffer/WhatIOffer";
+import Appointment from "./components/Appointment/Appointment";
+import AdminPage from "./components/AdminPage/AdminPage";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 import "./App.css";
 import "./reset.css";
-import Dashboard from "./components/Dashboard";
 
 function App() {
   const location = useLocation();

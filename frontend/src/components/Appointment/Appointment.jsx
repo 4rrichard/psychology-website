@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { DateTime, Interval } from "luxon";
 import { Link } from "react-router-dom";
 import "./Appointment.css";
-import RegContact from "./RegContact";
+import RegContact from "../RegContact/RegContact";
 import { useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
+import AuthContext from "../../context/AuthProvider";
 
 function Appointment() {
   // const day = DateTime.local(2022, 9, 20, { locale: "en" }).day;

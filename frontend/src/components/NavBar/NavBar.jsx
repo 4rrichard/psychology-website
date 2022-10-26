@@ -3,8 +3,8 @@ import { Link as Scroll } from "react-scroll";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 import { useContext } from "react";
-import AuthContext from "../context/AuthProvider";
-import axios from "../api/axios";
+import AuthContext from "../../context/AuthProvider";
+import axios from "../../api/axios";
 
 function NavBar() {
   const { auth, setAuth } = useContext(AuthContext);

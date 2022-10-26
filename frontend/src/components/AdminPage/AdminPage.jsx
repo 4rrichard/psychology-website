@@ -1,13 +1,12 @@
 import React from "react";
 import { useState, useRef, useEffect, useContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import AuthContext from "../context/AuthProvider";
-import axios from "../api/axios";
+import AuthContext from "../../context/AuthProvider";
+import axios from "../../api/axios";
 import "./AdminPage.css";
-import jwt_decode from "jwt-decode";
 
 function AdminPage() {
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const userRef = useRef();
   const errRef = useRef();

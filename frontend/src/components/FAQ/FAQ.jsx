@@ -1,6 +1,6 @@
 import React from "react";
 import "./FAQ.css";
-import { faqData } from "./faqData.js";
+import { faqData } from "./faqData";
 import Questions from "./Questions";
 
 function FAQ() {

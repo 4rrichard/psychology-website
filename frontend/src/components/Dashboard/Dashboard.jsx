@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
-import AuthContext from "../context/AuthProvider";
-import axios from "../api/axios";
+import AuthContext from "../../context/AuthProvider";
+import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {

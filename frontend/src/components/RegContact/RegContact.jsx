@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useRef } from "react";
-import BookedMessage from "./BookedMessage";
+import BookedMessage from "../BookedMessage/BookedMessage";
 import "./RegContact.css";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import ReCAPTCHA from "react-google-recaptcha";
 
 function RegContact({ clickBack, fullDate, setDisableDate }) {
