@@ -1,10 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import BookedMessage from "./BookedMessage";
 import "./RegContact.css";
 import axios from "../api/axios";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function RegContact({ clickBack, fullDate, setDisableDate }) {
+  const { REACT_APP_SITE_KEY } = process.env;
+  const captchaRef = useRef();
+
   const [displayConfirm, setDisplayConfirm] = useState(true);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -13,6 +17,7 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     message: "",
     messageError: false,
   });
+  const [recaptchaValue, setRecaptchaValue] = useState("");
 
   const dateMessage = `\nbooked date: ${fullDate.date} ${fullDate.month} ${fullDate.year} at ${fullDate.hour}`;
 
@@ -27,9 +32,11 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     fullForm.append("phoneNum", formData.phoneNum);
     fullForm.append("message", formData.message);
 
+    captchaRef.current.reset();
+
     console.log(...fullForm);
     axios
-      .post("/api/sendemail", fullForm)
+      .post("/api/sendemail", { fullForm, recaptchaValue })
       .then(() => {
         setFormData({
           fullName: "",
@@ -65,7 +72,10 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  console.log(formData);
+  function onChange(value) {
+    setRecaptchaValue(value);
+    console.log(value);
+  }
 
   return (
     <>
@@ -133,6 +143,11 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
               cols="30"
               rows="10"
             ></textarea>
+            <ReCAPTCHA
+              sitekey={REACT_APP_SITE_KEY}
+              ref={captchaRef}
+              onChange={onChange}
+            />
             <button
               type="submit"
               // onClick={bookedBtnHandle}

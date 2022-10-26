@@ -3,11 +3,9 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 function Dashboard() {
   const { auth, setAuth } = useContext(AuthContext);
-  const [admin, setAdmin] = useState("");
 
   const navigate = useNavigate();
 
@@ -17,9 +15,6 @@ function Dashboard() {
       .get("/logout", {
         headers: {
           "Content-Type": "application/json",
-          // "Access-Control-Allow-Origin": "http://localhost:3000",
-          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-          // "Access-Control-Allow-Credentials": true,
         },
         withCredentials: true,
       })
@@ -35,9 +30,6 @@ function Dashboard() {
       .get("/protected", {
         headers: {
           "Content-Type": "application/json",
-          // "Access-Control-Allow-Origin": "http://localhost:3000",
-          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-          // "Access-Control-Allow-Credentials": true,
         },
         withCredentials: true,
       })
