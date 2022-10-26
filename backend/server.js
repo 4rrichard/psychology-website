@@ -64,6 +64,7 @@ app.post("/api/sendemail", multer().none(), (req, res) => {
 
         if (data.success) {
           axios.post(GOOGLE_FORM_ACTION_URL, form);
+          res.send("okay");
         } else {
           return res
             .status(400)
@@ -77,7 +78,6 @@ app.post("/api/sendemail", multer().none(), (req, res) => {
     console.log(error);
     res.status(400).json(error);
   }
-  res.send("okay");
 });
 
 app.post("/refresh", refreshTokenController.handleRefreshToken);

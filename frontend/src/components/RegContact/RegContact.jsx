@@ -152,6 +152,7 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
               cols="30"
               rows="10"
             ></textarea>
+            {formData.messageError === true && <div>Recaptcha failed</div>}
             <ReCAPTCHA
               sitekey={REACT_APP_SITE_KEY}
               ref={captchaRef}
