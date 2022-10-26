@@ -48,6 +48,19 @@ const {
 
 const GOOGLE_FORM_ACTION_URL = `https://docs.google.com/forms/u/0/d/${REACT_APP_GOOGLE_FORM_KEY}/formResponse`;
 
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "../frontend/build/index.html"),
+    function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
+});
+
 app.post("/api/sendemail", multer().none(), async (req, res) => {
   try {
     const { recaptchaValue, fullName, email, phoneNum, message } = req.body;
