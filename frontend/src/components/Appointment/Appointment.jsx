@@ -7,6 +7,17 @@ import { useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 
 function Appointment() {
+  //--- HELP FOR THE CALENDAR ---
+
+  // const nowDate = DateTime.now().toFormat("dd");
+
+  // const nowHour = DateTime.now().c.hour;
+  // const yesterday = DateTime.now().plus({ day: -1 });
+  // const tomorrowHour = DateTime.now().plus({ day: 1 }).c.hour;
+  // const hourss = DateTime.now().plus({ day: 1 }).plus({ hour: -1 });
+  // const nowHourFormatted = DateTime.now()
+  //   .plus({ hour: 1 })
+  //   .toLocaleString(DateTime.TIME_SIMPLE);
   // const day = DateTime.local(2022, 9, 20, { locale: "en" }).day;
   // const weekday = DateTime.local(2022, 9, 20, { locale: "en" }).weekdayLong;
   // const year = DateTime.local(2022, 9, 20, { locale: "en" }).year;
@@ -27,6 +38,8 @@ function Appointment() {
   //--- localstorage data delete ---
   // localStorage.clear();
 
+  // --- STATES ---
+
   const { auth } = useContext(AuthContext);
   const admin = auth.admin;
 
@@ -36,77 +49,22 @@ function Appointment() {
   const [incrementStart, setIncrementStart] = useState(0);
   const [incrementEnd, setIncrementEnd] = useState(6);
 
+  const [sendFullDate, setSendFullDate] = useState("");
+
   const [isPreviousDisabled, setIsPreviousDisabled] = useState(false);
 
   const [disableDate, setDisableDate] = useState(() =>
     JSON.parse(localStorage.getItem("bookedTime") ?? "[]")
   );
 
-  // const [adminDisable, setAdminDisable] = useState(false);
+  //--- DATA FOR THE CALENDAR ---
 
-  const [sendFullDate, setSendFullDate] = useState("");
-
-  const handleClick = (e) => {
-    const selectHour = e.target.innerText;
-    const selectMonth =
-      e.target.parentNode.firstElementChild.nextElementSibling.innerText;
-    const selectDate =
-      e.target.parentNode.firstElementChild.nextElementSibling
-        .nextElementSibling.innerText;
-    const selectYear = e.target.parentNode.firstElementChild.innerText;
-
-    if (!admin) {
-      setDisplay(false);
-    }
-
-    setSendFullDate({
-      hour: selectHour,
-      date: selectDate,
-      month: selectMonth,
-      year: selectYear,
-    });
-
-    if (admin) {
-      setDisableDate((old) => [
-        ...old,
-        [parseInt(selectYear), selectMonth, parseInt(selectDate), selectHour],
-      ]);
-    }
-  };
-
-  console.log(disableDate);
-
-  const clickBack = () => {
-    setDisplay(true);
-  };
-
-  const handleNextClick = () => {
-    setIncrementStart(incrementStart + 7);
-    setIncrementEnd(incrementEnd + 7);
-    setDisplayNextWeek(true);
-  };
-  const handlePrevClick = () => {
-    setIncrementStart((prevState) => prevState - 7);
-    setIncrementEnd((prevState) => prevState - 7);
-    setDisplayNextWeek(true);
-  };
-
-  // const nowDate = DateTime.now().toFormat("dd");
-
-  // const nowHour = DateTime.now().c.hour;
-  // const yesterday = DateTime.now().plus({ day: -1 });
-  // const tomorrowHour = DateTime.now().plus({ day: 1 }).c.hour;
   const tomorrow = DateTime.now().plus({ day: 1 });
-
-  // const hourss = DateTime.now().plus({ day: 1 }).plus({ hour: -1 });
 
   const hoursArray = [];
   for (let i = tomorrow.c.hour; i >= 10; i--) {
     hoursArray.push(`${i}:${"00"}`);
   }
-  // const nowHourFormatted = DateTime.now()
-  //   .plus({ hour: 1 })
-  //   .toLocaleString(DateTime.TIME_SIMPLE);
 
   const now = DateTime.now();
 
@@ -142,43 +100,6 @@ function Appointment() {
   }
 
   const dateArray = Array.from(days(interval));
-
-  //--- Disable previous button ---
-  useEffect(() => {
-    const arrayFirst = [];
-    arrayFirst.push(
-      "" +
-        String(startOfNextWeek.c.year) +
-        String(startOfNextWeek.c.month).padStart(2, "0") +
-        String(startOfNextWeek.c.day).padStart(2, "0")
-    );
-    const arraySecond = [];
-    arraySecond.push(
-      "" +
-        String(startOfWeek.c.year) +
-        String(startOfWeek.c.month).padStart(2, "0") +
-        String(startOfWeek.c.day).padStart(2, "0")
-    );
-
-    if (parseInt(arrayFirst[0]) > parseInt(arraySecond[0])) {
-      setIsPreviousDisabled(false);
-    } else {
-      setIsPreviousDisabled(true);
-    }
-  }, [
-    startOfNextWeek.c.year,
-    startOfNextWeek.c.month,
-    startOfNextWeek.c.day,
-    startOfWeek.c.year,
-    startOfWeek.c.day,
-    startOfWeek.c.month,
-  ]);
-
-  //--- Saving state after refresh  ---
-
-  useEffect(() => {
-    window.localStorage.setItem("bookedTime", JSON.stringify(disableDate));
-  }, [disableDate]);
 
   const dateArrayNextWeek = Array.from(days(intervalNextWeek));
 
@@ -225,6 +146,91 @@ function Appointment() {
     });
   });
 
+  //--- CLICK HANDLERS ---
+
+  const handleClickOnTime = (e) => {
+    const selectHour = e.target.innerText;
+    const selectMonth =
+      e.target.parentNode.firstElementChild.nextElementSibling.innerText;
+    const selectDate =
+      e.target.parentNode.firstElementChild.nextElementSibling
+        .nextElementSibling.innerText;
+    const selectYear = e.target.parentNode.firstElementChild.innerText;
+
+    if (!admin) {
+      setDisplay(false);
+    }
+
+    setSendFullDate({
+      hour: selectHour,
+      date: selectDate,
+      month: selectMonth,
+      year: selectYear,
+    });
+
+    if (admin) {
+      setDisableDate((old) => [
+        ...old,
+        [parseInt(selectYear), selectMonth, parseInt(selectDate), selectHour],
+      ]);
+    }
+  };
+
+  const clickBack = () => {
+    setDisplay(true);
+  };
+
+  const handleNextClick = () => {
+    setIncrementStart(incrementStart + 7);
+    setIncrementEnd(incrementEnd + 7);
+    setDisplayNextWeek(true);
+  };
+
+  //--- DISABLE PREVIOUS BUTTON ---
+  const handlePrevClick = () => {
+    setIncrementStart((prevState) => prevState - 7);
+    setIncrementEnd((prevState) => prevState - 7);
+    setDisplayNextWeek(true);
+  };
+
+  useEffect(() => {
+    const arrayFirst = [];
+    arrayFirst.push(
+      "" +
+        String(startOfNextWeek.c.year) +
+        String(startOfNextWeek.c.month).padStart(2, "0") +
+        String(startOfNextWeek.c.day).padStart(2, "0")
+    );
+    const arraySecond = [];
+    arraySecond.push(
+      "" +
+        String(startOfWeek.c.year) +
+        String(startOfWeek.c.month).padStart(2, "0") +
+        String(startOfWeek.c.day).padStart(2, "0")
+    );
+
+    if (parseInt(arrayFirst[0]) > parseInt(arraySecond[0])) {
+      setIsPreviousDisabled(false);
+    } else {
+      setIsPreviousDisabled(true);
+    }
+  }, [
+    startOfNextWeek.c.year,
+    startOfNextWeek.c.month,
+    startOfNextWeek.c.day,
+    startOfWeek.c.year,
+    startOfWeek.c.day,
+    startOfWeek.c.month,
+  ]);
+
+  //--- SAVING DATA IN LOCAL STORAGE  ---
+
+  useEffect(() => {
+    window.localStorage.setItem("bookedTime", JSON.stringify(disableDate));
+  }, [disableDate]);
+
+  //--- DISABLE APPOINTMENT DATES ---
+
   function isAppointmentDisabled(hours, wholeMonth) {
     if (
       wholeMonth.year === tomorrow.c.year &&
@@ -241,19 +247,6 @@ function Appointment() {
     ) {
       return true;
     }
-
-    // if (admin) {
-    //   if (
-    //     wholeMonth.year === parseInt(sendFullDate.year) &&
-    //     wholeMonth.month === sendFullDate.month &&
-    //     wholeMonth.days === parseInt(sendFullDate.date) &&
-    //     hours === sendFullDate.hour
-    //   ) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // }
 
     return (
       disableDate.find((value) => {
@@ -301,7 +294,7 @@ function Appointment() {
                     <Link
                       className="appointment--hours"
                       value={10}
-                      onClick={handleClick}
+                      onClick={handleClickOnTime}
                       disabled={isAppointmentDisabled(hours, wholeMonth)}
                       key={hours}
                     >
@@ -322,7 +315,7 @@ function Appointment() {
                   {hoursArr.map((hours) => (
                     <Link
                       className="appointment--hours"
-                      onClick={handleClick}
+                      onClick={handleClickOnTime}
                       disabled={isAppointmentDisabled(hours, wholeMonth)}
                       key={hours}
                     >
