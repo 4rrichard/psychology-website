@@ -18,8 +18,6 @@ function Appointment() {
   // const start = DateTime.local(2022, 9, 19, { locale: "en" });
   // const end = DateTime.local(2022, 9, 26, { locale: "en" });
 
-  // console.log(dateArray[0].setLocale("en").weekdayLong);
-
   // const weekdays = Info.weekdays("long", { locale: "en" });
   // const nowFullDateStart = DateTime.now().toFormat("MMMM dd, yyyy");
   // const nowFullDateEnd = DateTime.now()
@@ -29,8 +27,8 @@ function Appointment() {
   //--- localstorage data delete ---
   // localStorage.clear();
 
-  // const { auth } = useContext(AuthContext);
-  // const admin = auth.admin;
+  const { auth } = useContext(AuthContext);
+  const admin = auth.admin;
 
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
@@ -38,14 +36,13 @@ function Appointment() {
   const [incrementStart, setIncrementStart] = useState(0);
   const [incrementEnd, setIncrementEnd] = useState(6);
 
-  //rename usestate
   const [isPreviousDisabled, setIsPreviousDisabled] = useState(false);
 
   const [disableDate, setDisableDate] = useState(() =>
     JSON.parse(localStorage.getItem("bookedTime") ?? "[]")
   );
 
-  const [adminDisable, setAdminDisable] = useState(false);
+  // const [adminDisable, setAdminDisable] = useState(false);
 
   const [sendFullDate, setSendFullDate] = useState("");
 
@@ -58,7 +55,10 @@ function Appointment() {
         .nextElementSibling.innerText;
     const selectYear = e.target.parentNode.firstElementChild.innerText;
 
-    setDisplay(false);
+    if (!admin) {
+      setDisplay(false);
+    }
+
     setSendFullDate({
       hour: selectHour,
       date: selectDate,
@@ -66,10 +66,15 @@ function Appointment() {
       year: selectYear,
     });
 
-    // if (admin) {
-    //   isAppointmentDisabled(setAdminDisable(!adminDisable));
-    // }
+    if (admin) {
+      setDisableDate((old) => [
+        ...old,
+        [parseInt(selectYear), selectMonth, parseInt(selectDate), selectHour],
+      ]);
+    }
   };
+
+  console.log(disableDate);
 
   const clickBack = () => {
     setDisplay(true);
@@ -92,14 +97,13 @@ function Appointment() {
   // const yesterday = DateTime.now().plus({ day: -1 });
   // const tomorrowHour = DateTime.now().plus({ day: 1 }).c.hour;
   const tomorrow = DateTime.now().plus({ day: 1 });
-  // console.log(tomorrow.c.hour + ":00");
+
   // const hourss = DateTime.now().plus({ day: 1 }).plus({ hour: -1 });
-  // console.log(hourss);
+
   const hoursArray = [];
   for (let i = tomorrow.c.hour; i >= 10; i--) {
     hoursArray.push(`${i}:${"00"}`);
   }
-  // console.log(hoursArray);
   // const nowHourFormatted = DateTime.now()
   //   .plus({ hour: 1 })
   //   .toLocaleString(DateTime.TIME_SIMPLE);
@@ -170,18 +174,11 @@ function Appointment() {
     startOfWeek.c.month,
   ]);
 
-  // useEffect(() => {
-  //   const data = window.localStorage.getItem("bookedTime");
-  //   setDisableDate(JSON.parse(data));
-  // }, []);
-
   //--- Saving state after refresh  ---
 
   useEffect(() => {
     window.localStorage.setItem("bookedTime", JSON.stringify(disableDate));
   }, [disableDate]);
-
-  // const daysOfSept = dateArray.map((dates) => dates.c).map((date) => date.day);
 
   const dateArrayNextWeek = Array.from(days(intervalNextWeek));
 
@@ -211,15 +208,6 @@ function Appointment() {
     hoursArr.push(`${i}:${"00"}`);
   }
 
-  // const wholeWeekArray = [];
-  // monthArray.map((month, index) => {
-  //   return wholeWeekArray.push({
-  //     month: month,
-  //     days: daysOfSept[index],
-  //     weekdays: weekdaysOfSept[index],
-  //   });
-  // });
-
   const nextMonthArray = [];
 
   for (let i = 0; i < 7; i++) {
@@ -237,14 +225,7 @@ function Appointment() {
     });
   });
 
-  //Get text of button : event.target.innerText
-  // && nowHour >= hours.slice(0, 2)
-
   function isAppointmentDisabled(hours, wholeMonth) {
-    //now.c.hour + ":00"
-    // console.log(parseInt(hours.slice(0, 2)));
-    // console.log(hoursArray.map((hour) => parseInt(hour.slice(0, 2))));
-
     if (
       wholeMonth.year === tomorrow.c.year &&
       wholeMonth.month === tomorrowMonth &&
@@ -260,6 +241,19 @@ function Appointment() {
     ) {
       return true;
     }
+
+    // if (admin) {
+    //   if (
+    //     wholeMonth.year === parseInt(sendFullDate.year) &&
+    //     wholeMonth.month === sendFullDate.month &&
+    //     wholeMonth.days === parseInt(sendFullDate.date) &&
+    //     hours === sendFullDate.hour
+    //   ) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // }
 
     return (
       disableDate.find((value) => {
