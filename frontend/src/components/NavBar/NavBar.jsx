@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Link as Scroll } from "react-scroll";
 import { Link } from "react-router-dom";
-import "./NavBar.css";
-import { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../context/AuthProvider";
 import axios from "../../api/axios";
+import "./NavBar.css";
 
 function NavBar() {
   const { auth, setAuth } = useContext(AuthContext);
+  const [navOpen, setNavOpen] = useState(false);
+
+  const menuToggle = () => {
+    setNavOpen(!navOpen);
+  };
 
   const handleLogout = (event) => {
     event.preventDefault();
@@ -25,12 +31,12 @@ function NavBar() {
 
   return (
     <>
-      <nav>
+      <nav className="navbar">
         <Link to="/" className="nav--name">
           Psychologist Gizem Cakin
         </Link>
 
-        <div className="nav--primary">
+        <div className={`nav--primary ${navOpen && "nav--open"}`}>
           <div className="nav--anchors">
             <Scroll
               activeClass="active"
@@ -77,6 +83,12 @@ function NavBar() {
             Book an appointment
           </Link>
         </div>
+        <FontAwesomeIcon
+          onClick={menuToggle}
+          icon={faBars}
+          size="4x"
+          className="hiddenMenuIcon"
+        />
         {auth.admin && (
           <button onClick={handleLogout} className="logged-in">
             {auth.admin}
