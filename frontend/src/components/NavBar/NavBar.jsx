@@ -40,6 +40,7 @@ function NavBar() {
           <div className="nav--anchors">
             <Scroll
               activeClass="active"
+              onClick={menuToggle}
               to="about-me"
               spy={true}
               smooth={true}
@@ -50,6 +51,7 @@ function NavBar() {
 
             <Scroll
               activeClass="active"
+              onClick={menuToggle}
               to="offers"
               spy={true}
               hashSpy={true}
@@ -61,6 +63,7 @@ function NavBar() {
 
             <Scroll
               activeClass="active"
+              onClick={menuToggle}
               to="blog"
               spy={true}
               smooth={true}
@@ -71,6 +74,7 @@ function NavBar() {
 
             <Scroll
               activeClass="active"
+              onClick={menuToggle}
               to="contacts"
               spy={true}
               smooth={true}
