@@ -15,14 +15,16 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 60% 50%;
+  .hero--subtitle,
+  .hero--title {
+    max-width: 550px;
+    width: auto;
+  }
   .hero--subtitle {
-    width: 550px;
     font-family: "Quicksand", sans-serif;
     font-size: 20px;
   }
   .hero--title {
-    width: 550px;
-
     font-family: "Oswald", sans-serif;
     font-weight: 400;
     font-size: 65px;
