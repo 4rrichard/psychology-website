@@ -29,7 +29,7 @@
     flex-wrap: wrap;
     gap: 50px;
     .offers--offer {
-      width: 150px;
+      min-width: 200px;
 
       display: flex;
       flex-direction: column;

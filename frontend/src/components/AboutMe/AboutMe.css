@@ -34,16 +34,14 @@
   border: 2px solid #bf9773;
   border-radius: 30px;
 }
-@media screen and (max-width: 865px) {
-  .about-me .about-me--main-container .about-me--image,
-.about-me .about-me--main-container .about-me--pharagraph {
-    min-width: 100%;
-  }
-}
 @media screen and (max-width: 1000px) {
   .about-me .about-me--main-container {
     flex-direction: column;
     align-items: center;
     gap: 60px;
+  }
+  .about-me .about-me--main-container .about-me--image,
+.about-me .about-me--main-container .about-me--pharagraph {
+    min-width: 100%;
   }
 }/*# sourceMappingURL=AboutMe.css.map */

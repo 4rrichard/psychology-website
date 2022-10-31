@@ -27,7 +27,7 @@
   gap: 50px;
 }
 .offers .offers--main-container .offers--offer {
-  width: 150px;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
