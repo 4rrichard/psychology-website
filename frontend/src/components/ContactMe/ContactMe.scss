@@ -1,5 +1,5 @@
 .contacts {
-  margin-top: 80px;
+  padding-top: 80px;
 
   display: flex;
   flex-direction: column;
@@ -58,53 +58,58 @@
         margin-top: 50px;
       }
     }
+
+    .contacts--send-email {
+      min-width: 50%;
+      width: auto;
+
+      padding: 60px 40px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+
+      border: 1px solid #dbb898;
+      border-radius: 7px;
+      input,
+      textarea {
+        padding: 10px;
+        border: 1px solid #dbb898;
+        border-radius: 7px;
+      }
+      input[type="text"],
+      textarea {
+        background-color: #f7f2eb;
+        font-family: "Quicksand", sans-serif;
+      }
+      .send-email--btn {
+        height: 50px;
+
+        padding: 13px;
+
+        background-color: #bf9773;
+        border-radius: 6px;
+
+        font-family: "Quicksand", sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        color: white;
+
+        transition-duration: 0.2s;
+        transition-timing-function: ease-in-out;
+      }
+      .send-email--btn:hover {
+        background-color: #dbb898;
+      }
+    }
     @media screen and (max-width: 865px) {
       flex-direction: column;
       align-items: center;
-    }
-  }
-  .contacts--send-email {
-    min-width: 400px;
-    width: auto;
-
-    padding: 60px 40px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 30px;
-
-    border: 1px solid #dbb898;
-    border-radius: 7px;
-    input,
-    textarea {
-      padding: 10px;
-      border: 1px solid #dbb898;
-      border-radius: 7px;
-    }
-    input[type="text"],
-    textarea {
-      background-color: #f7f2eb;
-      font-family: "Quicksand", sans-serif;
-    }
-    .send-email--btn {
-      height: 50px;
-
-      padding: 13px;
-
-      background-color: #bf9773;
-      border-radius: 6px;
-
-      font-family: "Quicksand", sans-serif;
-      font-weight: 600;
-      font-size: 18px;
-      color: white;
-
-      transition-duration: 0.2s;
-      transition-timing-function: ease-in-out;
-    }
-    .send-email--btn:hover {
-      background-color: #dbb898;
+      .contacts--info,
+      .contacts--send-email {
+        min-width: 100%;
+      }
     }
   }
 }

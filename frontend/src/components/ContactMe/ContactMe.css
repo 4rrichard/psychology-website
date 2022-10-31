@@ -1,5 +1,5 @@
 .contacts {
-  margin-top: 80px;
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,14 +55,8 @@
   width: auto;
   margin-top: 50px;
 }
-@media screen and (max-width: 865px) {
-  .contacts .contacts-container {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-.contacts .contacts--send-email {
-  min-width: 400px;
+.contacts .contacts-container .contacts--send-email {
+  min-width: 50%;
   width: auto;
   padding: 60px 40px;
   display: flex;
@@ -72,18 +66,18 @@
   border: 1px solid #dbb898;
   border-radius: 7px;
 }
-.contacts .contacts--send-email input,
-.contacts .contacts--send-email textarea {
+.contacts .contacts-container .contacts--send-email input,
+.contacts .contacts-container .contacts--send-email textarea {
   padding: 10px;
   border: 1px solid #dbb898;
   border-radius: 7px;
 }
-.contacts .contacts--send-email input[type=text],
-.contacts .contacts--send-email textarea {
+.contacts .contacts-container .contacts--send-email input[type=text],
+.contacts .contacts-container .contacts--send-email textarea {
   background-color: #f7f2eb;
   font-family: "Quicksand", sans-serif;
 }
-.contacts .contacts--send-email .send-email--btn {
+.contacts .contacts-container .contacts--send-email .send-email--btn {
   height: 50px;
   padding: 13px;
   background-color: #bf9773;
@@ -95,6 +89,16 @@
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
 }
-.contacts .contacts--send-email .send-email--btn:hover {
+.contacts .contacts-container .contacts--send-email .send-email--btn:hover {
   background-color: #dbb898;
+}
+@media screen and (max-width: 865px) {
+  .contacts .contacts-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .contacts .contacts-container .contacts--info,
+.contacts .contacts-container .contacts--send-email {
+    min-width: 100%;
+  }
 }/*# sourceMappingURL=ContactMe.css.map */

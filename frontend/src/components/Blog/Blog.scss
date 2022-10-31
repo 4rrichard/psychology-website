@@ -1,5 +1,5 @@
 .blog {
-  height: 100vh;
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,6 +53,9 @@
     }
     .blog--article:hover {
       scale: 1.05;
+    }
+    @media screen and (max-width: 865px) {
+      flex-direction: column;
     }
   }
 }
