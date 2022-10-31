@@ -15,7 +15,7 @@
   .faq--question-container,
   .faq--question-container-active {
     width: auto;
-    height: 50px;
+    height: auto;
 
     margin-bottom: 20px;
     padding: 10px 30px;
@@ -34,6 +34,8 @@
     .faq--close {
       width: auto;
       max-height: 80%;
+      max-width: 8%;
+      margin-left: 20px;
     }
     .faq--close {
       transform: rotate(180deg);
@@ -58,7 +60,7 @@
     border-bottom-right-radius: 10px;
 
     overflow: hidden;
-    transition: max-height 1.5s ease;
+    transition: max-height 0.8s ease-in-out;
   }
   .faq--answer {
     padding: 20px;

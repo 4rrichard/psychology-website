@@ -1,5 +1,6 @@
 .subscribe {
-  height: 40vh;
+  padding-top: 80px;
+  padding-bottom: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +33,6 @@
 }
 .subscribe .subscribe--form .subscribe--first-name {
   width: auto;
-  max-width: 20%;
 }
 .subscribe .subscribe--form .subscribe--btn {
   height: 50px;
@@ -48,4 +48,16 @@
 }
 .subscribe .subscribe--form .subscribe--btn:hover {
   background-color: #dbb898;
+}
+@media screen and (max-width: 865px) {
+  .subscribe .subscribe--form {
+    flex-direction: column;
+    max-width: 50%;
+    gap: 20px;
+  }
+}
+@media screen and (max-width: 865px) {
+  .subscribe {
+    align-items: center;
+  }
 }/*# sourceMappingURL=Subscribe.css.map */
