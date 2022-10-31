@@ -1,5 +1,5 @@
 .about-me {
-  height: 100vh;
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,18 +19,31 @@
 }
 .about-me .about-me--main-container .about-me--image,
 .about-me .about-me--main-container .about-me--pharagraph {
-  width: 500px;
-  height: 600px;
+  min-width: 30%;
+  max-width: 40%;
+  height: auto;
 }
 .about-me .about-me--main-container .about-me--image {
   -o-object-fit: cover;
      object-fit: cover;
-  -o-object-position: 5% 0;
-     object-position: 5% 0;
   border-radius: 30px;
 }
 .about-me .about-me--main-container .about-me--pharagraph {
+  height: auto;
   padding: 30px;
   border: 2px solid #bf9773;
   border-radius: 30px;
+}
+@media screen and (max-width: 865px) {
+  .about-me .about-me--main-container .about-me--image,
+.about-me .about-me--main-container .about-me--pharagraph {
+    min-width: 250px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .about-me .about-me--main-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
 }/*# sourceMappingURL=AboutMe.css.map */
