@@ -32,6 +32,7 @@
 }
 .subscribe .subscribe--form .subscribe--first-name {
   width: auto;
+  max-width: 20%;
 }
 .subscribe .subscribe--form .subscribe--btn {
   height: 50px;
