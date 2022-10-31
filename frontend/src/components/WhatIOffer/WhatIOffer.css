@@ -1,5 +1,4 @@
 .offers {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,6 +22,7 @@
 .offers .offers--main-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 50px;
 }
 .offers .offers--main-container .offers--offer {
@@ -30,6 +30,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-basis: 25%;
   font-family: "Quicksand", sans-serif;
 }
 .offers .offers--main-container .offers--offer .offers--icon {

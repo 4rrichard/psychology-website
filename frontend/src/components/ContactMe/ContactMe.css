@@ -1,5 +1,5 @@
 .contacts {
-  height: 90vh;
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,6 +54,12 @@
   max-height: 350px;
   width: auto;
   margin-top: 50px;
+}
+@media screen and (max-width: 865px) {
+  .contacts .contacts-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .contacts .contacts--send-email {
   min-width: 400px;
