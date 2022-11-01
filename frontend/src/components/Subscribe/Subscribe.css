@@ -18,6 +18,7 @@
 }
 .subscribe .subscribe--form {
   display: flex;
+  justify-content: center;
   gap: 40px;
   width: 100%;
 }
@@ -52,7 +53,6 @@
 @media screen and (max-width: 865px) {
   .subscribe .subscribe--form {
     flex-direction: column;
-    max-width: 50%;
     gap: 20px;
   }
 }

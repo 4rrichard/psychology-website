@@ -14,7 +14,11 @@
   font-size: 20px;
   font-weight: 600;
 }
-.footer .footer--reach-me .footer--social {
+.footer .footer--reach-me .footer--social-icons {
+  display: flex;
+  gap: 40px;
+}
+.footer .footer--reach-me .footer--social-icons .footer--social {
   width: 40px;
   text-align: center;
   display: flex;
@@ -22,14 +26,29 @@
   align-items: center;
   cursor: pointer;
 }
-.footer .footer--reach-me .footer--social .footer--social-icon {
+.footer .footer--reach-me .footer--social-icons .footer--social .footer--social-icon {
   filter: invert(86%) sepia(10%) saturate(2300%) hue-rotate(331deg) brightness(72%) contrast(97%);
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
 }
-.footer .footer--reach-me .footer--social:hover .footer--social-icon {
+.footer .footer--reach-me .footer--social-icons .footer--social:hover .footer--social-icon {
   scale: 1.1;
+}
+@media screen and (max-width: 865px) {
+  .footer .footer--reach-me {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
 }
 .footer .footer--creator {
   margin-left: 20px;
+}
+@media screen and (max-width: 865px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+  }
 }/*# sourceMappingURL=Footer.css.map */
