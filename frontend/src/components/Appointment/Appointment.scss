@@ -1,5 +1,7 @@
 .appointment {
-  margin: 80px 0;
+  max-width: 850px;
+  max-height: 700px;
+  margin: 80px auto;
 
   display: flex;
   flex-direction: column;
@@ -19,14 +21,15 @@
     margin-bottom: 30px;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 23px;
     .appointment--current-week-date {
       font-size: 22px;
     }
     .prev-week-btn,
     .next-week-btn {
-      min-width: 70px;
+      min-width: 150px;
+      min-height: 45px;
 
       padding: 10px;
 
@@ -42,6 +45,10 @@
       transition-duration: 0.2s;
       transition-timing-function: ease-in-out;
     }
+    .prev-week-btn:hover,
+    .next-week-btn:hover {
+      background-color: #dbb898;
+    }
 
     .prev-week-btn[disabled] {
       opacity: 60%;
@@ -54,11 +61,16 @@
   .appointment--container {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    overflow: hidden;
+    border-radius: 8px;
+
     .appointment--fulldate {
+      padding: 20px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
+      flex-grow: 1;
+      flex-basis: 0;
       .year-no-display {
         display: none;
       }
@@ -81,9 +93,11 @@
         font-size: 18px;
       }
       .appointment--hours {
-        min-width: 70px;
+        width: 60%;
 
         padding: 5px;
+
+        background-color: white;
 
         border: 1px solid #bf9773;
         border-radius: 5px;
@@ -105,6 +119,13 @@
         pointer-events: none;
         border: 1px solid rgb(185, 183, 183);
       }
+    }
+    @media screen and (max-width: 1000px) {
+      overflow: auto;
+      width: 100%;
+    }
+    .appointment--fulldate:nth-child(odd) {
+      background-color: #f7f2eb;
     }
   }
 }
