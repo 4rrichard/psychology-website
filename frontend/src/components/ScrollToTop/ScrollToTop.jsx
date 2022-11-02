@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ScrollToTop.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquareCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUp } from "@fortawesome/free-solid-svg-icons";
 
 function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,12 +34,11 @@ function ScrollToTop() {
       {isVisible && (
         <div className="to-top">
           <FontAwesomeIcon
-            icon={faSquareCaretUp}
-            size="4x"
+            icon={faCircleUp}
+            size="3x"
             onClick={scrollToTop}
             className="to-top-btn"
           />
-          <h2 className="to-top-text">To Top</h2>
         </div>
       )}
     </>

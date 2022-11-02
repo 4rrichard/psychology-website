@@ -1,23 +1,15 @@
 .to-top:hover .to-top-btn {
   scale: 1.2;
-}
-
-.to-top-btn,
-.to-top-text {
-  position: fixed;
-  right: 20px;
-  bottom: 6px;
-  cursor: pointer;
+  opacity: 1;
 }
 
 .to-top-btn {
-  bottom: 30px;
-  right: 30px;
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+  cursor: pointer;
+  opacity: 0.7;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   filter: invert(86%) sepia(10%) saturate(2300%) hue-rotate(331deg) brightness(72%) contrast(97%);
-}
-
-.to-top-text {
-  color: #bf9773;
 }/*# sourceMappingURL=ScrollToTop.css.map */
