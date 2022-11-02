@@ -162,6 +162,12 @@
     min-width: 25%;
   }
 }
+@media screen and (max-width: 455px) {
+  .appointment .appointment--title {
+    scale: 0.856;
+    transition: scale 0.8s;
+  }
+}
 @media screen and (max-width: 580px) {
   .appointment {
     margin: 0 30px;

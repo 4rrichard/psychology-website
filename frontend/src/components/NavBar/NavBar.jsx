@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link as Scroll } from "react-scroll";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../context/AuthProvider";
 import axios from "../../api/axios";
 import "./NavBar.css";
@@ -97,12 +97,22 @@ function NavBar() {
             Book an appointment
           </Link>
         </div>
-        <FontAwesomeIcon
-          onClick={menuToggle}
-          icon={faBars}
-          size="4x"
-          className="hiddenMenuIcon"
-        />
+        {!navOpen && (
+          <FontAwesomeIcon
+            onClick={menuToggle}
+            icon={faBars}
+            size="4x"
+            className="hiddenMenuIcon"
+          />
+        )}
+        {navOpen && (
+          <FontAwesomeIcon
+            onClick={menuToggle}
+            icon={faXmark}
+            size="4x"
+            className="hiddenMenuIcon"
+          />
+        )}
         {auth.admin && (
           <button onClick={handleLogout} className="logged-in">
             {auth.admin}

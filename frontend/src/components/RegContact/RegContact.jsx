@@ -87,7 +87,10 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     <>
       {displayConfirm ? (
         <section className="regContact">
-          <h2 className="regContact--details-title">Booking details</h2>
+          <h1 className="regContact--details-title">Booking details</h1>
+          <button className="back-to-appointment-btn" onClick={clickBack}>
+            Back to Appointments
+          </button>
           <form
             onSubmit={handleForm}
             className="contacts--send-email"
@@ -163,9 +166,6 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
               Finalize Booking
             </button>
           </form>
-          <button className="back-to-appointment-btn" onClick={clickBack}>
-            Back to Appointments
-          </button>
         </section>
       ) : (
         <BookedMessage />
