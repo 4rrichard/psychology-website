@@ -142,12 +142,12 @@
     transition: max-width, max-height 0.5s ease-in-out;
   }
   .appointment .appointment--change-week {
-    flex-direction: column;
     align-items: center;
   }
   .appointment .appointment--change-week .appointment--current-week-date {
     max-width: 250px;
     text-align: center;
+    font-size: 20px;
   }
   .appointment .appointment--change-week .prev-week-btn,
 .appointment .appointment--change-week .next-week-btn {
@@ -155,9 +155,21 @@
     max-width: 80px;
   }
   .appointment .appointment--container {
+    justify-content: flex-start;
     margin: auto;
   }
   .appointment .appointment--container .appointment--fulldate {
     min-width: 25%;
+  }
+}
+@media screen and (max-width: 580px) {
+  .appointment {
+    margin: 0 30px;
+  }
+  .appointment .appointment--change-week {
+    flex-direction: column;
+  }
+  .appointment .appointment--container .appointment--fulldate {
+    min-width: 50%;
   }
 }/*# sourceMappingURL=Appointment.css.map */
