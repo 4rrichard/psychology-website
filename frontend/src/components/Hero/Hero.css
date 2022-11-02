@@ -44,4 +44,16 @@
 .hero .hero--aboutme-btn:hover,
 .hero .hero--book-appointment-btn:hover {
   background-color: #dbb898;
+}
+@media screen and (max-width: 800px) {
+  .hero {
+    background-position: 65% 50%;
+    transition: background-position 1s ease-in-out;
+  }
+}
+@media screen and (max-width: 950px) {
+  .hero .hero--subtitle,
+.hero .hero--title {
+    max-width: 50%;
+  }
 }/*# sourceMappingURL=Hero.css.map */

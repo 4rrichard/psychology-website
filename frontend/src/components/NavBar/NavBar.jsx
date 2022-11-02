@@ -32,7 +32,13 @@ function NavBar() {
   return (
     <>
       <nav className="navbar">
-        <Link to="/" className="nav--name">
+        <Link
+          to="/"
+          onClick={() => {
+            setNavOpen(false);
+          }}
+          className="nav--name"
+        >
           Psychologist Gizem Cakin
         </Link>
 
