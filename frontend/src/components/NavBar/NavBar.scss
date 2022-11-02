@@ -72,6 +72,7 @@
       left: 0;
       width: 100%;
       height: 0em;
+      z-index: 1;
 
       display: flex;
       flex-direction: column;
@@ -91,6 +92,7 @@
 
     .hiddenMenuIcon {
       display: block;
+      width: 40px;
     }
 
     .nav--open {
