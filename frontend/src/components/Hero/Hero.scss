@@ -54,6 +54,12 @@
     background-color: #dbb898;
   }
 
+  @media screen and (max-width: 420px) {
+    height: auto;
+    padding-top: 110px;
+    padding-bottom: 50px;
+  }
+
   @media screen and(max-width:800px) {
     background-position: 65% 50%;
     transition: background-position 1s ease-in-out;

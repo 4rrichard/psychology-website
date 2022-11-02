@@ -45,6 +45,13 @@
 .hero .hero--book-appointment-btn:hover {
   background-color: #dbb898;
 }
+@media screen and (max-width: 420px) {
+  .hero {
+    height: auto;
+    padding-top: 110px;
+    padding-bottom: 50px;
+  }
+}
 @media screen and (max-width: 800px) {
   .hero {
     background-position: 65% 50%;
