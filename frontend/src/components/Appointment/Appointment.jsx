@@ -180,7 +180,7 @@ function Appointment() {
     setDisplay(true);
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = (e) => {
     setIncrementStart(incrementStart + 7);
     setIncrementEnd(incrementEnd + 7);
     setDisplayNextWeek(true);

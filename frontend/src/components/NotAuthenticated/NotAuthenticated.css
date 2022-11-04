@@ -1,0 +1,29 @@
+.not-authenticated {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.not-authenticated .n-a--title {
+  font-size: 80px;
+}
+.not-authenticated .n-a--subtitle {
+  font-size: 33px;
+}
+.not-authenticated .n-a--redirect {
+  height: 50px;
+  margin-top: 30px;
+  padding: 13px;
+  background-color: #bf9773;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.not-authenticated .n-a--redirect:hover {
+  background-color: #dbb898;
+}/*# sourceMappingURL=NotAuthenticated.css.map */

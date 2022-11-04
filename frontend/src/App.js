@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 
@@ -18,10 +18,14 @@ import Dashboard from "./components/Dashboard/Dashboard";
 
 import "./App.css";
 import "./reset.css";
+import AuthContext from "./context/AuthProvider";
+import NotAuthenticated from "./components/NotAuthenticated/NotAuthenticated";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   const location = useLocation();
   const path = location.pathname;
+  const { auth } = useContext(AuthContext);
   const [display, setDisplay] = useState(true);
   const [displayPage, setDisplayPage] = useState(true);
 
@@ -58,8 +62,12 @@ function App() {
       <Routes>
         <Route path="/" />
         <Route path="/appointment" element={<Appointment />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/login" element={<Dashboard />} />
+        <Route path="/admin/*" element={<AdminPage />} />
+        <Route
+          path="/login"
+          element={auth.user ? <Dashboard /> : <NotAuthenticated />}
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {displayPage && (
         <>

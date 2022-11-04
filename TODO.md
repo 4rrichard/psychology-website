@@ -1,4 +1,4 @@
-[] reCaptcha implementation :
+[x] reCaptcha implementation :
 https://blog.logrocket.com/implement-recaptcha-react-application/#implementing-recaptcha-in-react
 
 https://developers.google.com/recaptcha/docs/versions
@@ -14,7 +14,7 @@ https://developers.google.com/recaptcha/docs/versions
 
 [] If error with email sending then error message pops up
 
-[] CSS fix on website
+[x] CSS fix on website
 
 [] Routing fix:
 ---[] react-router and react-scroll
