@@ -5,6 +5,7 @@ import "./Appointment.css";
 import RegContact from "../RegContact/RegContact";
 import { useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
+import { useRef } from "react";
 
 function Appointment() {
   //--- HELP FOR THE CALENDAR ---
@@ -42,6 +43,7 @@ function Appointment() {
 
   const { auth } = useContext(AuthContext);
   const admin = auth.admin;
+  const selectedTimes = useRef([]);
 
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
@@ -55,6 +57,10 @@ function Appointment() {
 
   const [disableDate, setDisableDate] = useState(() =>
     JSON.parse(localStorage.getItem("bookedTime") ?? "[]")
+  );
+
+  const [adminDisable, setAdminDisable] = useState(() =>
+    JSON.parse(localStorage.getItem("classChange") ?? "[]")
   );
 
   //--- DATA FOR THE CALENDAR ---
@@ -148,7 +154,7 @@ function Appointment() {
 
   //--- CLICK HANDLERS ---
 
-  const handleClickOnTime = (e) => {
+  const handleClickOnTime = (e, i) => {
     const selectHour = e.target.innerText;
     const selectMonth =
       e.target.parentNode.firstElementChild.nextElementSibling.innerText;
@@ -169,10 +175,19 @@ function Appointment() {
     });
 
     if (admin) {
-      setDisableDate((old) => [
-        ...old,
-        [parseInt(selectYear), selectMonth, parseInt(selectDate), selectHour],
-      ]);
+      if (e.currentTarget.classList.contains("admin-disable")) {
+        localStorage.removeItem("classChange");
+      } else {
+        setAdminDisable("admin-disable");
+
+        e.currentTarget.classList.add("admin-disable");
+      }
+    }
+    const iterator = selectedTimes.current.values();
+
+    for (const value of iterator) {
+      if (value.className === "appointment--hours admin-disable")
+        console.log(value);
     }
   };
 
@@ -180,7 +195,7 @@ function Appointment() {
     setDisplay(true);
   };
 
-  const handleNextClick = (e) => {
+  const handleNextClick = () => {
     setIncrementStart(incrementStart + 7);
     setIncrementEnd(incrementEnd + 7);
     setDisplayNextWeek(true);
@@ -290,13 +305,19 @@ function Appointment() {
                   <h2 className="appointment--month">{wholeMonth.month}</h2>
                   <h1 className="appointment--date">{wholeMonth.days}</h1>
                   <h2 className="appointment--day">{wholeMonth.weekdays}</h2>
-                  {hoursArr.map((hours) => (
+                  {hoursArr.map((hours, i) => (
                     <Link
                       className="appointment--hours"
                       value={10}
-                      onClick={handleClickOnTime}
+                      ref={(el) =>
+                        el !== null &&
+                        (selectedTimes.current = [
+                          ...new Set([...selectedTimes.current, el]),
+                        ])
+                      }
+                      onClick={(event) => handleClickOnTime(event, i)}
                       disabled={isAppointmentDisabled(hours, wholeMonth)}
-                      key={hours}
+                      key={i}
                     >
                       {hours}
                     </Link>

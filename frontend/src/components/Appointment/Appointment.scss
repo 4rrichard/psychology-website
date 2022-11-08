@@ -120,6 +120,12 @@
         pointer-events: none;
         border: 1px solid rgb(185, 183, 183);
       }
+      .admin-disable {
+        opacity: 60%;
+        color: grey;
+        background-color: rgb(175, 174, 174);
+        border: 1px solid rgb(185, 183, 183);
+      }
     }
     .appointment--fulldate:nth-child(odd) {
       background-color: #f7f2eb;

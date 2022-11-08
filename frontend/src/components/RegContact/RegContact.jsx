@@ -44,7 +44,7 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
         },
         withCredentials: true,
       })
-      .then((response) => {
+      .then(() => {
         setFormData({
           fullName: "",
           email: "",
