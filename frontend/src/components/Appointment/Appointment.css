@@ -64,9 +64,6 @@
   flex-grow: 1;
   flex-basis: 0;
 }
-.appointment .appointment--container .appointment--fulldate .year-no-display {
-  display: none;
-}
 .appointment .appointment--container .appointment--fulldate .appointment--month {
   font-family: "Quicksand", sans-serif;
   font-weight: 400;
