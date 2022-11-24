@@ -5,6 +5,7 @@ import "./Appointment.css";
 import RegContact from "../RegContact/RegContact";
 import { useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
+import { useRef } from "react";
 
 function Appointment() {
   //--- HELP FOR THE CALENDAR ---
@@ -82,6 +83,14 @@ function Appointment() {
 
   const { auth } = useContext(AuthContext);
   const admin = auth.admin;
+  const buttons = useRef(new Set([]));
+  buttons.current.delete(null);
+
+  for (const button of buttons.current.values()) {
+    if (button.classList.value.includes("admin-disable")) {
+      console.log(button);
+    }
+  }
 
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
@@ -211,30 +220,6 @@ function Appointment() {
     );
   };
 
-  const isBooked = (time, fullDay) => {
-    const wholeDayArr = Array.from([
-      fullDay.year,
-      fullDay.month,
-      fullDay.days,
-      time,
-    ]);
-
-    const data = adminDisable.values.map((e) => {
-      return e.data;
-    });
-    console.log(data);
-
-    const checkedData = data.find((val) =>
-      val.every((v, i) => v === wholeDayArr[i])
-    );
-
-    if (checkedData) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   const clickBack = () => {
     setDisplay(true);
   };
@@ -307,6 +292,10 @@ function Appointment() {
       return true;
     }
 
+    // if (document.getElementsByClassName("admin-disable") === ) {
+    //   return true;
+    // }
+
     return (
       disableDate.find((value) => {
         if (
@@ -322,6 +311,29 @@ function Appointment() {
       }) !== undefined
     );
   }
+
+  const isBooked = (time, fullDay) => {
+    const wholeDayArr = Array.from([
+      fullDay.year,
+      fullDay.month,
+      fullDay.days,
+      time,
+    ]);
+
+    const data = adminDisable.values.map((e) => {
+      return e.data;
+    });
+
+    const checkedData = data.find((val) =>
+      val.every((v, i) => v === wholeDayArr[i])
+    );
+
+    if (checkedData) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <>
@@ -353,6 +365,7 @@ function Appointment() {
                       className={`appointment--hours ${
                         isBooked(hours, wholeMonth) && "admin-disable"
                       }`}
+                      ref={(element) => buttons.current.add(element)}
                       value={10}
                       onClick={() => handleClickOnTime(hours, wholeMonth)}
                       disabled={isAppointmentDisabled(hours, wholeMonth)}
