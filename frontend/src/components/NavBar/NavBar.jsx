@@ -115,7 +115,7 @@ function NavBar() {
                   onClick={() => goToPageAndScroll("about-me")}
                   className="nav--anchor"
                 >
-                  About
+                  About me
                 </button>
                 <button
                   onClick={() => goToPageAndScroll("offers")}
