@@ -109,29 +109,33 @@ function NavBar() {
                 </Scroll>
               </>
             ) : (
-              <ul>
-                <li>
-                  {" "}
-                  <button onClick={() => goToPageAndScroll("blog")}>
-                    Blog
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => goToPageAndScroll("about-me")}>
-                    About
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => goToPageAndScroll("offers")}>
-                    What I offer
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => goToPageAndScroll("contacts")}>
-                    Contacts
-                  </button>
-                </li>
-              </ul>
+              <>
+                {" "}
+                <button
+                  onClick={() => goToPageAndScroll("about-me")}
+                  className="nav--anchor"
+                >
+                  About
+                </button>
+                <button
+                  onClick={() => goToPageAndScroll("offers")}
+                  className="nav--anchor"
+                >
+                  What I offer
+                </button>
+                <button
+                  onClick={() => goToPageAndScroll("blog")}
+                  className="nav--anchor"
+                >
+                  Blog
+                </button>
+                <button
+                  onClick={() => goToPageAndScroll("contacts")}
+                  className="nav--anchor"
+                >
+                  Contacts
+                </button>
+              </>
             )}
           </div>
           <Link
