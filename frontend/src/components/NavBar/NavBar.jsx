@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Link as Scroll } from "react-scroll";
+import { scroller } from "react-scroll";
 import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../context/AuthProvider";
@@ -10,6 +12,23 @@ import "./NavBar.css";
 function NavBar() {
   const { auth, setAuth } = useContext(AuthContext);
   const [navOpen, setNavOpen] = useState(false);
+
+  const path = useLocation().pathname;
+  const location = path.split("/")[1];
+  const navigate = useNavigate();
+
+  console.log(path, location);
+
+  const goToPageAndScroll = async (selector) => {
+    console.log(selector);
+    await navigate("/");
+    await scroller.scrollTo(selector, {
+      duration: 500,
+      smooth: true,
+      offset: 50,
+      spy: true,
+    });
+  };
 
   const menuToggle = () => {
     setNavOpen(!navOpen);
@@ -44,50 +63,76 @@ function NavBar() {
 
         <div className={`nav--primary ${navOpen && "nav--open"}`}>
           <div className="nav--anchors">
-            <Scroll
-              activeClass="active"
-              onClick={menuToggle}
-              to="about-me"
-              spy={true}
-              smooth={true}
-              className="nav--anchor"
-            >
-              About me
-            </Scroll>
-
-            <Scroll
-              activeClass="active"
-              onClick={menuToggle}
-              to="offers"
-              spy={true}
-              hashSpy={true}
-              smooth={true}
-              className="nav--anchor"
-            >
-              What I Offer
-            </Scroll>
-
-            <Scroll
-              activeClass="active"
-              onClick={menuToggle}
-              to="blog"
-              spy={true}
-              smooth={true}
-              className="nav--anchor"
-            >
-              Blog
-            </Scroll>
-
-            <Scroll
-              activeClass="active"
-              onClick={menuToggle}
-              to="contacts"
-              spy={true}
-              smooth={true}
-              className="nav--anchor"
-            >
-              Contacts
-            </Scroll>
+            {location !== "appointment" ? (
+              <>
+                {" "}
+                <Scroll
+                  activeClass="active"
+                  onClick={menuToggle}
+                  to="about-me"
+                  spy={true}
+                  smooth={true}
+                  className="nav--anchor"
+                >
+                  About me
+                </Scroll>
+                <Scroll
+                  activeClass="active"
+                  onClick={menuToggle}
+                  to="offers"
+                  spy={true}
+                  hashSpy={true}
+                  smooth={true}
+                  className="nav--anchor"
+                >
+                  What I Offer
+                </Scroll>
+                <Scroll
+                  activeClass="active"
+                  onClick={menuToggle}
+                  to="blog"
+                  spy={true}
+                  smooth={true}
+                  className="nav--anchor"
+                >
+                  Blog
+                </Scroll>
+                <Scroll
+                  activeClass="active"
+                  onClick={menuToggle}
+                  to="contacts"
+                  spy={true}
+                  smooth={true}
+                  className="nav--anchor"
+                >
+                  Contacts
+                </Scroll>
+              </>
+            ) : (
+              <ul>
+                <li>
+                  {" "}
+                  <button onClick={() => goToPageAndScroll("blog")}>
+                    Blog
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => goToPageAndScroll("about-me")}>
+                    About
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => goToPageAndScroll("offers")}>
+                    What I offer
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => goToPageAndScroll("contacts")}>
+                    Contacts
+                  </button>
+                </li>
+              </ul>
+            )}
           </div>
           <Link
             to="/appointment"

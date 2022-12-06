@@ -2,16 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 
-import AboutMe from "./components/AboutMe/AboutMe";
-import Blog from "./components/Blog/Blog";
-import ContactMe from "./components/ContactMe/ContactMe";
-import FAQ from "./components/FAQ/FAQ";
 import Footer from "./components/Footer/Footer";
-import Hero from "./components/Hero/Hero";
 import NavBar from "./components/NavBar/NavBar";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import Subscribe from "./components/Subscribe/Subscribe";
-import WhatIOffer from "./components/WhatIOffer/WhatIOffer";
 import Appointment from "./components/Appointment/Appointment";
 import AdminPage from "./components/AdminPage/AdminPage";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -21,6 +14,7 @@ import "./reset.css";
 import AuthContext from "./context/AuthProvider";
 import NotAuthenticated from "./components/NotAuthenticated/NotAuthenticated";
 import NotFound from "./components/NotFound/NotFound";
+import Home from "./components/Home/Home";
 
 function App() {
   const location = useLocation();
@@ -47,20 +41,12 @@ function App() {
       {displayPage && <NavBar />}
       {display && displayPage && (
         <>
-          <Hero />
-          <div className="body-container">
-            <AboutMe />
-            <WhatIOffer />
-            <Blog />
-            <FAQ />
-            <ContactMe />
-            <Subscribe />
-          </div>
+          <Home />
         </>
       )}
 
       <Routes>
-        <Route path="/" />
+        <Route path="/" element={<Home />} />
         <Route path="/appointment" element={<Appointment />} />
         <Route path="/admin/*" element={<AdminPage />} />
         <Route
