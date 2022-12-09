@@ -1,6 +1,5 @@
 .appointment {
   max-width: 960px;
-  max-height: 700px;
   margin: 80px auto;
   display: flex;
   flex-direction: column;
@@ -164,6 +163,35 @@
   .appointment .appointment--container .appointment--fulldate {
     min-width: 25%;
   }
+}
+.appointment .admin-disable-selected-btn {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 50px auto 0 auto;
+  padding: 20px;
+  color: white;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  background-color: #b5320b;
+  border: solid 3px transparent;
+  border-radius: 5px;
+  text-align: center;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+.appointment .admin-disable-selected-btn:hover {
+  color: white;
+  border: solid 3px rgba(181, 51, 11, 0.5333333333);
+  background-color: rgba(181, 51, 11, 0.5333333333);
+}
+.appointment .admin-disable-selected-btn[disabled] {
+  opacity: 60%;
+  color: grey;
+  background-color: lightgray;
+  cursor: auto;
+  border: solid 3px transparent;
 }
 @media screen and (max-width: 455px) {
   .appointment .appointment--title {

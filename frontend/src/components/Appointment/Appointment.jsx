@@ -5,7 +5,7 @@ import "./Appointment.css";
 import RegContact from "../RegContact/RegContact";
 import { useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
-import { useRef } from "react";
+// import { useRef } from "react";
 import axios from "../../api/axios";
 
 function Appointment() {
@@ -84,18 +84,14 @@ function Appointment() {
 
   const { auth } = useContext(AuthContext);
   const admin = auth.admin;
-  const buttons = useRef(new Set([]));
-  buttons.current.delete(null);
+  // const buttons = useRef(new Set([]));
+  // buttons.current.delete(null);
 
-  useEffect(() => {
-    if (buttons.classList) {
-      for (const button of buttons.current.values()) {
-        if (button.classList.value.includes("admin-disable")) {
-          console.log(button);
-        }
-      }
-    }
-  });
+  // for (const button of buttons.current.values()) {
+  //   if (button.classList.value.includes("admin-disable")) {
+  //     console.log(button);
+  //   }
+  // }
 
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
@@ -111,8 +107,6 @@ function Appointment() {
   //   JSON.parse(localStorage.getItem("bookedTime") ?? "[]")
   // );
   const [disableDate, setDisableDate] = useState([]);
-
-  console.log(disableDate);
 
   const [adminDisable, setAdminDisable] = useState(
     () => new SelectedValues([])
@@ -283,11 +277,32 @@ function Appointment() {
 
   //--- GETTING DATE FROM DATABASE  ---
 
+  const [refresh, setRefresh] = useState(false);
+
   useEffect(() => {
     axios.get("/api/getregdata").then((response) => {
       setDisableDate(response.data.map((date) => date.fullDate));
+      console.log(response.data);
     });
-  }, [setDisableDate]);
+  }, [setDisableDate, refresh]);
+
+  const saveSelected = () => {
+    adminDisable.values.map((e) =>
+      axios
+        .post("/api/addregdata", {
+          fullDate: {
+            year: e.data[0],
+            month: e.data[1],
+            date: e.data[2],
+            hour: e.data[3],
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setRefresh(true);
+        })
+    );
+  };
 
   //--- DISABLE APPOINTMENT DATES ---
 
@@ -381,7 +396,7 @@ function Appointment() {
                       className={`appointment--hours ${
                         isBooked(hours, wholeMonth) && "admin-disable"
                       }`}
-                      ref={(element) => buttons.current.add(element)}
+                      // ref={(element) => buttons.current.add(element)}
                       value={10}
                       onClick={() => handleClickOnTime(hours, wholeMonth)}
                       disabled={isAppointmentDisabled(hours, wholeMonth)}
@@ -415,6 +430,15 @@ function Appointment() {
                 </div>
               ))}
           </div>
+          {admin && (
+            <button
+              className="admin-disable-selected-btn"
+              onClick={saveSelected}
+              disabled={adminDisable.values.length === 0 ? true : false}
+            >
+              Disable Selected Dates
+            </button>
+          )}
         </section>
       ) : (
         <RegContact

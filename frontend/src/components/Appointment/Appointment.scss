@@ -1,6 +1,6 @@
 .appointment {
   max-width: 960px;
-  max-height: 700px;
+
   margin: 80px auto;
 
   display: flex;
@@ -173,6 +173,39 @@
       margin: auto;
     }
   }
+
+  .admin-disable-selected-btn {
+    width: max-content;
+
+    margin: 50px auto 0 auto;
+    padding: 20px;
+
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    background-color: #b5320b;
+    border: solid 3px transparent;
+    border-radius: 5px;
+
+    text-align: center;
+
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }
+  .admin-disable-selected-btn:hover {
+    color: white;
+    border: solid 3px #b5330b88;
+    background-color: #b5330b88;
+  }
+  .admin-disable-selected-btn[disabled] {
+    opacity: 60%;
+    color: grey;
+    background-color: lightgray;
+    cursor: auto;
+    border: solid 3px transparent;
+  }
+
   @media screen and (max-width: 455px) {
     .appointment--title {
       scale: 0.856;
