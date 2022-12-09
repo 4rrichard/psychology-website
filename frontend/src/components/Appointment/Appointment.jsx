@@ -6,6 +6,7 @@ import RegContact from "../RegContact/RegContact";
 import { useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 import { useRef } from "react";
+import axios from "../../api/axios";
 
 function Appointment() {
   //--- HELP FOR THE CALENDAR ---
@@ -95,7 +96,6 @@ function Appointment() {
       }
     }
   });
-  console.log(buttons);
 
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
@@ -107,9 +107,12 @@ function Appointment() {
 
   const [isPreviousDisabled, setIsPreviousDisabled] = useState(false);
 
-  const [disableDate, setDisableDate] = useState(() =>
-    JSON.parse(localStorage.getItem("bookedTime") ?? "[]")
-  );
+  // const [disableDate, setDisableDate] = useState(() =>
+  //   JSON.parse(localStorage.getItem("bookedTime") ?? "[]")
+  // );
+  const [disableDate, setDisableDate] = useState([]);
+
+  console.log(disableDate);
 
   const [adminDisable, setAdminDisable] = useState(
     () => new SelectedValues([])
@@ -218,11 +221,13 @@ function Appointment() {
       hour: hours,
     });
 
-    setAdminDisable((oldSelectedValues) =>
-      oldSelectedValues.toggle(
-        new MyDate([fullDay.year, fullDay.month, fullDay.days, hours])
-      )
-    );
+    if (admin) {
+      setAdminDisable((oldSelectedValues) =>
+        oldSelectedValues.toggle(
+          new MyDate([fullDay.year, fullDay.month, fullDay.days, hours])
+        )
+      );
+    }
   };
 
   const clickBack = () => {
@@ -272,11 +277,17 @@ function Appointment() {
     startOfWeek.c.month,
   ]);
 
-  //--- SAVING DATA IN LOCAL STORAGE  ---
+  // useEffect(() => {
+  //   window.localStorage.setItem("bookedTime", JSON.stringify(disableDate));
+  // }, [disableDate]);
+
+  //--- GETTING DATE FROM DATABASE  ---
 
   useEffect(() => {
-    window.localStorage.setItem("bookedTime", JSON.stringify(disableDate));
-  }, [disableDate]);
+    axios.get("/api/getregdata").then((response) => {
+      setDisableDate(response.data.map((date) => date.fullDate));
+    });
+  }, [setDisableDate]);
 
   //--- DISABLE APPOINTMENT DATES ---
 
@@ -304,10 +315,10 @@ function Appointment() {
     return (
       disableDate.find((value) => {
         if (
-          value[0] === wholeMonth.year &&
-          value[1] === wholeMonth.month &&
-          value[2] === wholeMonth.days &&
-          value[3] === hours
+          value.year === wholeMonth.year &&
+          value.month === wholeMonth.month &&
+          value.date === wholeMonth.days &&
+          value.hour === hours
         ) {
           return true;
         } else {

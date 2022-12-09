@@ -53,15 +53,25 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
         });
 
         setDisplayConfirm(false);
-        setDisableDate((old) => [
-          ...old,
-          [
-            parseInt(fullDate.year),
-            fullDate.month,
-            parseInt(fullDate.date),
-            fullDate.hour,
-          ],
-        ]);
+        // setDisableDate((old) => [
+        //   ...old,
+        //   [
+        //     parseInt(fullDate.year),
+        //     fullDate.month,
+        //     parseInt(fullDate.date),
+        //     fullDate.hour,
+        //   ],
+        // ]);
+        axios
+          .post("/api/addregdata", {
+            fullDate: fullDate,
+            name: formData.fullName,
+            email: formData.email,
+            phoneNum: formData.phoneNum,
+          })
+          .then((response) => {
+            console.log(response.data);
+          });
       })
       .catch(() => {
         setFormData({

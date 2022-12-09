@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 // const multipart = require("express-multipart");
 const FormData = require("form-data");
 require("dotenv").config();
@@ -7,6 +8,7 @@ const cors = require("cors");
 
 const bodyParser = require("body-parser");
 const refreshTokenController = require("./controller/refreshTokenController");
+const connectDB = require("./config/dbConn");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
@@ -16,6 +18,8 @@ const multer = require("multer");
 // const mp = multipart.multipart({});
 const app = express();
 const port = process.env.PORT || 8080;
+
+connectDB();
 
 app.use(cookieParser());
 app.use(
@@ -150,6 +154,41 @@ app.get("/protected", verify, (req, res) => {
   return res.json({ admin: req.user });
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on port http://localhost:${port}`);
+const regSchema = mongoose.Schema({
+  fullDate: {},
+  name: String,
+  email: String,
+  phoneNum: Number,
+});
+
+const regData = mongoose.model("regData", regSchema);
+
+app.post("/api/addregdata", (req, res) => {
+  const addData = new regData({
+    fullDate: req.body.fullDate,
+    name: req.body.name,
+    email: req.body.email,
+    phoneNum: req.body.phoneNum,
+  });
+
+  console.log(req.body);
+
+  addData.save((err, doc) => {
+    if (err) return console.log(err);
+    res.status(200).json(doc);
+  });
+});
+
+app.get("/api/getregdata", (req, res) => {
+  regData.find({}, { fullDate: 1, _id: 0 }, (err, doc) => {
+    if (err) return console.log(err);
+    res.json(doc);
+  });
+});
+
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  app.listen(port, () => {
+    console.log(`Server listening on port http://localhost:${port}`);
+  });
 });
