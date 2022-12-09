@@ -86,11 +86,16 @@ function Appointment() {
   const buttons = useRef(new Set([]));
   buttons.current.delete(null);
 
-  for (const button of buttons.current.values()) {
-    if (button.classList.value.includes("admin-disable")) {
-      console.log(button);
+  useEffect(() => {
+    if (buttons.classList) {
+      for (const button of buttons.current.values()) {
+        if (button.classList.value.includes("admin-disable")) {
+          console.log(button);
+        }
+      }
     }
-  }
+  });
+  console.log(buttons);
 
   const [display, setDisplay] = useState(true);
   const [displayNextWeek, setDisplayNextWeek] = useState(false);
@@ -386,8 +391,10 @@ function Appointment() {
                   <h2 className="appointment--day">{wholeMonth.weekdays}</h2>
                   {hoursArr.map((hours) => (
                     <Link
-                      className="appointment--hours"
-                      onClick={handleClickOnTime}
+                      className={`appointment--hours ${
+                        isBooked(hours, wholeMonth) && "admin-disable"
+                      }`}
+                      onClick={() => handleClickOnTime(hours, wholeMonth)}
                       disabled={isAppointmentDisabled(hours, wholeMonth)}
                       key={hours}
                     >

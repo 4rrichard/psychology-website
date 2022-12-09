@@ -17,8 +17,6 @@ function NavBar() {
   const location = path.split("/")[1];
   const navigate = useNavigate();
 
-  console.log(path, location);
-
   const goToPageAndScroll = async (selector) => {
     console.log(selector);
     await navigate("/");
