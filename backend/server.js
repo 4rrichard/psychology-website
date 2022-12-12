@@ -180,10 +180,32 @@ app.post("/api/addregdata", (req, res) => {
 });
 
 app.get("/api/getregdata", (req, res) => {
-  regData.find({}, { fullDate: 1, _id: 0 }, (err, doc) => {
+  regData.find({}, { fullDate: 1, name: 1, _id: 0 }, (err, doc) => {
     if (err) return console.log(err);
     res.json(doc);
   });
+});
+
+app.post("/api/removedata", (req, res) => {
+  const wholeDate = req.body.fullDate;
+  const year = wholeDate.year;
+  const month = wholeDate.month;
+  const day = wholeDate.date;
+  const hour = wholeDate.hour;
+  // console.log(date);
+  console.log(year, month, day, hour);
+  regData.deleteOne(
+    {
+      "fullDate.year": year,
+      "fullDate.month": month,
+      "fullDate.date": day,
+      "fullDate.hour": hour,
+    },
+    (err, doc) => {
+      if (err) return console.log(err);
+      res.json(doc);
+    }
+  );
 });
 
 mongoose.connection.once("open", () => {

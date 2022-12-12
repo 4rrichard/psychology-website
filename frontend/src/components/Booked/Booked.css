@@ -1,0 +1,100 @@
+.active-modal {
+  overflow-y: hidden;
+}
+
+.booked-appointments-container .overlay {
+  z-index: 3;
+  background: rgba(49, 49, 49, 0.8);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+.booked-appointments-container .booked-appointments {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px 28px;
+  border-radius: 10px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  min-width: 300px;
+  z-index: 5;
+}
+.booked-appointments-container .booked-appointments .close-modal {
+  display: block;
+  margin-left: auto;
+  cursor: pointer;
+}
+.booked-appointments-container .booked-appointments .booked-appointments--title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+}
+.booked-appointments-container .booked-appointments .booked-appointments--data-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.booked-appointments-container .booked-appointments .booked-appointments--data-container .all-booked-data {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.booked-appointments-container .booked-appointments .booked-appointments--data-container .all-booked-data .date-of-booked {
+  font-size: large;
+}
+.booked-appointments-container .booked-appointments .booked-appointments--data-container .all-booked-data .name-of-booked {
+  font-size: large;
+}
+.booked-appointments-container .booked-appointments .booked-appointments--data-container .all-booked-data .delete-appointment {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: block;
+  margin-right: 0px;
+  margin-left: auto;
+  padding: 3px;
+  background-color: #b5320b;
+  color: white;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  border: solid 3px transparent;
+  border-radius: 5px;
+  text-align: center;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+.booked-appointments-container .booked-appointments .booked-appointments--data-container .all-booked-data .delete-appointment:hover {
+  background-color: #882709;
+}
+.booked-appointments-container .booked-appointments .booked-appointments--data-container .all-booked-data:nth-child(odd) {
+  background-color: #dbb898;
+}
+.booked-appointments-container .booked-appointments .deleted-msg {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto 20px auto;
+  padding: 10px;
+  border: solid 2px;
+  border-radius: 10px;
+  font-family: "Quicksand", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #b5320b;
+  text-align: center;
+}/*# sourceMappingURL=Booked.css.map */
