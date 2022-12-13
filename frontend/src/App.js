@@ -20,15 +20,9 @@ function App() {
   const location = useLocation();
   const path = location.pathname;
   const { auth } = useContext(AuthContext);
-  const [display, setDisplay] = useState(true);
   const [displayPage, setDisplayPage] = useState(true);
 
   useEffect(() => {
-    if (path !== "/appointment") {
-      setDisplay(true);
-    } else {
-      setDisplay(false);
-    }
     if (path !== "/admin" && path !== "/login") {
       setDisplayPage(true);
     } else {
@@ -39,11 +33,6 @@ function App() {
   return (
     <>
       {displayPage && <NavBar />}
-      {display && displayPage && (
-        <>
-          <Home />
-        </>
-      )}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -51,7 +40,7 @@ function App() {
         <Route path="/admin/*" element={<AdminPage />} />
         <Route
           path="/login"
-          element={auth.user ? <Dashboard /> : <NotAuthenticated />}
+          element={auth.admin ? <Dashboard /> : <NotAuthenticated />}
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

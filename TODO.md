@@ -7,7 +7,7 @@ https://developers.google.com/recaptcha/docs/versions
 ---[x] React Context
 ---[x] Backend authentication
 ---[x] When invalid user data - error message
----[] Admin can remove booked appointments
+---[x] Admin can remove booked appointments
 ---[] Admin can add blog posts
 ---[x] Admin can logout when finished
 ---[] Auto logout when leaving page
