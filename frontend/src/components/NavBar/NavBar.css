@@ -58,7 +58,7 @@
   color: #dbb898;
   transition: 0.2s ease-in-out;
 }
-@media screen and (max-width: 865px) {
+@media screen and (max-width: 950px) {
   .navbar .nav--primary {
     position: absolute;
     top: 5.3em;

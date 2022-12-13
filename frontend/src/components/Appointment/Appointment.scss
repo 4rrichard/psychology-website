@@ -172,10 +172,19 @@
       }
       margin: auto;
     }
+
+    .admin-btns {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .admin-btns {
-    margin: 50px auto 0 auto;
+    margin: 50px auto 0;
+
+    display: flex;
+    gap: 30px;
+
     .admin-disable-selected-btn,
     .admin-show-dates-btn {
       width: max-content;
@@ -196,7 +205,6 @@
     }
     .admin-disable-selected-btn {
       background-color: #b5320b;
-      margin-right: 50px;
     }
     .admin-disable-selected-btn:hover {
       background-color: #882709;
