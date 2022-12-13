@@ -15,7 +15,7 @@ function Appointment() {
   // const nowDate = DateTime.now().toFormat("dd");
 
   // const nowHour = DateTime.now().c.hour;
-  // const yesterday = DateTime.now().plus({ day: -1 });
+
   // const tomorrowHour = DateTime.now().plus({ day: 1 }).c.hour;
   // const hourss = DateTime.now().plus({ day: 1 }).plus({ hour: -1 });
   // const nowHourFormatted = DateTime.now()
@@ -137,6 +137,7 @@ function Appointment() {
   }
 
   const now = DateTime.now();
+  const yesterday = DateTime.now({ locale: "en" }).plus({ day: -1 });
 
   const nowMonth = DateTime.now().setLocale("en").monthLong;
   const tomorrowMonth = DateTime.now()
@@ -462,7 +463,7 @@ function Appointment() {
                 className="admin-show-dates-btn"
                 onClick={() => {
                   toggleModal();
-                  setRefresh(true);
+                  setRefresh((prev) => !prev);
                 }}
               >
                 Show Booked Dates
@@ -474,6 +475,8 @@ function Appointment() {
                   modal={modal}
                   fullBookedData={fullBookedData}
                   setRefresh={setRefresh}
+                  now={startOfWeek}
+                  yesterday={yesterday}
                 />
               )}
             </div>
