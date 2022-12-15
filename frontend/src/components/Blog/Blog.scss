@@ -29,6 +29,8 @@
     .blog--article {
       width: auto;
 
+      z-index: 4;
+
       border: 2px solid #bf9773;
       border-radius: 30px;
       overflow: hidden;
@@ -57,5 +59,24 @@
     @media screen and (max-width: 865px) {
       flex-direction: column;
     }
+  }
+  .all-articles-btn {
+    height: 50px;
+    width: max-content;
+    margin: 40px auto 0 auto;
+    padding: 13px;
+
+    background-color: #bf9773;
+    border-radius: 6px;
+
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+  }
+  .all-articles-btn:hover {
+    background-color: #dbb898;
   }
 }

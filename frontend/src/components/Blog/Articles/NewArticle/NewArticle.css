@@ -1,0 +1,29 @@
+.new-blog {
+  margin: 100px 40px;
+}
+.new-blog .new-blog--title-container,
+.new-blog .new-blog--desc-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.new-blog .new-blog--title-container .new-blog--title,
+.new-blog .new-blog--title-container .new-blog--desc,
+.new-blog .new-blog--desc-container .new-blog--title,
+.new-blog .new-blog--desc-container .new-blog--desc {
+  margin-bottom: 30px;
+  padding: 5px;
+  border: 2px solid black;
+}
+.new-blog .new-blog--title-container .new-blog--title,
+.new-blog .new-blog--desc-container .new-blog--title {
+  width: 200px;
+}
+.new-blog .new-blog--title-container .new-blog--desc,
+.new-blog .new-blog--desc-container .new-blog--desc {
+  width: 300px;
+  height: 150px;
+}
+.new-blog .quill .ql-editor {
+  min-height: 300px;
+}/*# sourceMappingURL=NewArticle.css.map */

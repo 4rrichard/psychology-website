@@ -8,6 +8,7 @@ const cors = require("cors");
 
 const bodyParser = require("body-parser");
 const refreshTokenController = require("./controller/refreshTokenController");
+const Post = require("./models/BlogPosts");
 const connectDB = require("./config/dbConn");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
@@ -154,6 +155,8 @@ app.get("/protected", verify, (req, res) => {
   return res.json({ admin: req.user });
 });
 
+//----MongoDB-----
+
 const regSchema = mongoose.Schema({
   fullDate: {},
   name: String,
@@ -206,6 +209,24 @@ app.post("/api/removedata", (req, res) => {
       res.json(doc);
     }
   );
+});
+
+app.post("/api/addpost", async (req, res) => {
+  const newPost = new Post(req.body);
+  try {
+    const savedPost = await newPost.save();
+    res.status(200).json(savedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//-----Articles-----
+
+app.get("/:pageName", (req, res) => {
+  let pageName = req.params.pageName;
+  console.log(req.params.pageName);
+  res.send(pageName);
 });
 
 mongoose.connection.once("open", () => {

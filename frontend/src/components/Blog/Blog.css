@@ -27,6 +27,7 @@
 }
 .blog .blog--articles .blog--article {
   width: auto;
+  z-index: 4;
   border: 2px solid #bf9773;
   border-radius: 30px;
   overflow: hidden;
@@ -54,4 +55,22 @@
   .blog .blog--articles {
     flex-direction: column;
   }
+}
+.blog .all-articles-btn {
+  height: 50px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 40px auto 0 auto;
+  padding: 13px;
+  background-color: #bf9773;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.blog .all-articles-btn:hover {
+  background-color: #dbb898;
 }/*# sourceMappingURL=Blog.css.map */

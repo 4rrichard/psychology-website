@@ -1,0 +1,28 @@
+.new-blog {
+  margin: 100px 40px;
+  .new-blog--title-container,
+  .new-blog--desc-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    .new-blog--title,
+    .new-blog--desc {
+      margin-bottom: 30px;
+      padding: 5px;
+
+      border: 2px solid black;
+    }
+    .new-blog--title {
+      width: 200px;
+    }
+    .new-blog--desc {
+      width: 300px;
+      height: 150px;
+    }
+  }
+  .quill {
+    .ql-editor {
+      min-height: 300px;
+    }
+  }
+}
