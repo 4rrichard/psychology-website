@@ -61,7 +61,7 @@ function NavBar() {
 
         <div className={`nav--primary ${navOpen && "nav--open"}`}>
           <div className="nav--anchors">
-            {location !== "appointment" ? (
+            {location === "" ? (
               <>
                 {" "}
                 <Scroll

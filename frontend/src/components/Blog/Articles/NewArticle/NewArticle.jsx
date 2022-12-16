@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import axios from "../../../../api/axios";
 import "./NewArticle.css";
 
 function NewArticle() {
-  const [value, setValue] = useState("");
+  const [bodyValue, setBodyValue] = useState("");
+  const [formData, setFormData] = useState({
+    photo: "",
+    title: "",
+    desc: "",
+  });
 
   const modules = {
     toolbar: [
@@ -58,25 +64,77 @@ function NewArticle() {
     minHeight: "300px",
   };
 
+  const saveBlog = () => {
+    axios
+      .post("/api/addpost", {
+        photo: "",
+        title: formData.title,
+        desc: formData.desc,
+        textBody: bodyValue,
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
+  };
+
+  const handleForm = (event) => {
+    event.preventDefault();
+    saveBlog();
+  };
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const handleQuillChange = (content, delta, source, editor) => {
+    setBodyValue(editor.getContents());
+  };
+
   return (
-    <section className="new-blog">
+    <form className="new-blog" onSubmit={handleForm}>
+      <h1 className="new-blog--main-title">Create new post</h1>
       <label className="new-blog--title-container">
-        Blog title
-        <input type="text" className="new-blog--title" />
+        Post title
+        <input
+          type="text"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          className="new-blog--title"
+        />
       </label>
       <label className="new-blog--desc-container">
-        Blog description
-        <textarea type="text" className="new-blog--desc" />
+        Post description
+        <textarea
+          type="text"
+          name="desc"
+          value={formData.desc}
+          onChange={handleChange}
+          className="new-blog--desc"
+        />
+      </label>
+      <label className="new-blog--img-container">
+        Upload cover photo
+        <input
+          type="file"
+          name="photo"
+          value={formData.photo}
+          onChange={handleChange}
+          className="new-blog--img"
+        />
       </label>
       <ReactQuill
         theme="snow"
-        value={value}
-        onChange={setValue}
+        value={bodyValue}
+        onChange={handleQuillChange}
         modules={modules}
         formats={formats}
         style={style}
       />
-    </section>
+      <button type="submit" className="save-blog-btn">
+        Save
+      </button>
+    </form>
   );
 }
 

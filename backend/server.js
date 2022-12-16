@@ -213,12 +213,18 @@ app.post("/api/removedata", (req, res) => {
 
 app.post("/api/addpost", async (req, res) => {
   const newPost = new Post(req.body);
-  try {
-    const savedPost = await newPost.save();
-    res.status(200).json(savedPost);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  console.log(req.body);
+  newPost.save((err, doc) => {
+    if (err) return console.log(err);
+    res.status(200).json(doc);
+  });
+});
+
+app.get("/api/getpost", (req, res) => {
+  Post.find((err, doc) => {
+    if (err) return console.log(err);
+    res.json(doc);
+  });
 });
 
 //-----Articles-----
