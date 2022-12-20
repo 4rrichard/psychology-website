@@ -10,11 +10,13 @@
 }
 .all-articles .blog--articles {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
   gap: 50px;
 }
 .all-articles .blog--articles .blog--article {
   width: auto;
+  flex: 0 0 30%;
   margin-bottom: 40px;
   z-index: 4;
   border: 2px solid #bf9773;

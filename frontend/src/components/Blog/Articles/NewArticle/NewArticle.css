@@ -36,25 +36,45 @@
   width: 300px;
   height: 150px;
 }
+.new-blog .new-blog--title-container .new-blog--img,
+.new-blog .new-blog--desc-container .new-blog--img,
+.new-blog .new-blog--img-container .new-blog--img {
+  display: none;
+}
+.new-blog .new-blog--img-container {
+  cursor: pointer;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin-bottom: 15px;
+}
+.new-blog .img-preview {
+  max-width: 200px;
+  margin-bottom: 30px;
+}
 .new-blog .quill .ql-editor {
   min-height: 300px;
 }
-.new-blog .save-blog-btn {
+.new-blog .save-blog-btn,
+.new-blog .new-blog--img-container {
   display: block;
-  min-width: 150px;
-  min-height: 45px;
-  margin: 30px auto;
   padding: 10px;
   color: white;
   font-family: "Quicksand", sans-serif;
   font-weight: 600;
-  font-size: 18px;
   background-color: #bf9773;
   border-radius: 5px;
   text-align: center;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
 }
-.new-blog .save-blog-btn:hover {
+.new-blog .save-blog-btn {
+  min-width: 150px;
+  min-height: 45px;
+  margin: 30px auto;
+  font-size: 18px;
+}
+.new-blog .save-blog-btn:hover,
+.new-blog .new-blog--img-container:hover {
   background-color: #dbb898;
 }/*# sourceMappingURL=NewArticle.css.map */

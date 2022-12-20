@@ -7,7 +7,7 @@ function AboutMe() {
       <h1 className="about-me--title">About me</h1>
       <div className="about-me--main-container">
         <img
-          src="\images\about-me-image.jpg"
+          src="\images\Gizem-about.jpg"
           alt="about-me"
           className="about-me--image"
         />

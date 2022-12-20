@@ -17,6 +17,7 @@ import NotFound from "./components/NotFound/NotFound";
 import Home from "./components/Home/Home";
 import AllArticles from "./components/Blog/Articles/AllArticles/AllArticles";
 import NewArticle from "./components/Blog/Articles/NewArticle/NewArticle";
+import Article from "./components/Blog/Articles/Article/Article";
 
 function App() {
   const location = useLocation();
@@ -44,6 +45,7 @@ function App() {
           path="/articles/new"
           element={auth.admin ? <NewArticle /> : <NotAuthenticated />}
         />
+        <Route path="/articles/:pageName" element={<Article />} />
         <Route path="/admin/*" element={<AdminPage />} />
         <Route
           path="/login"

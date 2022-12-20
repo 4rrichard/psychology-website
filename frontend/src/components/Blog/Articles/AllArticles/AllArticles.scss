@@ -11,11 +11,14 @@
   }
   .blog--articles {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+
     gap: 50px;
     .blog--article {
       width: auto;
 
+      flex: 0 0 30%;
       margin-bottom: 40px;
 
       z-index: 4;

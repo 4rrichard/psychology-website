@@ -1,23 +1,9 @@
 import React from "react";
-import "./Blog.css";
-import axios from "../../api/axios";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import "./Blog.css";
+
 function Blog() {
-  const [title, setTitle] = useState();
-
-  axios.get(`/${title}`).then((response) => {
-    console.log(response.data);
-  });
-
-  console.log(title);
-
-  const sendTitle = (e) => {
-    const titleSelect = e.target.parentNode.children[1].innerHTML;
-    setTitle(titleSelect.toLowerCase());
-  };
-
   return (
     <section className="blog" id="blog">
       <h1 className="blog--title">Blog</h1>
@@ -26,7 +12,7 @@ function Blog() {
         with pshychological distress
       </h2>
       <div className="blog--articles">
-        <div className="blog--article" onClick={sendTitle}>
+        <div className="blog--article">
           <img
             src="\images\blog-image.jpg"
             alt="blog"

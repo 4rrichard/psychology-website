@@ -15,6 +15,15 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const multer = require("multer");
 // const { response } = require("express");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "../frontend/public/images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
 
 // const mp = multipart.multipart({});
 const app = express();
@@ -229,10 +238,17 @@ app.get("/api/getpost", (req, res) => {
 
 //-----Articles-----
 
-app.get("/:pageName", (req, res) => {
+app.get("/articles/:pageName", (req, res) => {
   let pageName = req.params.pageName;
   console.log(req.params.pageName);
   res.send(pageName);
+});
+
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  const file = req.file;
+  console.log(req.body);
+  console.log(file.filename);
+  res.status(200).json(file.filename);
 });
 
 mongoose.connection.once("open", () => {

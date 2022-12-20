@@ -11,6 +11,9 @@ function NewArticle() {
     title: "",
     desc: "",
   });
+  const [file, setFile] = useState(null);
+  const [imgTitle, setImgTitle] = useState();
+  const [preview, setPreview] = useState();
 
   const modules = {
     toolbar: [
@@ -64,10 +67,16 @@ function NewArticle() {
     minHeight: "300px",
   };
 
+  console.log(file);
+
   const saveBlog = () => {
+    const photo = new FormData();
+    photo.append("file", file);
+
+    axios.post("/api/upload", photo);
     axios
       .post("/api/addpost", {
-        photo: "",
+        photo: `/images/${imgTitle}`,
         title: formData.title,
         desc: formData.desc,
         textBody: bodyValue,
@@ -79,6 +88,7 @@ function NewArticle() {
 
   const handleForm = (event) => {
     event.preventDefault();
+
     saveBlog();
   };
 
@@ -88,6 +98,12 @@ function NewArticle() {
 
   const handleQuillChange = (content, delta, source, editor) => {
     setBodyValue(editor.getContents());
+  };
+
+  const handleInputChange = (event) => {
+    setPreview(URL.createObjectURL(event.target.files[0]));
+    setFile(event.target.files[0]);
+    setImgTitle(event.target.files[0].name);
   };
 
   return (
@@ -118,11 +134,13 @@ function NewArticle() {
         <input
           type="file"
           name="photo"
-          value={formData.photo}
-          onChange={handleChange}
+          onChange={handleInputChange}
           className="new-blog--img"
         />
       </label>
+
+      {file && <img src={preview} alt="img" className="img-preview" />}
+
       <ReactQuill
         theme="snow"
         value={bodyValue}
