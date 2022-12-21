@@ -11,6 +11,7 @@
 .new-blog .new-blog--title-container,
 .new-blog .new-blog--desc-container,
 .new-blog .new-blog--img-container {
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -21,20 +22,15 @@
 .new-blog .new-blog--desc-container .new-blog--desc,
 .new-blog .new-blog--img-container .new-blog--title,
 .new-blog .new-blog--img-container .new-blog--desc {
-  margin-bottom: 30px;
+  width: 360px;
   padding: 5px;
+  font-size: 18px;
   border: 2px solid black;
-}
-.new-blog .new-blog--title-container .new-blog--title,
-.new-blog .new-blog--desc-container .new-blog--title,
-.new-blog .new-blog--img-container .new-blog--title {
-  width: 200px;
 }
 .new-blog .new-blog--title-container .new-blog--desc,
 .new-blog .new-blog--desc-container .new-blog--desc,
 .new-blog .new-blog--img-container .new-blog--desc {
-  width: 300px;
-  height: 150px;
+  height: 145px;
 }
 .new-blog .new-blog--title-container .new-blog--img,
 .new-blog .new-blog--desc-container .new-blog--img,
@@ -51,6 +47,9 @@
 .new-blog .img-preview {
   max-width: 200px;
   margin-bottom: 30px;
+}
+.new-blog .quill {
+  border: 2px solid black;
 }
 .new-blog .quill .ql-editor {
   min-height: 300px;

@@ -1,5 +1,6 @@
 .post {
-  margin: 50px 200px;
+  max-width: 600px;
+  margin: 50px auto;
 }
 .post .title--post {
   text-align: center;

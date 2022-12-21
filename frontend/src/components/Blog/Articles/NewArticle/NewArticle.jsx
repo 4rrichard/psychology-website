@@ -14,6 +14,7 @@ function NewArticle() {
   const [file, setFile] = useState(null);
   const [imgTitle, setImgTitle] = useState();
   const [preview, setPreview] = useState();
+  const [textAreaCount, setTextAreaCount] = useState(0);
 
   const modules = {
     toolbar: [
@@ -67,8 +68,6 @@ function NewArticle() {
     minHeight: "300px",
   };
 
-  console.log(file);
-
   const saveBlog = () => {
     const photo = new FormData();
     photo.append("file", file);
@@ -96,6 +95,8 @@ function NewArticle() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  console.log(formData);
+
   const handleQuillChange = (content, delta, source, editor) => {
     setBodyValue(editor.getContents());
   };
@@ -104,6 +105,10 @@ function NewArticle() {
     setPreview(URL.createObjectURL(event.target.files[0]));
     setFile(event.target.files[0]);
     setImgTitle(event.target.files[0].name);
+  };
+
+  const recalculate = (e) => {
+    setTextAreaCount(e.target.value.length);
   };
 
   return (
@@ -117,6 +122,7 @@ function NewArticle() {
           value={formData.title}
           onChange={handleChange}
           className="new-blog--title"
+          maxLength="40"
         />
       </label>
       <label className="new-blog--desc-container">
@@ -125,9 +131,14 @@ function NewArticle() {
           type="text"
           name="desc"
           value={formData.desc}
-          onChange={handleChange}
+          onChange={(e) => {
+            handleChange(e);
+            recalculate(e);
+          }}
+          maxLength="200"
           className="new-blog--desc"
         />
+        <p className="character-limit">{textAreaCount}/200</p>
       </label>
       <label className="new-blog--img-container">
         Upload cover photo

@@ -1,5 +1,9 @@
 .all-articles {
-  margin: 40px;
+  margin: 40px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .all-articles--title {
     margin-bottom: 20px;
 
@@ -10,15 +14,22 @@
     text-align: center;
   }
   .blog--articles {
+    margin: 0 15%;
+
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
 
     gap: 50px;
     .blog--article {
       width: auto;
+      min-width: 250px;
+      max-height: 500px;
+      max-width: 300px;
 
-      flex: 0 0 30%;
+      flex-basis: 50%;
+      flex-grow: 1;
       margin-bottom: 40px;
 
       z-index: 4;
@@ -30,25 +41,75 @@
 
       transition-duration: 0.2s;
       transition-timing-function: ease-in-out;
-      .blog--image {
-        max-width: 100%;
+      .blog-img-container {
+        height: 200px;
+        overflow: hidden;
+        .blog--image {
+          max-width: 100%;
+          height: auto;
+          min-height: 250px;
+          object-fit: cover;
+        }
       }
-      .blog-article--title {
-        padding-top: 20px;
-        text-align: center;
-        font-family: "Oswald", sans-serif;
-      }
-      .blog-article--pharagraph {
-        padding: 10px 30px 30px 30px;
+      .blog-article--text {
+        height: 250px;
+        padding: 20px;
 
-        font-family: "Quicksand", sans-serif;
-        font-weight: 400;
+        .blog-article--title {
+          text-align: center;
+          font-family: "Oswald", sans-serif;
+        }
+        .blog-article--pharagraph {
+          font-family: "Quicksand", sans-serif;
+          font-weight: 400;
+        }
       }
     }
     .blog--article:hover {
       scale: 1.05;
     }
   }
+  @media screen and (max-width: 1100px) {
+    .blog--articles {
+      justify-content: center;
+    }
+  }
+  .pagination-btns {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .previous,
+    .next,
+    .pagination-link {
+      cursor: pointer;
+
+      padding: 10px;
+
+      border: 2px solid #bf9773;
+      border-radius: 5px;
+
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in-out;
+    }
+
+    .pagination-disabled {
+      cursor: default;
+
+      opacity: 60%;
+      color: grey;
+      background-color: lightgray;
+
+      border: 2px solid lightgray;
+    }
+
+    .pagination-active {
+      background-color: #bf9773;
+      color: white;
+    }
+  }
+
   .new-article-btn {
     display: block;
 
@@ -58,18 +119,20 @@
     margin: 30px auto;
     padding: 20px;
 
-    color: white;
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
     font-size: 18px;
-    background-color: #bf9773;
-    border-radius: 5px;
 
     text-align: center;
+
+    background-color: #bf9773;
+    color: white;
+    border-radius: 5px;
 
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
   }
+
   .new-article-btn:hover {
     background-color: #dbb898;
   }
