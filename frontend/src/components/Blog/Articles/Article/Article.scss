@@ -1,0 +1,17 @@
+.post {
+  margin: 50px 200px;
+  .title--post {
+    text-align: center;
+  }
+  .desc--post {
+    margin: 10px 0 30px;
+  }
+  .img--post {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  .body--post {
+    margin-top: 60px;
+  }
+}

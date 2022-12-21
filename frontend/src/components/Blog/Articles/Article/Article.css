@@ -1,0 +1,17 @@
+.post {
+  margin: 50px 200px;
+}
+.post .title--post {
+  text-align: center;
+}
+.post .desc--post {
+  margin: 10px 0 30px;
+}
+.post .img--post {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.post .body--post {
+  margin-top: 60px;
+}/*# sourceMappingURL=Article.css.map */
