@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef, useEffect, useContext } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthProvider";
 import axios from "../../api/axios";
 import "./AdminPage.css";
@@ -159,9 +159,6 @@ function AdminPage() {
         </label>
         <button className="admin-submit">Login</button>
       </form>
-      <Routes>
-        <Route path="/login" />
-      </Routes>
     </div>
   );
 }

@@ -31,6 +31,9 @@
 
       z-index: 4;
 
+      flex-basis: 50%;
+      flex-grow: 1;
+
       border: 2px solid #bf9773;
       border-radius: 30px;
       overflow: hidden;
@@ -38,8 +41,15 @@
 
       transition-duration: 0.2s;
       transition-timing-function: ease-in-out;
-      .blog--image {
-        max-width: 100%;
+      .blog-img-container {
+        height: 200px;
+        overflow: hidden;
+        .blog--image {
+          max-width: 100%;
+          height: auto;
+          min-height: 250px;
+          object-fit: cover;
+        }
       }
       .blog-article--title {
         padding-top: 20px;

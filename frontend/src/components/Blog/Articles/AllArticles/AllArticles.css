@@ -67,29 +67,44 @@
   }
 }
 .all-articles .pagination-btns {
+  width: auto;
+  height: auto;
   list-style-type: none;
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.all-articles .pagination-btns .previous,
-.all-articles .pagination-btns .next,
+.all-articles .pagination-btns .prev-btn,
+.all-articles .pagination-btns .next-btn,
 .all-articles .pagination-btns .pagination-link {
   cursor: pointer;
   padding: 10px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #bf9773;
   border: 2px solid #bf9773;
   border-radius: 5px;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
 }
-.all-articles .pagination-btns .pagination-disabled {
+.all-articles .pagination-btns .pagination-disabled .prev-btn,
+.all-articles .pagination-btns .pagination-disabled .next-btn {
   cursor: default;
+  padding: 10px;
+  border-radius: 5px;
   opacity: 60%;
   color: grey;
   background-color: lightgray;
   border: 2px solid lightgray;
 }
-.all-articles .pagination-btns .pagination-active {
+.all-articles .pagination-btns .pagination-active .pagination-link {
+  background-color: #bf9773;
+  color: white;
+}
+.all-articles .pagination-btns .prev-btn:hover:not(.pagination-disabled .prev-btn),
+.all-articles .pagination-btns .next-btn:hover:not(.pagination-disabled .next-btn),
+.all-articles .pagination-btns .pagination-link:hover:not(.pagination-active .pagination-link) {
   background-color: #bf9773;
   color: white;
 }
