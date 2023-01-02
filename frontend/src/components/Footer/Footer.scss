@@ -1,5 +1,5 @@
 .footer {
-  padding: 30px;
+  padding: 30px 100px;
 
   display: flex;
   justify-content: space-between;
@@ -40,7 +40,7 @@
         scale: 1.1;
       }
     }
-    @media screen and (max-width: 865px) {
+    @media screen and (max-width: 1000px) {
       flex-direction: column;
       align-items: center;
       gap: 20px;
@@ -49,7 +49,7 @@
   .footer--creator {
     margin-left: 20px;
   }
-  @media screen and (max-width: 865px) {
+  @media screen and (max-width: 1000px) {
     flex-direction: column;
     align-items: center;
     gap: 20px;

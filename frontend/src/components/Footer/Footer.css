@@ -1,5 +1,5 @@
 .footer {
-  padding: 30px;
+  padding: 30px 100px;
   display: flex;
   justify-content: space-between;
   font-family: "Quicksand", sans-serif;
@@ -34,7 +34,7 @@
 .footer .footer--reach-me .footer--social-icons .footer--social:hover .footer--social-icon {
   scale: 1.1;
 }
-@media screen and (max-width: 865px) {
+@media screen and (max-width: 1000px) {
   .footer .footer--reach-me {
     flex-direction: column;
     align-items: center;
@@ -44,7 +44,7 @@
 .footer .footer--creator {
   margin-left: 20px;
 }
-@media screen and (max-width: 865px) {
+@media screen and (max-width: 1000px) {
   .footer {
     flex-direction: column;
     align-items: center;
