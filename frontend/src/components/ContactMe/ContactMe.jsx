@@ -1,7 +1,51 @@
 import React from "react";
+import { useState } from "react";
+import axios from "../../api/axios";
 import "./ContactMe.css";
 
 function ContactMe() {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phoneNum: "",
+    message: "",
+    messageError: false,
+  });
+
+  const sendMessage = () => {
+    const fullForm = new FormData();
+    fullForm.append("fullName", formData.fullName);
+    fullForm.append("email", formData.email);
+    fullForm.append("phoneNum", formData.phoneNum);
+    fullForm.append("message", formData.message);
+    fullForm.append("captcha", formData.captcha);
+
+    axios
+      .post("/api/sendemail", fullForm, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      .then(() => {
+        setFormData({
+          fullName: "",
+          email: "",
+          phoneNum: "",
+          message: "",
+        });
+      })
+      .catch(() => {
+        setFormData({
+          messageError: true,
+        });
+      });
+  };
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
   return (
     <section className="contacts">
       <h1 className="contacts--title">Contact me</h1>
@@ -44,20 +88,34 @@ function ContactMe() {
         <form className="contacts--send-email">
           <input
             type="text"
+            value={formData.fullName}
+            onChange={handleChange}
+            name="fullName"
             placeholder="Enter your full name"
             className="send-email--full-name "
+            required
           />
           <input
-            type="text"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            name="email"
             placeholder="Enter your email adress"
             className="send-email--email-adress "
+            required
           />
           <input
-            type="text"
+            type="number"
+            value={formData.phoneNum}
+            onChange={handleChange}
+            name="phoneNum"
             placeholder="Enter your phone number"
             className="send-email--phone-number "
+            required
           />
           <textarea
+            value={formData.message}
+            onChange={handleChange}
             name="message"
             placeholder="Write your message"
             className="send-email--message"

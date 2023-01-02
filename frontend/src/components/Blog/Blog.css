@@ -61,9 +61,16 @@
 .blog .blog--articles .blog--article:hover {
   scale: 1.05;
 }
-@media screen and (max-width: 865px) {
+@media screen and (max-width: 1000px) {
   .blog .blog--articles {
     flex-direction: column;
+    align-items: center;
+  }
+  .blog .blog--articles .blog--article {
+    max-width: 500px;
+  }
+  .blog .blog--articles .blog--article .blog-img-container {
+    height: auto;
   }
 }
 .blog .all-articles-btn {

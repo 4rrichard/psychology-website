@@ -8,9 +8,8 @@ https://developers.google.com/recaptcha/docs/versions
 ---[x] Backend authentication
 ---[x] When invalid user data - error message
 ---[x] Admin can remove booked appointments
----[] Admin can add blog posts
+---[x] Admin can add blog posts
 ---[x] Admin can logout when finished
----[] Auto logout when leaving page
 
 [] If error with email sending then error message pops up
 

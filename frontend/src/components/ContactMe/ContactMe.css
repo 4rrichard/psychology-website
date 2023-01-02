@@ -72,7 +72,7 @@
   border: 1px solid #dbb898;
   border-radius: 7px;
 }
-.contacts .contacts-container .contacts--send-email input[type=text],
+.contacts .contacts-container .contacts--send-email input,
 .contacts .contacts-container .contacts--send-email textarea {
   background-color: #f7f2eb;
   font-family: "Quicksand", sans-serif;
