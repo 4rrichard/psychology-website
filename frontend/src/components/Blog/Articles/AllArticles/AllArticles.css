@@ -12,7 +12,7 @@
   text-align: center;
 }
 .all-articles .blog--articles {
-  margin: 0 15%;
+  margin: 0 11%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -27,7 +27,6 @@
   flex-basis: 50%;
   flex-grow: 1;
   margin-bottom: 40px;
-  z-index: 4;
   border: 2px solid #bf9773;
   border-radius: 30px;
   overflow: hidden;
@@ -64,6 +63,11 @@
 @media screen and (max-width: 1100px) {
   .all-articles .blog--articles {
     justify-content: center;
+  }
+}
+@media screen and (min-width: 1585px) {
+  .all-articles {
+    margin: 0 9%;
   }
 }
 .all-articles .pagination-btns {
@@ -107,6 +111,11 @@
 .all-articles .pagination-btns .pagination-link:hover:not(.pagination-active .pagination-link) {
   background-color: #bf9773;
   color: white;
+}
+@media screen and (min-width: 1585px) {
+  .all-articles .pagination-btns {
+    margin-bottom: 50px;
+  }
 }
 .all-articles .new-article-btn {
   display: block;

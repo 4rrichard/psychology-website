@@ -15,8 +15,6 @@ function Blog() {
     });
   }, []);
 
-  console.log(fullPost);
-
   return (
     <section className="blog" id="blog">
       <h1 className="blog--title">Blog</h1>

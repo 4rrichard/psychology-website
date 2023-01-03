@@ -1,8 +1,9 @@
 import React from "react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthProvider";
 import axios from "../../api/axios";
-import { useNavigate } from "react-router-dom";
+import "./Dashboard.css";
 
 function Dashboard() {
   const { auth, setAuth } = useContext(AuthContext);
@@ -40,13 +41,34 @@ function Dashboard() {
       });
   };
 
+  const goToNewBlog = () => {
+    navigate("/articles/new");
+  };
+  const goToAppointments = () => {
+    navigate("/appointment");
+  };
+
   return (
     <div className="login">
-      <h1>Welcome {auth.user}!</h1>
-      <button onClick={getData} className="login--gohome">
-        Go to the main page!
+      <h1 className="login--title">Welcome Gizem!</h1>
+
+      <div className="login-nav-btns">
+        <button onClick={getData} className="login--gohome button">
+          Go to the main page!
+        </button>
+        <button onClick={goToNewBlog} className="login--newarticle button">
+          Write a new article
+        </button>
+        <button
+          onClick={goToAppointments}
+          className="login--gotoappointments button"
+        >
+          Check appointments
+        </button>
+      </div>
+      <button onClick={handleLogout} className="logout-btn button">
+        Logout
       </button>
-      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }

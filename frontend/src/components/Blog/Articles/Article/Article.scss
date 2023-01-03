@@ -15,4 +15,7 @@
   .body--post {
     margin-top: 60px;
   }
+  @media screen and (max-width: 817px) {
+    margin: 50px 100px;
+  }
 }

@@ -15,4 +15,9 @@
 }
 .post .body--post {
   margin-top: 60px;
+}
+@media screen and (max-width: 817px) {
+  .post {
+    margin: 50px 100px;
+  }
 }/*# sourceMappingURL=Article.css.map */

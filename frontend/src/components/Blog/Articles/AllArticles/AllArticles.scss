@@ -14,7 +14,7 @@
     text-align: center;
   }
   .blog--articles {
-    margin: 0 15%;
+    margin: 0 11%;
 
     display: flex;
     flex-wrap: wrap;
@@ -31,8 +31,6 @@
       flex-basis: 50%;
       flex-grow: 1;
       margin-bottom: 40px;
-
-      z-index: 4;
 
       border: 2px solid #bf9773;
       border-radius: 30px;
@@ -73,6 +71,9 @@
     .blog--articles {
       justify-content: center;
     }
+  }
+  @media screen and (min-width: 1585px) {
+    margin: 0 9%;
   }
   .pagination-btns {
     width: auto;
@@ -128,6 +129,9 @@
     .pagination-link:hover:not(.pagination-active .pagination-link) {
       background-color: #bf9773;
       color: white;
+    }
+    @media screen and (min-width: 1585px) {
+      margin-bottom: 50px;
     }
   }
 
