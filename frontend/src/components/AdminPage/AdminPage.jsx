@@ -94,7 +94,7 @@ function AdminPage() {
         if (!err?.response) {
           setErrMsg("No Server Response");
         } else if (err.response?.status === 400) {
-          setErrMsg("Missing UserName or Password");
+          setErrMsg("Invalid username or password");
         } else if (err.response?.status === 401) {
           setErrMsg("Unauthorized");
         } else {
@@ -117,14 +117,14 @@ function AdminPage() {
 
   return (
     <div className="admin">
-      <p
-        ref={errRef}
-        className={errMsg ? "errmsg" : "offscreen"}
-        aria-live="assertive"
-      >
-        {errMsg}
-      </p>
       <form onSubmit={handleForm} className="admin-login">
+        <div
+          ref={errRef}
+          className={errMsg ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {errMsg}
+        </div>
         <label className="username-label">
           Username
           <input

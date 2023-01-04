@@ -12,6 +12,7 @@ import "./NavBar.css";
 function NavBar() {
   const { auth, setAuth } = useContext(AuthContext);
   const [navOpen, setNavOpen] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const path = useLocation().pathname;
   const location = path.split("/")[1];
@@ -26,6 +27,10 @@ function NavBar() {
       offset: 50,
       spy: true,
     });
+  };
+
+  const toggleModal = () => {
+    setModal(!modal);
   };
 
   const menuToggle = () => {

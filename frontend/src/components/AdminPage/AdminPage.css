@@ -5,6 +5,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+.admin .errmsg {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ffe3e3;
+  border: 2px solid #ff8787;
+  border-radius: 10px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 300;
+  font-size: 20px;
 }
 .admin .admin-login {
   max-height: 50%;

@@ -47,10 +47,7 @@ function App() {
         />
         <Route path="/articles/:pageName" element={<Article />} />
         <Route path="/admin/*" element={<AdminPage />} />
-        <Route
-          path="/login"
-          element={auth.admin ? <Dashboard /> : <NotAuthenticated />}
-        />
+        <Route path="/login" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {displayPage && (

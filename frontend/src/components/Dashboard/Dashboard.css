@@ -52,7 +52,7 @@
 .login .logout-btn:hover {
   background-color: #b15b52;
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
   .login .login-nav-btns {
     flex-direction: column;
     align-items: center;

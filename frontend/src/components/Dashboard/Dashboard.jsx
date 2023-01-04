@@ -6,7 +6,7 @@ import axios from "../../api/axios";
 import "./Dashboard.css";
 
 function Dashboard() {
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
