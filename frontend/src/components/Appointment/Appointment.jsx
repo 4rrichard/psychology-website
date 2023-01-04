@@ -471,12 +471,9 @@ function Appointment() {
               {modal && (
                 <Booked
                   toggleModal={toggleModal}
-                  disableDate={disableDate}
-                  modal={modal}
                   fullBookedData={fullBookedData}
                   setRefresh={setRefresh}
                   now={startOfWeek}
-                  yesterday={yesterday}
                 />
               )}
             </div>

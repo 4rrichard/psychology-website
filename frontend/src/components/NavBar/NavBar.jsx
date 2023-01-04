@@ -7,12 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../context/AuthProvider";
 import axios from "../../api/axios";
+import LogoutPopup from "../LogoutPopup/LogoutPopup";
 import "./NavBar.css";
 
 function NavBar() {
   const { auth, setAuth } = useContext(AuthContext);
   const [navOpen, setNavOpen] = useState(false);
-  const [modal, setModal] = useState(false);
+  const [popup, setPopup] = useState(false);
 
   const path = useLocation().pathname;
   const location = path.split("/")[1];
@@ -29,8 +30,8 @@ function NavBar() {
     });
   };
 
-  const toggleModal = () => {
-    setModal(!modal);
+  const togglePopup = () => {
+    setPopup(!popup);
   };
 
   const menuToggle = () => {
@@ -47,9 +48,13 @@ function NavBar() {
       .then((response) => {
         console.log(response);
         setAuth({});
-        alert("You are logged out");
+        togglePopup();
       });
   };
+
+  setTimeout(() => {
+    setPopup(false);
+  }, 3000);
 
   return (
     <>
@@ -170,6 +175,7 @@ function NavBar() {
             {auth.admin}
           </button>
         )}
+        {popup && <LogoutPopup />}
       </nav>
     </>
   );

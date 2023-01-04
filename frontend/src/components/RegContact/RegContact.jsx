@@ -8,8 +8,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 function RegContact({ clickBack, fullDate, setDisableDate }) {
   const { REACT_APP_SITE_KEY } = process.env;
   const captchaRef = useRef();
+  const [popup, setPopup] = useState(false);
 
-  const [displayConfirm, setDisplayConfirm] = useState(true);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -52,7 +52,6 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
           message: "",
         });
 
-        setDisplayConfirm(false);
         // setDisableDate((old) => [
         //   ...old,
         //   [
@@ -62,16 +61,14 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
         //     fullDate.hour,
         //   ],
         // ]);
-        axios
-          .post("/api/addregdata", {
-            fullDate: fullDate,
-            name: formData.fullName,
-            email: formData.email,
-            phoneNum: formData.phoneNum,
-          })
-          .then((response) => {
-            console.log(response.data);
-          });
+        axios.post("/api/addregdata", {
+          fullDate: fullDate,
+          name: formData.fullName,
+          email: formData.email,
+          phoneNum: formData.phoneNum,
+        });
+
+        setPopup(true);
       })
       .catch(() => {
         setFormData({
@@ -93,94 +90,89 @@ function RegContact({ clickBack, fullDate, setDisableDate }) {
     setRecaptchaValue(value);
   }
 
-  return (
-    <>
-      {displayConfirm ? (
-        <section className="regContact">
-          <h1 className="regContact--details-title">Booking details</h1>
-          <button className="back-to-appointment-btn" onClick={clickBack}>
-            Back to Appointments
-          </button>
-          <form
-            onSubmit={handleForm}
-            className="contacts--send-email"
-            onInvalid={(e) =>
-              e.target.setCustomValidity("Please fill in the field")
-            }
-            onInput={(e) => e.target.setCustomValidity("")}
-          >
-            <div className="details-container">
-              <div className="regContact--details">
-                <h3 className="details--title">Date</h3>
-                <h3 className="details--pharagraph">
-                  {`${fullDate.year} ${fullDate.month} ${fullDate.date}`}
-                </h3>
-              </div>
-              <div className="regContact--details">
-                <h3 className="details--title">Time</h3>
-                <h3 className="details--pharagraph">{fullDate.hour}</h3>
-              </div>
-              <div className="regContact--details">
-                <h3 className="details--title">Service</h3>
-                <h3 className="details--pharagraph">Therapy session</h3>
-              </div>
-            </div>
+  const togglePopup = () => {
+    setPopup(!popup);
+  };
 
-            <input
-              type="text"
-              value={formData.fullName}
-              onChange={handleChange}
-              name="fullName"
-              placeholder="Enter your full name"
-              className="send-email--full-name "
-              required
-            />
-            <input
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              name="email"
-              placeholder="Enter your email adress"
-              className="send-email--email-adress "
-              required
-            />
-            <input
-              type="number"
-              value={formData.phoneNum}
-              onChange={handleChange}
-              name="phoneNum"
-              placeholder="Enter your phone number"
-              className="send-email--phone-number "
-              required
-            />
-            <textarea
-              value={formData.message}
-              onChange={handleChange}
-              name="message"
-              placeholder="Write your message"
-              className="send-email--message"
-              cols="30"
-              rows="10"
-            ></textarea>
-            {formData.messageError === true && <div>Recaptcha failed</div>}
-            <ReCAPTCHA
-              sitekey={REACT_APP_SITE_KEY}
-              ref={captchaRef}
-              onChange={onChange}
-            />
-            <button
-              type="submit"
-              // onClick={bookedBtnHandle}
-              className="send-email--btn"
-            >
-              Finalize Booking
-            </button>
-          </form>
-        </section>
-      ) : (
-        <BookedMessage />
-      )}
-    </>
+  return (
+    <section className="regContact">
+      <h1 className="regContact--details-title">Booking details</h1>
+      <button className="back-to-appointment-btn" onClick={clickBack}>
+        Back to Appointments
+      </button>
+      <form
+        onSubmit={handleForm}
+        className="contacts--send-email"
+        onInvalid={(e) =>
+          e.target.setCustomValidity("Please fill in the field")
+        }
+        onInput={(e) => e.target.setCustomValidity("")}
+      >
+        <div className="details-container">
+          <div className="regContact--details">
+            <h3 className="details--title">Date</h3>
+            <h3 className="details--pharagraph">
+              {`${fullDate.year} ${fullDate.month} ${fullDate.date}`}
+            </h3>
+          </div>
+          <div className="regContact--details">
+            <h3 className="details--title">Time</h3>
+            <h3 className="details--pharagraph">{fullDate.hour}</h3>
+          </div>
+          <div className="regContact--details">
+            <h3 className="details--title">Service</h3>
+            <h3 className="details--pharagraph">Therapy session</h3>
+          </div>
+        </div>
+
+        <input
+          type="text"
+          value={formData.fullName}
+          onChange={handleChange}
+          name="fullName"
+          placeholder="Enter your full name"
+          className="send-email--full-name "
+          required
+        />
+        <input
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          name="email"
+          placeholder="Enter your email adress"
+          className="send-email--email-adress "
+          required
+        />
+        <input
+          type="number"
+          value={formData.phoneNum}
+          onChange={handleChange}
+          name="phoneNum"
+          placeholder="Enter your phone number"
+          className="send-email--phone-number "
+          required
+        />
+        <textarea
+          value={formData.message}
+          onChange={handleChange}
+          name="message"
+          placeholder="Write your message"
+          className="send-email--message"
+          cols="30"
+          rows="10"
+        ></textarea>
+        {formData.messageError === true && <div>Recaptcha failed</div>}
+        <ReCAPTCHA
+          sitekey={REACT_APP_SITE_KEY}
+          ref={captchaRef}
+          onChange={onChange}
+        />
+        <button type="submit" className="send-email--btn">
+          Finalize Booking
+        </button>
+      </form>
+      {popup && <BookedMessage togglePopup={togglePopup} />}
+    </section>
   );
 }
 

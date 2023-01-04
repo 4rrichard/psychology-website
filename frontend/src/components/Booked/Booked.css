@@ -2,7 +2,7 @@
   overflow-y: hidden;
 }
 
-.booked-appointments-container .overlay {
+.overlay {
   z-index: 3;
   background: rgba(49, 49, 49, 0.8);
   width: 100vw;
@@ -13,6 +13,7 @@
   bottom: 0;
   position: fixed;
 }
+
 .booked-appointments-container .booked-appointments {
   position: absolute;
   top: 40%;

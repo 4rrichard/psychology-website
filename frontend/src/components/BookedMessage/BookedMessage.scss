@@ -1,8 +1,65 @@
+.overlay {
+  z-index: 3;
+  background: rgba(49, 49, 49, 0.8);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
 .booking-confirmation {
-  height: 70vh;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px 28px;
+  border-radius: 10px;
+  width: max-content;
+  max-width: 500px;
+  min-width: 300px;
+  z-index: 5;
+  .booking-confirmation--title {
+    text-align: center;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    margin: 20px 0;
+
+    font-family: "Oswald", sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+  }
+  .booking-confirmation--text {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .ok-btn {
+    display: block;
+    margin: 30px auto;
+
+    width: max-content;
+
+    padding: 8px;
+
+    background-color: #bf9773;
+
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+
+    border: solid 3px transparent;
+    border-radius: 5px;
+
+    text-align: center;
+
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }
+  .ok-btn:hover {
+    background-color: #dbb898;
+  }
 }

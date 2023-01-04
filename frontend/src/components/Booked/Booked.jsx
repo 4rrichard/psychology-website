@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Info } from "luxon";
 
-function Booked({ toggleModal, fullBookedData, setRefresh, now, yesterday }) {
+function Booked({ toggleModal, fullBookedData, setRefresh, now }) {
   // console.log(modal);
   // if (modal) {
   //   document.body.classList.add("active-modal");
@@ -67,38 +67,43 @@ function Booked({ toggleModal, fullBookedData, setRefresh, now, yesterday }) {
   }, []);
 
   return (
-    <div className="booked-appointments-container">
+    <>
       <div className="overlay" onClick={toggleModal}></div>
-      <div className="booked-appointments">
-        <FontAwesomeIcon
-          onClick={toggleModal}
-          icon={faXmark}
-          size="2x"
-          className="close-modal"
-        />
 
-        <h1 className="booked-appointments--title">Booked Appointments</h1>
-        <div className="booked-appointments--data-container">
-          {showDates.map((fullData, i) => (
-            <div className="all-booked-data" key={i}>
-              <div className="date-of-booked">
-                {`
+      <div className="booked-appointments-container">
+        <div className="booked-appointments">
+          <FontAwesomeIcon
+            onClick={toggleModal}
+            icon={faXmark}
+            size="2x"
+            className="close-modal"
+          />
+
+          <h1 className="booked-appointments--title">Booked Appointments</h1>
+          <div className="booked-appointments--data-container">
+            {showDates.map((fullData, i) => (
+              <div className="all-booked-data" key={i}>
+                <div className="date-of-booked">
+                  {`
                 ${fullData.fullDate.year} ${fullData.fullDate.month}
                 ${fullData.fullDate.date} ${fullData.fullDate.hour}`}
+                </div>
+                <div className="name-of-booked">{fullData.name}</div>
+                <button
+                  className="delete-appointment"
+                  onClick={() => removeDate(fullData)}
+                >
+                  Delete
+                </button>
               </div>
-              <div className="name-of-booked">{fullData.name}</div>
-              <button
-                className="delete-appointment"
-                onClick={() => removeDate(fullData)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
+            ))}
+          </div>
+          {deletedData && (
+            <div className="deleted-msg">Successfully deleted</div>
+          )}
         </div>
-        {deletedData && <div className="deleted-msg">Successfully deleted</div>}
       </div>
-    </div>
+    </>
   );
 }
 
