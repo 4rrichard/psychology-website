@@ -26,7 +26,7 @@ function Dashboard() {
       });
   };
 
-  const getData = () => {
+  const goToHome = () => {
     axios
       .get("/protected", {
         headers: {
@@ -37,15 +37,34 @@ function Dashboard() {
       .then((response) => {
         setAuth(response.data);
         navigate("/");
-        console.log(response.data);
       });
   };
 
   const goToNewBlog = () => {
-    navigate("/articles/new");
+    axios
+      .get("/protected", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        setAuth(response.data);
+        navigate("/articles/new");
+      });
   };
   const goToAppointments = () => {
-    navigate("/appointment");
+    axios
+      .get("/protected", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        setAuth(response.data);
+        navigate("/appointment");
+      });
   };
 
   return (
@@ -53,7 +72,7 @@ function Dashboard() {
       <h1 className="login--title">Welcome Gizem!</h1>
 
       <div className="login-nav-btns">
-        <button onClick={getData} className="login--gohome button">
+        <button onClick={goToHome} className="login--gohome button">
           Go to the main page!
         </button>
         <button onClick={goToNewBlog} className="login--newarticle button">
