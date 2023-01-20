@@ -7,7 +7,7 @@
   align-items: flex-start;
   justify-content: center;
   gap: 18px;
-  background-image: url("/public/images/Gizem2.jpg");
+  background: linear-gradient(90deg, rgba(247, 245, 247, 0.8), rgba(192, 72, 72, 0)), url("/public/images/Gizem2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 60% 50%;
