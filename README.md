@@ -1,5 +1,7 @@
 # **Psychology website**
 
+![psychology-website-front](https://user-images.githubusercontent.com/102076693/214838554-e2d6c7d6-e618-4d47-99a3-ad7e4fbd635e.jpg)
+
 ### **Motivation for the project:**
 
 #### I wanted to create something that will be used in the future (by my partner who is a psychologist)
