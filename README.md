@@ -1,4 +1,7 @@
-# **Psychology website**
+
+<h1 align="center">
+Psychology website
+</h1>
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/102076693/214838554-e2d6c7d6-e618-4d47-99a3-ad7e4fbd635e.jpg" width="700px" >
@@ -34,6 +37,7 @@
 
 - api calls with axios
 - backend using express
+- storing data in MongoDB
 - saving data in local storage or cookies
 - email sending from form
 - react states, effect hook, react context
