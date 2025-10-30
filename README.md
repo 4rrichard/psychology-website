@@ -1,45 +1,92 @@
+# 🧠 Psychology Website
 
-<h1 align="center">
-Psychology website
-</h1>
+A full-stack web application built with **React** and **Node/Express**, using **MongoDB** for data storage.  
+The project was created to be used in real life by a **clinical psychologist** (my partner), so the focus was on real-world features like appointment booking, form handling, and admin access.
 
-<p align="center">
-<img src="https://user-images.githubusercontent.com/102076693/214838554-e2d6c7d6-e618-4d47-99a3-ad7e4fbd635e.jpg" width="700px" >
-</p>
-  
-### **Motivation for the project:**
+---
 
-#### I wanted to create something that will be used in the future (by my partner who is a psychologist)
+## 🎯 Motivation
 
-</br>
+I wanted to build something **useful and realistic**, not just a demo.  
+This project simulates a real psychologist’s website where clients can:
 
-### **A project with full of challenges:**
+-   browse information,
+-   book an appointment,
+-   fill in forms,
+-   and the psychologist can manage bookings via an admin panel.
 
-- scroll down on the page on button click
-- navigation on the website
-- creating a calendar through api
-- disable buttons in real time (if time passes)
-- disable buttons if data is sent
-- connecting form to google forms and sending e-mail
-- creating an admin login page (jwt, cookies, routes)
-- learning and using backend
-- the project is built alone without a team (with mentor help)
+---
 
-### **Working on this project helped me to improve a lot in soft skills:**
+## 🧪 Challenges Solved
 
-- time management
-- problem solving
-- not giving up when being stuck for a long time
-- not being afraid to ask for help
-- enjoying learning about new technologies
+This project was **not** a simple CRUD. I specifically challenged myself with:
 
-### **And hard skills too:**
+-   🔽 **Scroll to section** on button click
+-   🧭 **Smooth navigation** across the website
+-   📅 **Calendar creation via API** (appointments)
+-   ⏱️ **Disabling time slots in real time** (if time has already passed)
+-   ✅ **Disabling buttons after form submission** to prevent duplicates
+-   📧 **Connecting form to Google Forms and sending e-mails**
+-   👤 **Admin login page** with:
+    -   JWT
+    -   Cookies
+    -   Protected routes
+-   🖥️ **Full backend setup** (Express + MongoDB)
+-   👩‍💻 **Built solo** (with mentor guidance)
 
-- api calls with axios
-- backend using express
-- storing data in MongoDB
-- saving data in local storage or cookies
-- email sending from form
-- react states, effect hook, react context
-- navigation on the website with react router
-- learning about registration, signing in and protected routes
+---
+
+## 💡 Soft Skills Gained
+
+Working on this project helped me improve:
+
+-   🕒 **Time management** – planning features and breaking them down
+-   🧩 **Problem solving** – finding solutions for real-life UI/UX needs
+-   💪 **Persistence** – continuing even when stuck for a long time
+-   🗣️ **Asking for help** – learning to consult mentor / docs
+-   🤓 **Enjoying learning** – discovering new tools and patterns
+
+---
+
+## 🛠️ Hard Skills Practiced
+
+-   🌐 **API calls with Axios**
+-   🖥️ **Backend with Express.js**
+-   🗄️ **MongoDB** for storing appointments and form data
+-   🍪 **Auth & persistence** with **JWT, cookies, localStorage**
+-   📧 **Email sending** from form submission
+-   ⚛️ **React state & hooks** (`useState`, `useEffect`, Context API)
+-   🧭 **Routing** with **React Router**
+-   🔐 **Protected routes** (only logged-in admin can access dashboard)
+-   👤 **User registration / login** flow
+
+---
+
+## 🧰 Tech Stack
+
+**Frontend**
+
+-   React
+-   React Router
+-   Axios
+-   Context API
+
+**Backend**
+
+-   Node.js
+-   Express.js
+-   JWT auth
+-   Google forms/Google script
+
+**Database**
+
+-   MongoDB
+
+---
+
+## 🚀 Possible Next Steps
+
+-   Add multi-language support (HU / EN / TR)
+-   Admin UI for editing available time slots
+-   Dashboard to view submitted forms
+-   Deploy to Render / Vercel / Railway + MongoDB Atlas
