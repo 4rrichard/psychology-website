@@ -1,59 +1,60 @@
 .hero {
-  width: 100%;
-  min-height: 95vh;
-  padding: 110px 30px 50px 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 18px;
-  background: linear-gradient(90deg, #f7f2eb, rgba(0, 0, 0, 0) 65%), url("/public/images/Gizem2.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 60% 50%;
+    width: 100%;
+    min-height: 95vh;
+    padding: 110px 30px 50px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 18px;
+    background: linear-gradient(90deg, #f7f2eb, rgba(0, 0, 0, 0) 65%),
+        url("/public/images/Gizem2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 60% 50%;
 }
 .hero .hero--subtitle,
 .hero .hero--title {
-  max-width: 550px;
-  width: auto;
+    max-width: 550px;
+    width: auto;
 }
 .hero .hero--subtitle {
-  font-family: "Quicksand", sans-serif;
-  font-size: 20px;
+    font-family: "Quicksand", sans-serif;
+    font-size: 20px;
 }
 .hero .hero--title {
-  font-family: "Oswald", sans-serif;
-  font-weight: 400;
-  font-size: 65px;
-  line-height: 70px;
-  color: rgb(63, 63, 63);
+    font-family: "Oswald", sans-serif;
+    font-weight: 400;
+    font-size: 65px;
+    line-height: 70px;
+    color: rgb(63, 63, 63);
 }
 .hero .hero--aboutme-btn,
 .hero .hero--book-appointment-btn {
-  height: 50px;
-  padding: 13px;
-  background-color: #bf9773;
-  border-radius: 6px;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  color: white;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+    height: 50px;
+    padding: 13px;
+    background-color: #bf9773;
+    border-radius: 6px;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
 }
 .hero .hero--aboutme-btn:hover,
 .hero .hero--book-appointment-btn:hover {
-  background-color: #dbb898;
+    background-color: #dbb898;
 }
 @media screen and (max-width: 800px) {
-  .hero {
-    background-position: 65% 50%;
-    transition: background-position 1s ease-in-out;
-  }
+    .hero {
+        background-position: 65% 50%;
+        transition: background-position 1s ease-in-out;
+    }
 }
 @media screen and (max-width: 950px) {
-  .hero .hero--subtitle,
-.hero .hero--title {
-    max-width: 50%;
-  }
-}/*# sourceMappingURL=Hero.css.map */
+    .hero .hero--subtitle,
+    .hero .hero--title {
+        max-width: 50%;
+    }
+} /*# sourceMappingURL=Hero.css.map */
