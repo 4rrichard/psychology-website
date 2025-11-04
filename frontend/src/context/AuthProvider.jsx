@@ -7,21 +7,20 @@ export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState(null);
 
     useEffect(() => {
+        const hasCookie = document.cookie.includes("jwt=");
+        if (!hasCookie) return;
+
         const getData = async () => {
             try {
                 const response = await axios.get("/protected", {
                     withCredentials: true,
                 });
-                console.log("Protected response:", response);
                 setAuth(response.data);
             } catch (err) {
-                if (err.response?.status !== 403) {
-                    console.error(
-                        "Unexpected error accessing /protected:",
-                        err
-                    );
+                if (err.response?.status === 403) {
+                    console.warn("Session expired or unauthorized");
+                    setAuth(null);
                 }
-                setAuth(null);
             }
         };
 
