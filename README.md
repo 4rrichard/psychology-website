@@ -5,6 +5,12 @@ The project was created to be used in real life by a **clinical psychologist** (
 
 ---
 
+## 📦 Project Structure
+- [Frontend README](./frontend/README.md)
+- [Backend README](./backend/README.md)
+
+---
+
 ## 🎯 Motivation
 
 I wanted to build something **useful and realistic**, not just a demo.  
