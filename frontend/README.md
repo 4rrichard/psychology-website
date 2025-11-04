@@ -17,12 +17,19 @@ The app will run at:
 
 ## ⚙️ Environment Variables
 
-Create a `.env` file based on `.env.sample` with the following values:
+All required environment variables are documented in the `.env.sample` file.  
 
+Copy the example environment file and create your own `.env`:
+
+### 🖥️ macOS / Linux
 ```bash
-VITE_API_BASE_URL=http://localhost:8080
-VITE_SITE_KEY=your_recaptcha_site_key_here
+cp .env.sample .env
 ```
+### 🪟 Windows (PowerShell)
+```bash
+Copy-Item .env.sample .env
+```
+Then open the newly created `.env` file and fill in your own values.
 
 ## 🧱 Tech Stack
 
