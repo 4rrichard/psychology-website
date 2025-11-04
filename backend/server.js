@@ -174,80 +174,109 @@ const regSchema = mongoose.Schema({
 
 const regData = mongoose.model("regData", regSchema);
 
-app.post("/api/addregdata", (req, res) => {
-    const addData = new regData({
-        fullDate: req.body.fullDate,
-        name: req.body.name,
-        email: req.body.email,
-        phoneNum: req.body.phoneNum,
-    });
+app.post("/api/addregdata", async (req, res) => {
+    try {
+        const addData = new regData({
+            fullDate: req.body.fullDate,
+            name: req.body.name,
+            email: req.body.email,
+            phoneNum: req.body.phoneNum,
+        });
 
-    console.log(req.body);
+        console.log(req.body);
 
-    addData.save((err, doc) => {
-        if (err) return console.log(err);
-        res.status(200).json(doc);
-    });
+        const savedData = await addData.save();
+        res.status(200).json(savedData);
+    } catch (error) {
+        console.error("Error saving registration data:", error);
+        res.status(500).json({ message: "Failed to save registration data" });
+    }
 });
 
-app.get("/api/getregdata", (req, res) => {
-    regData.find({}, { fullDate: 1, name: 1, _id: 0 }, (err, doc) => {
-        if (err) return console.log(err);
-        res.json(doc);
-    });
+app.get("/api/getregdata", async (req, res) => {
+    try {
+        const docs = await regData.find({}, { fullDate: 1, name: 1, _id: 0 });
+        res.status(200).json(docs);
+    } catch (error) {
+        console.error("Error fetching registration data:", error);
+        res.status(500).json({ message: "Failed to fetch registration data" });
+    }
 });
 
-app.post("/api/removedata", (req, res) => {
-    const wholeDate = req.body.fullDate;
-    const year = wholeDate.year;
-    const month = wholeDate.month;
-    const day = wholeDate.date;
-    const hour = wholeDate.hour;
-    // console.log(date);
-    console.log(year, month, day, hour);
-    regData.deleteOne(
-        {
+app.post("/api/removedata", async (req, res) => {
+    try {
+        const { year, month, date, hour } = req.body.fullDate;
+        console.log(year, month, date, hour);
+
+        const result = await regData.deleteOne({
             "fullDate.year": year,
             "fullDate.month": month,
-            "fullDate.date": day,
+            "fullDate.date": date,
             "fullDate.hour": hour,
-        },
-        (err, doc) => {
-            if (err) return console.log(err);
-            res.json(doc);
+        });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: "Record not found" });
         }
-    );
+
+        res.status(200).json({ message: "Record deleted successfully" });
+    } catch (error) {
+        console.error("Error removing registration data:", error);
+        res.status(500).json({ message: "Failed to remove registration data" });
+    }
 });
 
 app.post("/api/addpost", async (req, res) => {
-    const newPost = new Post(req.body);
-    console.log(req.body);
-    newPost.save((err, doc) => {
-        if (err) return console.log(err);
-        res.status(200).json(doc);
-    });
+    try {
+        const newPost = new Post(req.body);
+        const savedPost = await newPost.save();
+        res.status(200).json(savedPost);
+    } catch (error) {
+        console.error("Error saving post:", error);
+        res.status(500).json({ message: "Failed to save post" });
+    }
 });
 
-app.get("/api/getpost", (req, res) => {
-    Post.find((err, doc) => {
-        if (err) return console.log(err);
-        res.json(doc);
-    });
+app.get("/api/getpost", async (req, res) => {
+    try {
+        const posts = await Post.find();
+        res.status(200).json(posts);
+    } catch (error) {
+        console.error("Error fetching posts:", error);
+        res.status(500).json({ message: "Failed to fetch posts" });
+    }
 });
 
 //-----Articles-----
 
 app.get("/articles/:pageName", (req, res) => {
-    let pageName = req.params.pageName;
-    console.log(req.params.pageName);
-    res.send(pageName);
+    try {
+        const { pageName } = req.params;
+
+        if (!pageName) {
+            return res.status(400).json({ message: "Page name is required" });
+        }
+
+        console.log("Requested article:", pageName);
+        res.status(200).json({ pageName });
+    } catch (error) {
+        console.error("Error fetching article:", error);
+        res.status(500).json({ message: "Failed to fetch article" });
+    }
 });
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
-    const file = req.file;
-    console.log(req.body);
-    console.log(file.filename);
-    res.status(200).json(file.filename);
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: "No file uploaded" });
+        }
+
+        console.log("Uploaded file:", req.file.filename);
+        res.status(200).json({ filename: req.file.filename });
+    } catch (error) {
+        console.error("Error uploading file:", error);
+        res.status(500).json({ message: "Failed to upload file" });
+    }
 });
 
 mongoose.connection.once("open", () => {
