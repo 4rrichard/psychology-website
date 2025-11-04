@@ -90,9 +90,10 @@ Working on this project helped me improve:
 
 ---
 
-## 🚀 Possible Next Steps
+## 🧭 Future Plans / TODO
 
--   Add multi-language support (HU / EN / TR)
--   Admin UI for editing available time slots
--   Dashboard to view submitted forms
--   Deploy to Render / Vercel / Railway + MongoDB Atlas
+- [ ] 🐳 Dockerize the project for easier deployment
+- [ ] 🌐 Add multi-language support (using React i18next) 
+- [ ] 🔒 Extend admin panel with multiple user roles  
+- [ ] 📧 Show user-friendly error message when email sending fails  
+- [ ] 🛡️ Add blog content sanitization for XSS protection
