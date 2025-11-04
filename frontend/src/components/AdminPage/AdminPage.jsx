@@ -11,7 +11,7 @@ function AdminPage() {
     const userRef = useRef();
     const errRef = useRef();
 
-    const [user, setUser] = useState("");
+    const [admin, setAdmin] = useState("");
     const [pwd, setPwd] = useState("");
     const [errMsg, setErrMsg] = useState("");
 
@@ -21,13 +21,13 @@ function AdminPage() {
 
     useEffect(() => {
         setErrMsg("");
-    }, [user, pwd]);
+    }, [admin, pwd]);
 
     const handleForm = (event) => {
         event.preventDefault();
 
         axios
-            .post("/auth", JSON.stringify({ user, pwd }), {
+            .post("/auth", JSON.stringify({ admin, pwd }), {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -37,9 +37,9 @@ function AdminPage() {
                 console.log(response);
                 const accessToken = response?.data.accessToken;
 
-                setUser("");
+                setAdmin("");
                 setPwd("");
-                setAuth({ user, accessToken });
+                setAuth({ admin, accessToken });
                 navigate("/login");
             })
 
@@ -75,8 +75,8 @@ function AdminPage() {
                         className="admin-username"
                         ref={userRef}
                         autoComplete="off"
-                        value={user}
-                        onChange={(e) => setUser(e.target.value)}
+                        value={admin}
+                        onChange={(e) => setAdmin(e.target.value)}
                         onInvalid={(e) =>
                             e.target.setCustomValidity(
                                 "Please fill in the field"

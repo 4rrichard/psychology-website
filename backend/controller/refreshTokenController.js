@@ -15,12 +15,12 @@ const handleRefreshToken = (req, res) => {
     const refreshToken = cookies.jwt;
 
     jwt.verify(refreshToken, REACT_APP_REFRESH_TOKEN_SECRET, (err, decoded) => {
-        if (err || REACT_APP_USERNAME !== decoded.user)
+        if (err || REACT_APP_USERNAME !== decoded.admin)
             return res.sendStatus(403);
 
         const accessToken = jwt.sign(
             {
-                user: decoded.user,
+                admin: decoded.admin,
             },
             REACT_APP_ACCESS_TOKEN_SECRET,
             { expiresIn: "15m" }

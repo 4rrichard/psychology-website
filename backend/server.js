@@ -92,7 +92,7 @@ app.post("/api/sendemail", multer().none(), (req, res) => {
 
 app.post("/refresh", refreshTokenController.handleRefreshToken);
 
-const generateAccessToken = (user) => {
+const generateAccessToken = () => {
     return jwt.sign(
         { admin: REACT_APP_USERNAME },
         REACT_APP_ACCESS_TOKEN_SECRET,
@@ -101,7 +101,7 @@ const generateAccessToken = (user) => {
         }
     );
 };
-const generateRefreshToken = (user) => {
+const generateRefreshToken = () => {
     return jwt.sign(
         { admin: REACT_APP_USERNAME },
         REACT_APP_REFRESH_TOKEN_SECRET,
@@ -113,7 +113,7 @@ const generateRefreshToken = (user) => {
 
 app.post("/auth", (req, res, next) => {
     if (
-        REACT_APP_USERNAME === req.body.user &&
+        REACT_APP_USERNAME === req.body.admin &&
         REACT_APP_PASSWORD === req.body.pwd
     ) {
         const accessToken = generateAccessToken();
@@ -128,7 +128,7 @@ app.post("/auth", (req, res, next) => {
         });
 
         res.json({
-            user: REACT_APP_USERNAME,
+            admin: REACT_APP_USERNAME,
             accessToken,
             refreshToken,
         });
@@ -145,7 +145,7 @@ const verify = (req, res, next) => {
     try {
         const data = jwt.verify(token, REACT_APP_REFRESH_TOKEN_SECRET);
 
-        req.user = data.admin;
+        req.admin = data.admin;
         return next();
     } catch (err) {
         return res.sendStatus(403);
@@ -160,7 +160,7 @@ app.get("/logout", verify, (req, res) => {
 });
 
 app.get("/protected", verify, (req, res) => {
-    return res.json({ admin: req.user });
+    return res.json({ admin: req.admin });
 });
 
 //----MongoDB-----
