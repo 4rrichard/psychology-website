@@ -30,6 +30,7 @@ const handleLogin = async (req, res) => {
             { expiresIn: "1d" }
         );
 
+        // TODO: Set secure: true and sameSite: 'none' when using HTTPS in production
         res.cookie("jwt", refreshToken, {
             httpOnly: true,
             secure: false,

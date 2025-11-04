@@ -11,12 +11,11 @@ const Post = require("./models/BlogPosts");
 const connectDB = require("./config/dbConn");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-require("dotenv").config();
 const multer = require("multer");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "../frontend/public/images");
+        cb(null, process.env.UPLOAD_PATH);
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname);
@@ -32,7 +31,7 @@ connectDB();
 app.use(
     cors({
         credentials: true,
-        origin: "http://localhost:5173",
+        origin: process.env.FRONTEND_URL,
     })
 );
 app.use(cookieParser());
@@ -119,6 +118,7 @@ app.post("/auth", (req, res, next) => {
         const accessToken = generateAccessToken();
         const refreshToken = generateRefreshToken();
 
+        // TODO: Set secure: true and sameSite: 'none' when using HTTPS in production
         res.cookie("jwt", refreshToken, {
             httpOnly: true,
             secure: false,
