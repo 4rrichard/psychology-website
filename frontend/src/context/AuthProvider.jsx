@@ -7,9 +7,6 @@ export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState(null);
 
     useEffect(() => {
-        const hasCookie = document.cookie.includes("jwt=");
-        if (!hasCookie) return;
-
         const getData = async () => {
             try {
                 const response = await axios.get("/protected", {
